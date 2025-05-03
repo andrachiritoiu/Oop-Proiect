@@ -99,7 +99,10 @@ void Persoana :: setPrenume(const std::string &prenume) {
     this->prenume=prenume;
 }
 void Persoana :: setCNP(const std::string &CNP) {
-    this->CNP=CNP;
+    if (!isCNPvalid(CNP)) {
+        throw std::invalid_argument("CNP invalid");
+    }
+    this->CNP = CNP;
 }
 
 //operators
