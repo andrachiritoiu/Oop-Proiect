@@ -1,11 +1,14 @@
 #include <iostream>
 #include <array>
+#include "Persoana.h"
+#include "Pacient.h"
+#include "PersonalSpital.h"
+#include "Medic.h"
+#include "Asistent.h"
+
+int Pacient::next_id=0;
 
 int main() {
-    std::cout << "Hello, world!\n";
-    std::array<int, 100> v{};
-    int nr;
-    std::cout << "Introduceți nr: ";
     /////////////////////////////////////////////////////////////////////////
     /// Observație: dacă aveți nevoie să citiți date de intrare de la tastatură,
     /// dați exemple de date de intrare folosind fișierul tastatura.txt
@@ -25,24 +28,15 @@ int main() {
     /// Impun această cerință ca să învățați să faceți un demo și să arătați părțile din
     /// program care merg (și să le evitați pe cele care nu merg).
     ///
-    /////////////////////////////////////////////////////////////////////////
-    std::cin >> nr;
-    /////////////////////////////////////////////////////////////////////////
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "v[" << i << "] = ";
-        std::cin >> v[i];
-    }
-    std::cout << "\n\n";
-    std::cout << "Am citit de la tastatură " << nr << " elemente:\n";
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "- " << v[i] << "\n";
-    }
-    ///////////////////////////////////////////////////////////////////////////
     /// Pentru date citite din fișier, NU folosiți tastatura.txt. Creați-vă voi
     /// alt fișier propriu cu ce alt nume doriți.
     /// Exemplu:
     /// std::ifstream fis("date.txt");
     /// for(int i = 0; i < nr2; ++i)
     ///     fis >> v2[i];
+
+    // Persoana persoana("Ionescu","Maria","8174979702901");
+    // std::cout<<persoana.getNume();
+
     return 0;
 }
