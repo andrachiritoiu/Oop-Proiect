@@ -98,15 +98,7 @@ void Persoana :: setNume(const std::string &nume) {
 void Persoana :: setPrenume(const std::string &prenume) {
     this->prenume=prenume;
 }
-void Persoana :: setCNP(const std::string &CNP) {
-    if (CNP.empty()) {
-        throw std::invalid_argument("CNP cannot be empty!");
-    }
-    if (!isCNPvalid(CNP)) {
-        throw std::invalid_argument("CNP invalid");
-    }
-    this->CNP = CNP;
-}
+
 
 //operators
 Persoana& Persoana::operator= (const Persoana &p) {
