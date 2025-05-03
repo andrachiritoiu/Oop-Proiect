@@ -1,7 +1,18 @@
 #include "Pacient.h"
 #include<iostream>
 
+int Pacient::next_id=1;
+
 //constructors
+Pacient :: Pacient(): Persoana(){
+    this->id_pacient=next_id++;
+    this->diagnostic = "";
+    this->severitate_boala = 0;
+    this->data_internare = "";
+    this->data_externare = "";
+    this->asigurat = false;
+}
+
 Pacient :: Pacient (const std::string &nume, const std::string &prenume, const std::string &CNP, const std::string &diagnostic,
         int severitate_boala, const std::string &data_internare, const std::string &data_externare, bool asigurat):
         Persoana(nume, prenume, CNP){

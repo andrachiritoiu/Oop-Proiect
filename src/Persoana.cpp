@@ -115,7 +115,7 @@ bool Persoana::operator== (const Persoana &p) const {
     return this->CNP==p.CNP;
 }
 std::istream& operator>>(std::istream &in, Persoana &p) {
-    std::cout<<"Numele: ";
+    std::cout<<"\nNumele: ";
     in>>p.nume;
     std::cout<<"Prenumele: ";
     in>>p.prenume;

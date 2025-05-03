@@ -6,7 +6,6 @@
 #include "Medic.h"
 #include "Asistent.h"
 
-int Pacient::next_id=1;
 
 int main() {
     /////////////////////////////////////////////////////////////////////////
@@ -39,9 +38,14 @@ int main() {
     // std::cout<<persoana.getNume();
 
     Pacient pacient("Ionescu","Maria","2650101037813","raceala",5,"14.02","16.02",true);
-    Pacient persoana;
-    std::cin>>persoana;
-    std::cout<<persoana;
+
+    // Pacient persoana;
+    // std::cin>>persoana;
+    // std::cout<<persoana;
+    //
+    // Pacient persoana2;
+    // std::cin>>persoana2;
+    // std::cout<<persoana2;
 
     return 0;
 }
