@@ -8,6 +8,8 @@ private:
     std::string prenume;
     std::string CNP;
 
+    static bool isCNPvalid(const std::string &cnp);
+
 public:
     //constructors
     Persoana()=default;
@@ -35,7 +37,7 @@ public:
 
     //methods
     //functie virtuala pura => face clasa abstracta
-    virtual void afiseazaDetalii()=0;
+    //virtual void afiseazaDetalii()=0;
 
     //destructor
     virtual ~Persoana()=default;
