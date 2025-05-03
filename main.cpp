@@ -39,9 +39,9 @@ int main() {
 
     Pacient pacient("Ionescu","Maria","2650101037813","raceala",5,"14.02","16.02",true);
 
-    // Pacient persoana;
-    // std::cin>>persoana;
-    // std::cout<<persoana;
+    Pacient persoana;
+    std::cin>>persoana;
+    std::cout<<persoana;
     //
     // Pacient persoana2;
     // std::cin>>persoana2;
