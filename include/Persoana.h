@@ -3,7 +3,7 @@
 #include<string>
 
 class Persoana {
-private:
+protected:
     std::string nume;
     std::string prenume;
     std::string CNP;
