@@ -25,6 +25,7 @@ public:
     //methods
 
     //destructor
+    ~Asistent() override = default;
 
 };
 

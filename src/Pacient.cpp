@@ -1,5 +1,6 @@
 #include "Pacient.h"
 #include<iostream>
+#include<vector>
 
 int Pacient::next_id=1;
 
@@ -11,10 +12,11 @@ Pacient :: Pacient(): Persoana(){
     this->data_internare = "";
     this->data_externare = "";
     this->asigurat = false;
+    this->istoric_medical={};
 }
 
 Pacient :: Pacient (const std::string &nume, const std::string &prenume, const std::string &CNP, const std::string &diagnostic,
-        int severitate_boala, const std::string &data_internare, const std::string &data_externare, bool asigurat):
+        int severitate_boala, const std::string &data_internare, const std::string &data_externare, bool asigurat, const std::vector<std::string> &istoric_medical):
         Persoana(nume, prenume, CNP){
   this->id_pacient=next_id++;
   this->diagnostic=diagnostic;
@@ -22,6 +24,7 @@ Pacient :: Pacient (const std::string &nume, const std::string &prenume, const s
   this->data_internare=data_internare;
   this->data_externare=data_externare;
   this->asigurat=asigurat;
+  this->istoric_medical=istoric_medical;
 }
 //copy constructor
 Pacient::Pacient(const Pacient &p):Persoana(p){
@@ -31,6 +34,7 @@ Pacient::Pacient(const Pacient &p):Persoana(p){
     this->data_internare=p.data_internare;
     this->data_externare=p.data_externare;
     this->asigurat=p.asigurat;
+    this->istoric_medical=p.istoric_medical;
 }
 
 //getters
@@ -52,7 +56,9 @@ std::string Pacient :: getData_externare() const {
 bool Pacient :: getAsigurat() const {
     return this->asigurat;
 }
-
+const std::vector<std::string>& Pacient :: getIstoricMedical() const {
+    return this->istoric_medical;
+}
 
 //setters
 void Pacient :: setDiagnostic(const std::string &diagnostic) {
@@ -67,17 +73,21 @@ void Pacient :: setData_internare(const std::string &data_internare) {
 void Pacient :: setData_externare(const std::string &data_externare) {
     this->data_externare=data_externare;
 }
+void Pacient :: setIstoric(const std::vector<std::string>& istoric_medical) {
+    this->istoric_medical=istoric_medical;
+}
 
 //operators
 Pacient& Pacient :: operator=(const Pacient &p) {
     if (this!=&p) {
         Persoana::operator=(p);
-        id_pacient = p.id_pacient;
-        diagnostic = p.diagnostic;
-        severitate_boala = p.severitate_boala;
-        data_internare = p.data_internare;
-        data_externare = p.data_externare;
-        asigurat = p.asigurat;
+        this->id_pacient = p.id_pacient;
+        this->diagnostic = p.diagnostic;
+        this->severitate_boala = p.severitate_boala;
+        this->data_internare = p.data_internare;
+        this->data_externare = p.data_externare;
+        this->asigurat = p.asigurat;
+        this->istoric_medical=p.istoric_medical;
     }
     return *this;
 }
@@ -94,6 +104,19 @@ std::istream& operator>>(std::istream &in, Pacient &p) {
     in>>p.data_externare;
     std::cout<<"Asigurat: ";
     in>>p.asigurat;
+    std::cout<<"Istoric medical: \n";
+
+    int nr_intrari;
+    std::cout<<"Numar intrari in istoric medical: ";
+    in >> nr_intrari;
+    p.istoric_medical.clear();
+    std::string intrare;
+    std::getline(in,intrare);//in-flux intarare, intrare-var care stocheaza textul citit
+    for(int i=0;i<nr_intrari;i++) {
+        std::cout<<"Intrare "<< i + 1 <<": ";
+        std::getline(in,intrare);
+        p.istoric_medical.push_back(intrare);
+    }
     return in;
 }
 std::ostream& operator<<(std::ostream &out, const Pacient &p) {
@@ -103,10 +126,15 @@ std::ostream& operator<<(std::ostream &out, const Pacient &p) {
        <<"Severitate boala: "<<p.severitate_boala<<"\n"
        <<"Data internare: "<<p.data_internare<<"\n"
        <<"Data externare: "<<p.data_externare<<"\n"
-       <<"Asigurat: "<<(p.asigurat?"Da" : "Nu")<<"\n"; //accepta 1 si 0
+       <<"Asigurat: "<<(p.asigurat?"Da" : "Nu")<<"\n" //accepta 1 si 0
+       <<"Istoric medical: \n";
+    for (const auto& intrare: p.istoric_medical)
+        out<<" - "<<intrare<<"\n";
     return out;
 }
 
 //methods
-
+void Pacient :: adaugaIstoric(const std::string &noua_interventie) {
+    this->istoric_medical.push_back(noua_interventie);
+}
 

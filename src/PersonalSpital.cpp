@@ -2,6 +2,7 @@
 #include<iostream>
 
 int PersonalSpital::next_id=1;
+int PersonalSpital::salariu_mediu=0;
 
 //constructors
 PersonalSpital::PersonalSpital():Persoana() {
@@ -16,6 +17,7 @@ PersonalSpital::PersonalSpital(const std::string &nume, const std::string &prenu
     this->salariu=salariu;
     this->experienta=experienta;
     this->program=program;
+    salariu_mediu=(salariu_mediu*(next_id-1)+this->salariu)/next_id;
 }
 //copy constructor
 PersonalSpital::PersonalSpital(const PersonalSpital &p): Persoana(p){
@@ -23,6 +25,7 @@ PersonalSpital::PersonalSpital(const PersonalSpital &p): Persoana(p){
     this->salariu=p.salariu;
     this->experienta=p.experienta;
     this->program=p.program;
+    salariu_mediu=(salariu_mediu*(next_id-1)+this->salariu)/next_id;
 }
 
 //getters
@@ -41,6 +44,7 @@ std::string PersonalSpital :: getProgram() const {
 
 //setters
 void PersonalSpital :: setSalariu(int salariu) {
+    salariu_mediu=(salariu_mediu*(next_id-1)-this->salariu+salariu)/next_id;
     this->salariu=salariu;
 }
 void PersonalSpital :: setProgram(const std::string &program) {
@@ -78,3 +82,6 @@ std::ostream& operator<<(std::ostream &out, const PersonalSpital &p) {
 }
 
 //methods
+int PersonalSpital :: calculeazaSalariuMediu() {
+    return salariu_mediu;
+}

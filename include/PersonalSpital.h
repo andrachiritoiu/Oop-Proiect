@@ -10,6 +10,7 @@ protected:
   int salariu;
   int experienta;
   std::string program;
+  static int salariu_mediu;
 
 public:
   //constructors
@@ -35,7 +36,8 @@ public:
   friend std::ostream& operator<<(std::ostream &out, const PersonalSpital &p);
 
   //methods
-  virtual void calclueazaBonus() const = 0 ;
+  //virtual void calclueazaBonus() const = 0 ;
+  static int calculeazaSalariuMediu();
 
   //destructor
   ~PersonalSpital() override = default;
