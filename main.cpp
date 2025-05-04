@@ -51,8 +51,8 @@ int main() {
     // std::cout<<persoana2;
 
     Medic medic;
-    std::cin>>medic;
-    std::cout<<medic;
+    // std::cin>>medic;
+    // std::cout<<medic;
 
     return 0;
 }
