@@ -42,6 +42,4 @@ public:
 
 };
 
-
-
 #endif //MEDIC_H

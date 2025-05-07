@@ -52,7 +52,6 @@ Medic& Medic::operator=(const Medic &m) {
         this->pacienti=m.pacienti;
     }
     return *this;
-
 }
 std::istream& operator>>(std::istream &in,  Medic &m) {
     in>>static_cast<PersonalSpital&>(m);
@@ -79,11 +78,11 @@ std::istream& operator>>(std::istream &in,  Medic &m) {
 
 }
 std::ostream& operator<<(std::ostream &out, const  Medic &m) {
-    out << static_cast<const PersonalSpital&>(m);
-    out << "Specializare: " << m.specializare << "\n";
-    out << "Numar pacienti tratati: " << m.numar_pacienti_tratati << "\n";
-    out << "Numar operatii: " << m.numar_operatii << "\n";
-    out << "Pacienti:\n";
+    out<<static_cast<const PersonalSpital&>(m);
+    out<<"Specializare: "<< m.specializare<< "\n";
+    out<<"Numar pacienti tratati: "<< m.numar_pacienti_tratati<< "\n";
+    out<<"Numar operatii: "<< m.numar_operatii<< "\n";
+    out<<"Pacienti:\n";
 
    for (const auto& [id,pacient]: m.pacienti) {
        out<<"Pacient ID"<< id<<":\n"<<pacient<<"\n";
