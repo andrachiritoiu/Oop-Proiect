@@ -54,9 +54,9 @@ int main() {
     // std::cin>>medic;
     // std::cout<<medic;
 
-    Asistent asistent;
-    std::cin>>asistent;
-    std::cout<<asistent;
+    // Asistent asistent;
+    // std::cin>>asistent;
+    // std::cout<<asistent;
 
     return 0;
 }
