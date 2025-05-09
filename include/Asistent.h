@@ -14,7 +14,7 @@ public:
     //constructors
     Asistent();
     Asistent(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta,
-        const std::string &program, const std::string &sectie, std::vector<std::string> proceduri_efectuate);
+        const std::string &program, const std::string &sectie, const std::vector<std::string> &proceduri_efectuate);
     //copy constructor
     Asistent(const Asistent &a);
 
@@ -33,7 +33,7 @@ public:
     //methods
     // void calclueazaBonus() const override;
     void addProcedura(const std::string &procedura);
-    void efectueazaProcedura(Pacient *p, std::string procedura);
+    void efectueazaProcedura(Pacient *p, const std::string &procedura);
 
     //destructor
     ~Asistent() override = default;

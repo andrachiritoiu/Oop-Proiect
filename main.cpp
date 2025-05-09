@@ -5,6 +5,7 @@
 #include "PersonalSpital.h"
 #include "Medic.h"
 #include "Asistent.h"
+#include "Meniu.h"
 
 
 int main() {
@@ -58,5 +59,6 @@ int main() {
     // std::cin>>asistent;
     // std::cout<<asistent;
 
+    Meniu::getInstanta()->ruleaza();
     return 0;
 }

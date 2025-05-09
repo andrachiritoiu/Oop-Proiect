@@ -36,8 +36,6 @@ public:
     friend std::ostream& operator<<(std::ostream &out, const Persoana &p);
 
     //methods
-    //functie virtuala pura => face clasa abstracta
-    //virtual void afiseazaDetalii()=0;
 
     //destructor
     virtual ~Persoana()=default;
