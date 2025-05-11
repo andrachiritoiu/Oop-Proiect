@@ -244,7 +244,7 @@ void Meniu::ruleazaMeniuMedic() {
 
                     bool gasit=false;
                     for (const auto &m:this->medici) {
-                        if (m.getId()==idMedicCurent) {
+                        if (m.getId()==id) {
                             gasit=true;
                             idMedicCurent=id;
                             autentificat=true;
@@ -300,13 +300,13 @@ void Meniu::ruleazaMeniuMedic() {
                         std::cout << "Nu exista pacienti inregistrati.\n";
                     }
                     else {
-                        int idPacient;
+                        int id;
                         std::cout<<"Introduceti ID-ul pacientului: ";
-                        std::cin>>idPacient;
+                        std::cin>>id;
 
                         bool gasit=false;
                         for (auto &p:pacienti) {
-                            if (p.getId()==idPacient) {
+                            if (p.getId()==id) {
                                 gasit=true;
                                 std::string evaluare;
                                 std::cout<<"Introduceti evaluarea: ";
@@ -407,7 +407,7 @@ void Meniu::ruleazaMeniuMedic() {
                 }
             }
         }
-    }while (op!=6);
+    }while (op!=3);
 }
 
 void Meniu::ruleazaMeniuAsistent() {
@@ -444,7 +444,7 @@ void Meniu::ruleazaMeniuAsistent() {
 
                     bool gasit=false;
                     for (const auto &m:this->asistenti) {
-                        if (m.getId()==idAsistentCurent) {
+                        if (m.getId()==id) {
                             gasit=true;
                             idAsistentCurent=id;
                             autentificat=true;
@@ -504,10 +504,11 @@ void Meniu::ruleazaMeniuAsistent() {
                     autentificat=false;
                     break;
 
-                default:
+                default: {
                     std::cout<<"Optiune invalida\n";
                     break;
+                }
             }
         }
-    }while (op!=4);
+    }while (op!=3);
 }
