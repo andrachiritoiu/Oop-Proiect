@@ -21,7 +21,7 @@ PersonalSpital::PersonalSpital(const std::string &nume, const std::string &prenu
 }
 //copy constructor
 PersonalSpital::PersonalSpital(const PersonalSpital &p): Persoana(p){
-    this->id_angajat=next_id++;
+    this->id_angajat=p.id_angajat;
     this->salariu=p.salariu;
     this->experienta=p.experienta;
     this->program=p.program;
