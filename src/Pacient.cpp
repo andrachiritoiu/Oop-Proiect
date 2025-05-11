@@ -28,7 +28,7 @@ Pacient :: Pacient (const std::string &nume, const std::string &prenume, const s
 }
 //copy constructor
 Pacient::Pacient(const Pacient &p):Persoana(p){
-    this->id_pacient=next_id++;
+    this->id_pacient=p.id_pacient;
     this->diagnostic=p.diagnostic;
     this->severitate_boala=p.severitate_boala;
     this->data_internare=p.data_internare;
@@ -94,24 +94,26 @@ Pacient& Pacient :: operator=(const Pacient &p) {
 std::istream& operator>>(std::istream &in, Pacient &p) {
     //static_cast - converteste
     in>>static_cast<Persoana&>(p); //upcasting
-    std::cout<<"Diagnostic: ";
-    in>>p.diagnostic;
-    std::cout<<"Severitate boala: ";
-    in>>p.severitate_boala;
-    std::cout<<"Data internare: ";
-    in>>p.data_internare;
-    std::cout<<"Data externare: ";
-    in>>p.data_externare;
-    std::cout<<"Asigurat: ";
+
+    // std::cout<<"Diagnostic: ";
+    // in>>p.diagnostic;
+    // std::cout<<"Severitate boala: ";
+    // in>>p.severitate_boala;
+    // std::cout<<"Data internare: ";
+    // in>>p.data_internare;
+    // std::cout<<"Data externare: ";
+    // in>>p.data_externare;
+
+    std::cout<<"Asigurat(0-nu/1-da): ";
     in>>p.asigurat;
     std::cout<<"Istoric medical: \n";
 
     int nr_intrari;
     std::cout<<"Numar intrari in istoric medical: ";
-    in >> nr_intrari;
+    in>>nr_intrari;
     p.istoric_medical.clear();
     std::string intrare;
-    std::getline(in,intrare);//in-flux intarare, intrare-var care stocheaza textul citit
+    std::getline(in,intrare);//in-flux intarare, intrare - var care stocheaza textul citit
     for(int i=0;i<nr_intrari;i++) {
         std::cout<<"Intrare "<< i + 1 <<": ";
         std::getline(in,intrare);
@@ -122,12 +124,14 @@ std::istream& operator>>(std::istream &in, Pacient &p) {
 std::ostream& operator<<(std::ostream &out, const Pacient &p) {
     out<<static_cast<const Persoana&>(p);
     out<<"Id pacient: "<<p.id_pacient<<"\n"
-       <<"Diagnostic: "<<p.diagnostic<<"\n"
-       <<"Severitate boala: "<<p.severitate_boala<<"\n"
-       <<"Data internare: "<<p.data_internare<<"\n"
-       <<"Data externare: "<<p.data_externare<<"\n"
+
+       // <<"Diagnostic: "<<p.diagnostic<<"\n"
+       // <<"Severitate boala: "<<p.severitate_boala<<"\n"
+       // <<"Data internare: "<<p.data_internare<<"\n"
+       // <<"Data externare: "<<p.data_externare<<"\n"
+
        <<"Asigurat: "<<(p.asigurat?"Da" : "Nu")<<"\n" //accepta 1 si 0
-       <<"Istoric medical: \n";
+       <<"Istoric medical: "<<"\n";
     for (const auto& intrare: p.istoric_medical)
         out<<" - "<<intrare<<"\n";
     return out;

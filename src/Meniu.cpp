@@ -63,6 +63,11 @@ void Meniu::ruleazaMeniuPacient() {
                     std::cin>>pacient;
                     idPacientCurent=pacient.getId();
                     this->pacienti.push_back(pacient);
+
+                    for (const auto& p : pacienti) {
+                        std::cout << p << std::endl;
+                    }
+
                     autentificat=true;
                     std::cout<<"Pacient inregistrat cu ID: "<<idPacientCurent<<"\n";
                     break;
@@ -144,14 +149,10 @@ void Meniu::ruleazaMeniuPacient() {
 
                 case 3:{
                     //solicitare externare
-                    int id;
-                    std::cout<<"Introdu ID pacient pentru externare: ";
-                    std::cin>>id;
                     bool gasit=false;
                     for (auto &p:this->pacienti) {
-                        if (p.getId()==id) {
+                        if (p.getId()==idPacientCurent) {
                             gasit=true;
-
                             std::string data;
                             std::cout<<"Introdu data externarii: ";
                             std::cin>>data;
@@ -169,6 +170,7 @@ void Meniu::ruleazaMeniuPacient() {
                     //deconectare
                     autentificat=false;
                     idPacientCurent=-1;
+
                     std::cout<<"Deconectare reusita.\n";
                     break;
 
@@ -177,7 +179,7 @@ void Meniu::ruleazaMeniuPacient() {
                     break;
             }
         }
-    }while (optiune!=3);
+    }while (optiune!=4);
 }
 
 void Meniu::ruleazaMeniuPersonalMedical() {
