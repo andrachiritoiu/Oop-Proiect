@@ -4,8 +4,6 @@
 #include"Medic.h"
 #include"Asistent.h"
 
-#include<iostream>
-
 //Singleton(design pattern)
 
 class Meniu {

@@ -23,8 +23,8 @@ public:
     std::string getCNP() const;
 
     //setters
-    void setNume(const std::string &nume);
-    void setPrenume(const std::string &prenume);
+    void setNume(const std::string &nume_p);
+    void setPrenume(const std::string &prenume_p);
     //void setCNP(const std::string &CNP);
 
     //operators

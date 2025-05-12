@@ -322,10 +322,9 @@ void Meniu::ruleazaMeniuMedic() {
                         if (!gasit) {
                             std::cout<<"Pacient inexistent.\n";
                         }
-                        break;
                     }
-
-                }
+                    break;
+                    }
 
                 case 3: {
                     //prescriere reteta
@@ -354,8 +353,8 @@ void Meniu::ruleazaMeniuMedic() {
                         if (!gasit) {
                             std::cout<<"Pacient inexistent.\n";
                         }
-                        break;
                     }
+                    break;
                 }
 
                 case 4: {

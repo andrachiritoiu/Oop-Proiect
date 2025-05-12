@@ -39,9 +39,9 @@ int main() {
     // std::cout<<persoana.getNume();
 
     //
-    Pacient pacient("Ionescu","Maria","2650101037813","raceala",5,"14.02","16.02",true,
-        {"Internare pentru raceala 12.04.2022 - 14.04.2022","Consultatie cardiologie 20.09.2021","Tratament alergie 05.05.2020"});
-    std::cout<<pacient;
+    // Pacient pacient("Ionescu","Maria","2650101037813","raceala",5,"14.02","16.02",true,
+    //     {"Internare pentru raceala 12.04.2022 - 14.04.2022","Consultatie cardiologie 20.09.2021","Tratament alergie 05.05.2020"});
+    // std::cout<<pacient;
     //
     // Pacient persoana;
     // std::cin>>persoana;
@@ -59,6 +59,6 @@ int main() {
     // std::cin>>asistent;
     // std::cout<<asistent;
 
-    // Meniu::getInstanta()->ruleaza();
+    Meniu::getInstanta()->ruleaza();
     return 0;
 }
