@@ -2,7 +2,7 @@
 #include "Pacient.h"
 #include<iostream>
 #include<vector>
-
+// #include <windows.h>
 Meniu* Meniu::instanta=nullptr;
 
 Meniu* Meniu :: getInstanta(){
@@ -15,6 +15,7 @@ void Meniu::ruleaza(){
     int op;
 
     do{
+        // system("cls");
         std::cout<<"\n---- Sistem Management Spital ----\n";
         std::cout<<"1. Acces Pacient\n";
         std::cout<<"2. Acces Personal Medical\n";
@@ -94,9 +95,10 @@ void Meniu::ruleazaMeniuPacient() {
                 case 3:
                     break;
 
-                default:
+                default: {
                     std::cout<<"Optiune invalida\n";
                     break;
+                }
             }
         }
 
@@ -170,9 +172,10 @@ void Meniu::ruleazaMeniuPacient() {
                     break;
                 }
 
-                default:
+                default: {
                     std::cout<<"Optiune invalida\n";
                     break;
+                }
             }
         }
     }while (optiune!=4);
@@ -327,7 +330,7 @@ void Meniu::ruleazaMeniuMedic() {
                     }
 
                 case 3: {
-                    //prescriere reteta
+                    //prescriere tratament
                     if (pacienti.empty()) {
                         std::cout << "Nu exista pacienti inregistrati.\n";
                     }
@@ -390,8 +393,8 @@ void Meniu::ruleazaMeniuMedic() {
                         if (!gasit) {
                             std::cout<<"Pacient inexistent.\n";
                         }
-                        break;
                     }
+                    break;
                 }
 
                 case 6: {
