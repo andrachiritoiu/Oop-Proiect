@@ -60,8 +60,10 @@ std::ostream& operator<<(std::ostream &out,const Asistent &a) {
     out<<static_cast<const PersonalSpital&>(a);
     out<<"Sectie: "<<a.sectie<<"\n"
        <<"Proceduri efectuate: \n";
-    for (int i=0;i<a.proceduri_efectuate.size();i++) {
-        out<<" - Procedura "<<i+1<<": "<<a.proceduri_efectuate[i]<<" \n";
+    int i=1;
+    for (const auto &p:a.proceduri_efectuate){
+        out<<" - Procedura "<<i<<": "<<p<<" \n";
+        i++;
     }
     return out;
 }

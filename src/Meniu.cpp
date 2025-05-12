@@ -183,8 +183,8 @@ void Meniu::ruleazaMeniuPersonalMedical() {
 
     do {
         std::cout<<"\n---- Meniu Personal Medical ----\n";
-        std::cout<<"1. Medic\n";
-        std::cout<<"2. Asistent\n";
+        std::cout<<"1. Acces Medic\n";
+        std::cout<<"2. Acces Asistent\n";
         std::cout<<"3. Inapoi\n";
         std::cout<<"Alege: ";
         std::cin>>optiune_tip;
@@ -271,6 +271,7 @@ void Meniu::ruleazaMeniuMedic() {
 
         else {
             //este conectat
+            int opt;
             std::cout<<"\n---- Meniu Actiuni Medic (ID: "<<idMedicCurent<<") ----\n";
             std::cout<<"1. Vizualizare pacienti activi\n";
             std::cout<<"2. Evaluare pacient\n";
@@ -279,9 +280,9 @@ void Meniu::ruleazaMeniuMedic() {
             std::cout<<"5. Externare pacient\n";
             std::cout<<"6. Deconectare\n";
             std::cout<<"Alege: ";
-            std::cin>>op;
+            std::cin>>opt;
 
-            switch (op) {
+            switch (opt) {
                 case 1: {
                     //pacienti activi
                     if (pacienti.empty())
@@ -492,10 +493,12 @@ void Meniu::ruleazaMeniuAsistent() {
 
                 case 2:
                     //administrare tratament
+                    std::cout<<"Administrare tratament";
                     break;
 
                 case 3:
                     //verificare stoc medicamente
+                    std::cout<<"Verificare stoc medicamnete";
                     break;
 
                 case 4:

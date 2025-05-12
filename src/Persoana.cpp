@@ -93,10 +93,10 @@ std::string Persoana :: getCNP() const {
 
 //setters
 void Persoana :: setNume(const std::string &nume) {
-    this->nume=nume;
+    this->nume = nume;
 }
 void Persoana :: setPrenume(const std::string &prenume) {
-    this->prenume=prenume;
+    this->prenume = prenume;
 }
 
 

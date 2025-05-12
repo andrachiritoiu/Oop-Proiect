@@ -52,10 +52,10 @@ std::string PersonalSpital :: getProgram() const {
 
 //setters
 void PersonalSpital :: setSalariu(int salariu) {
-    suma_totala_salarii=suma_totala_salarii - this->salariu + salariu;
+    suma_totala_salarii = suma_totala_salarii - this->salariu + salariu;
     this->salariu=salariu;
     if (nr_angajati>0)
-        salariu_mediu=suma_totala_salarii / nr_angajati;
+        salariu_mediu = suma_totala_salarii / nr_angajati;
 }
 void PersonalSpital :: setProgram(const std::string &program) {
     this->program=program;
@@ -91,7 +91,7 @@ std::istream& operator>>(std::istream &in, PersonalSpital &p) {
     PersonalSpital::salariu_mediu=PersonalSpital::suma_totala_salarii/PersonalSpital::nr_angajati;
     return in;
 }
-std::ostream& operator<<(std::ostream &out, const PersonalSpital &p) {
+    std::ostream& operator<<(std::ostream &out, const PersonalSpital &p) {
     out<<static_cast<const Persoana&>(p);
     out<<"Id angajat: "<<p.id_angajat<<"\n"
        <<"Salariu: "<<p.salariu<<"\n"
