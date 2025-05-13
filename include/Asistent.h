@@ -34,8 +34,8 @@ public:
     // void calclueazaBonus() const override;
     void addProcedura(const std::string &procedura);
     void efectueazaProcedura(Pacient *p, const std::string &procedura);
-    template<typename T>
-    void verificaStoc(const Medicament<T>& med);
+    // template<typename T>
+    // void verificaStoc(const Medicament<T>& med);
 
     //destructor
     ~Asistent() override = default;

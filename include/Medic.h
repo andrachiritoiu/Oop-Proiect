@@ -36,8 +36,8 @@ public:
     //methods
     void adaugaPacient(const Pacient& p);
     void stergePacient(int id_pacient);
-    template<typename T>
-    void prescrieTratament(const Medicament<T>& med);
+    // template<typename T>
+    // void prescrieTratament(const Medicament<T>& med);
 
     //destructor
     ~Medic() override = default;

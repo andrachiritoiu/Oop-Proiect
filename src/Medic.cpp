@@ -98,10 +98,10 @@ void Medic::adaugaPacient(const Pacient& p) {
 void Medic::stergePacient(int id_pacient) {
     pacienti.erase(id_pacient);
 }
-template<typename T>
-void Medic::prescrieTratament(const Medicament<T>& med) {
-    std::cout<<"Tratament prescris:\n";
-    std::cout<<"Medicament: " << med.getNume() << "\n";
-    std::cout<<"Pret: " << med.getPret() << "\n";
-    std::cout<<"Cantitate: " << med.getCantitate() << "\n";
-}
+// template<typename T>
+// void Medic::prescrieTratament(const Medicament<T>& med) {
+//     std::cout<<"Tratament prescris:\n";
+//     std::cout<<"Medicament: " << med.getNume() << "\n";
+//     std::cout<<"Pret: " << med.getPret() << "\n";
+//     std::cout<<"Cantitate: " << med.getCantitate() << "\n";
+// }

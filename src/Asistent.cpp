@@ -81,8 +81,8 @@ void Asistent :: efectueazaProcedura(Pacient *p, const std::string &procedura) {
     p->adaugaIstoric(procedura);
     std::cout<<"Procedură efectuată de asistentul " + getNume() + " " + getPrenume() + ": " + procedura;
 }
-template<typename T>
-void Asistent::verificaStoc(const Medicament<T>& med) {
-    std::cout<<"Verificare stoc:\n";
-    std::cout<<"Cantitate in stoc: "<<med.getCantitate()<<"\n";
-}
+// template<typename T>
+// void Asistent::verificaStoc(const Medicament<T>& med) {
+//     std::cout<<"Verificare stoc:\n";
+//     std::cout<<"Cantitate in stoc: "<<med.getCantitate()<<"\n";
+// }

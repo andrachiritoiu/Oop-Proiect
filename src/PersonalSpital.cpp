@@ -91,7 +91,7 @@ std::istream& operator>>(std::istream &in, PersonalSpital &p) {
     PersonalSpital::salariu_mediu=PersonalSpital::suma_totala_salarii/PersonalSpital::nr_angajati;
     return in;
 }
-    std::ostream& operator<<(std::ostream &out, const PersonalSpital &p) {
+std::ostream& operator<<(std::ostream &out, const PersonalSpital &p) {
     out<<static_cast<const Persoana&>(p);
     out<<"Id angajat: "<<p.id_angajat<<"\n"
        <<"Salariu: "<<p.salariu<<"\n"
