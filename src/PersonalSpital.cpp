@@ -11,10 +11,10 @@ PersonalSpital::PersonalSpital():Persoana() {
     this->id_angajat=next_id++;
     this->salariu=0;
     this->experienta=0;
-    this->program="";
+    this->program;
 }
 PersonalSpital::PersonalSpital(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu,
-    int experienta, const std::string &program) : Persoana(nume, prenume, CNP){
+    int experienta,  std::map<std::string, std::vector<int>> &program) : Persoana(nume, prenume, CNP){
     this->id_angajat=next_id++;
     this->salariu=salariu;
     this->experienta=experienta;
@@ -46,9 +46,7 @@ int PersonalSpital :: getSalariu() const {
 int PersonalSpital :: getExperienta() const {
     return this->experienta;
 }
-std::string PersonalSpital :: getProgram() const {
-    return this->program;
-}
+
 
 //setters
 void PersonalSpital :: setSalariu(int salariu) {
@@ -56,9 +54,6 @@ void PersonalSpital :: setSalariu(int salariu) {
     this->salariu=salariu;
     if (nr_angajati>0)
         salariu_mediu = suma_totala_salarii / nr_angajati;
-}
-void PersonalSpital :: setProgram(const std::string &program) {
-    this->program=program;
 }
 
 //operators
@@ -83,7 +78,27 @@ std::istream& operator>>(std::istream &in, PersonalSpital &p) {
     std::cout<<"Experienta: ";
     in>>p.experienta;
     std::cout<<"Program: ";
-    in>>p.program;
+
+    int nr_zile;
+    std::cout<<"Numar de zile cu program: ";
+    in>>nr_zile;
+    for (int i=0;i<nr_zile;i++) {
+        std::string zi;
+        int ora;
+        std::cout<<"Ziua "<<i+1<<": ";
+        in>>zi;
+
+        std::vector<int> ore;
+        std::cout<<"Numar de ore pentru "<<zi<<": ";
+        int nr_ore;
+
+        std::cout<<"Orele: ";
+        for (int j=0;j<nr_ore;j++) {
+            in>>ora;
+            ore.push_back(ora);
+        }
+        p.program[zi]=ore;
+    }
 
     //recalculare daca este obiect nou
     PersonalSpital::suma_totala_salarii+=p.salariu;
@@ -96,7 +111,12 @@ std::ostream& operator<<(std::ostream &out, const PersonalSpital &p) {
     out<<"Id angajat: "<<p.id_angajat<<"\n"
        <<"Salariu: "<<p.salariu<<"\n"
        <<"Experienta: "<<p.experienta<<"\n"
-       <<"Program: "<<p.program<<"\n";
+       <<"Program: ";
+    for (const auto& zi : p.program) {
+        out << zi.first << ": ";
+        for (int ora : zi.second)
+            out << ora << " ";
+    }
     return out;
 }
 

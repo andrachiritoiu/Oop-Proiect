@@ -2,10 +2,10 @@
 
 //constructors
 Programare::Programare(const std::string& data, int ora, const Pacient &pacient, const Medic &medic){
-  this->data=data;
-  this->ora=ora;
-  this->pacient=pacient;
-  this->medic=medic;
+  this->data = data;
+  this->ora = ora;
+  this->pacient = pacient;
+  this->medic = medic;
 }
 
 //getters

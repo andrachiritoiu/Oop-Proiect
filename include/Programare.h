@@ -1,6 +1,7 @@
 #ifndef PROGRAMARE_H
 #define PROGRAMARE_H
 #include<string>
+#include<memory>
 #include "Pacient.h"
 #include "Medic.h"
 
@@ -10,10 +11,16 @@ class Programare {
     int ora{};
     Pacient pacient;
     Medic medic;
+
+    // std::shared_ptr<Pacient> pacient;
+    // std::shared_ptr<Medic> medic;
+
   public:
     //constructors
     Programare()=default;
     Programare(const std::string &data, int ora, const Pacient &pacient, const Medic &medic);
+
+    // Programare(const std::string &data, int ora, const std::shared_ptr<Pacient> &pacient, const std::shared_ptr<Medic> &medic);
 
     //getters
     std::string getData() const;
@@ -31,6 +38,7 @@ class Programare {
     //methods
 
     //destructor
+    ~Programare()=default;
 
 };
 
