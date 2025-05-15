@@ -10,7 +10,7 @@ Medic::Medic() : PersonalSpital() {
     this->pacienti={};
 }
 Medic::Medic(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta,
-       const std::string &program, const std::string &specializare, int numar_pacienti_tratati, int numar_operatii, const std::map<int, Pacient>& pacienti) : PersonalSpital(nume,
+       std::map<std::string, std::vector<int>> &program, const std::string &specializare, int numar_pacienti_tratati, int numar_operatii, const std::map<int, Pacient>& pacienti) : PersonalSpital(nume,
        prenume, CNP, salariu, experienta, program) {
     this->specializare=specializare;
     this->numar_pacienti_tratati=numar_pacienti_tratati;
@@ -98,6 +98,11 @@ void Medic::adaugaPacient(const Pacient& p) {
 void Medic::stergePacient(int id_pacient) {
     pacienti.erase(id_pacient);
 }
+void Medic :: calclueazaBonus() const {
+    int bonus=this->salariu*0.1*this->experienta/10;
+    std::cout<<"Bonus pentru medicul "<<this->nume<< " " <<this->prenume<<": "<<bonus<<" RON\n";
+}
+
 // template<typename T>
 // void Medic::prescrieTratament(const Medicament<T>& med) {
 //     std::cout<<"Tratament prescris:\n";

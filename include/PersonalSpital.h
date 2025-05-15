@@ -12,7 +12,7 @@ protected:
   static int next_id;
   int salariu;
   int experienta;
-  //{ziua:[ore], ..... }
+  //{ziua:[ora_inceput,ora_sfarsit], ..... }
   std::map<std::string, std::vector<int>> program;
   static int salariu_mediu;
   static int suma_totala_salarii;
@@ -22,7 +22,8 @@ public:
   //constructors
   PersonalSpital();
 
-  PersonalSpital(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta,  std::map<std::string, std::vector<int>> &program);
+  PersonalSpital(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta,
+    std::map<std::string, std::vector<int>> &program);
   //copy constructor
   PersonalSpital(const PersonalSpital &p);
 
@@ -41,11 +42,11 @@ public:
   friend std::ostream& operator<<(std::ostream &out, const PersonalSpital &p);
 
   //methods
-  //virtual void calclueazaBonus() const = 0 ;
+  virtual void calclueazaBonus() const = 0 ;
   static int calculeazaSalariuMediu();
 
   //destructor
-  ~PersonalSpital() override = default;
+  ~PersonalSpital() override;
 };
 
 

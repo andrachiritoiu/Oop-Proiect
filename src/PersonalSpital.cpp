@@ -77,25 +77,37 @@ std::istream& operator>>(std::istream &in, PersonalSpital &p) {
     in>>p.salariu;
     std::cout<<"Experienta: ";
     in>>p.experienta;
-    std::cout<<"Program: ";
 
     int nr_zile;
     std::cout<<"Numar de zile cu program: ";
     in>>nr_zile;
     for (int i=0;i<nr_zile;i++) {
         std::string zi;
-        int ora;
-        std::cout<<"Ziua "<<i+1<<": ";
+        std::cout<<"Ziua "<<i+1<<" (luni-duminica)"<<": ";
         in>>zi;
 
-        std::vector<int> ore;
-        std::cout<<"Numar de ore pentru "<<zi<<": ";
-        int nr_ore;
+        int nr_intervale;
+        std::cout<<"Numar de intervale orare pentru "<<zi<<": ";
+        in>>nr_intervale;
 
-        std::cout<<"Orele: ";
-        for (int j=0;j<nr_ore;j++) {
-            in>>ora;
-            ore.push_back(ora);
+        std::vector<int> ore;
+        std::string interval;
+        int ora_inceput,ora_sfarsit;
+        for (int j=0;j<nr_intervale;j++) {
+            std::cout << "Introduceti intervalul de ore "<<"(ora inceput - ora sfarsit): ";
+            in>>interval;
+
+            int poz=interval.find("-");
+            ora_inceput=std::stoi(interval.substr(0,poz));
+            ora_sfarsit=std::stoi(interval.substr(poz+1));
+
+            if (ora_inceput<0 || ora_inceput>24 || ora_sfarsit<0 || ora_sfarsit>24 || ora_inceput>=ora_sfarsit){
+                std::cout<<"Interval invalid. Reintroduceti intervalul.\n";
+                --j;
+            }
+
+            ore.push_back(ora_inceput);
+            ore.push_back(ora_sfarsit);
         }
         p.program[zi]=ore;
     }
@@ -121,6 +133,10 @@ std::ostream& operator<<(std::ostream &out, const PersonalSpital &p) {
 }
 
 //methods
-int PersonalSpital :: calculeazaSalariuMediu() {
+int PersonalSpital :: calculeazaSalariuMediu(){
     return salariu_mediu;
+}
+//destructors
+PersonalSpital::~PersonalSpital() {
+    nr_angajati--;
 }

@@ -15,7 +15,7 @@ private:
 public:
     //constructors
     Medic();
-    Medic(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta, const std::string &program,
+    Medic(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta, std::map<std::string, std::vector<int>> &program,
         const std::string &specializare, int numar_pacienti_tratati, int numar_operatii, const std::map<int, Pacient>& pacienti);
     //copy constructor
     Medic(const Medic &m);
@@ -36,6 +36,8 @@ public:
     //methods
     void adaugaPacient(const Pacient& p);
     void stergePacient(int id_pacient);
+    void calclueazaBonus() const override;
+
     // template<typename T>
     // void prescrieTratament(const Medicament<T>& med);
 

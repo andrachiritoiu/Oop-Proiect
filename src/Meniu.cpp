@@ -178,7 +178,7 @@ void Meniu::ruleazaMeniuPacient() {
                 }
             }
         }
-    }while (optiune!=4);
+    }while (autentificat || optiune!=3);
 }
 
 void Meniu::ruleazaMeniuPersonalMedical() {

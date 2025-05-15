@@ -9,31 +9,27 @@ class Programare {
   private:
     std::string data;
     int ora{};
-    Pacient pacient;
-    Medic medic;
-
-    // std::shared_ptr<Pacient> pacient;
-    // std::shared_ptr<Medic> medic;
+    //mai multe entitati(programari) acceseaza si folosesc acelasi obj(medic - fara sa se creeze duplicate)
+    std::shared_ptr<Pacient> pacient;
+    std::shared_ptr<Medic> medic;
 
   public:
     //constructors
     Programare()=default;
-    Programare(const std::string &data, int ora, const Pacient &pacient, const Medic &medic);
-
-    // Programare(const std::string &data, int ora, const std::shared_ptr<Pacient> &pacient, const std::shared_ptr<Medic> &medic);
+    Programare(const std::string &data, int ora, const std::shared_ptr<Pacient> &pacient, const std::shared_ptr<Medic> &medic);
 
     //getters
     std::string getData() const;
     int getOra() const;
     //const(1)-obj returnat nu poate fi modificat
-    const Pacient& getPacient() const;
-    const Medic& getMedic() const;
+    const std::shared_ptr<Pacient>& getPacient() const;
+    const std::shared_ptr<Medic>& getMedic() const;
 
     //setters
     void setData(const std::string &data);
     void setOra(int ora);
-    void setPacient(const Pacient &pacient);
-    void setMedic(const Medic &med);
+    void setPacient(const std::shared_ptr<Pacient> &pacient);
+    void setMedic(const std::shared_ptr<Medic> &med);
 
     //methods
 

@@ -8,7 +8,7 @@ Asistent::Asistent() : PersonalSpital() {
     this->proceduri_efectuate={};
 }
 Asistent::Asistent(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta,
-        const std::string &program, const std::string &sectie, const std::vector<std::string> &proceduri_efectuate) : PersonalSpital(nume,
+         std::map<std::string, std::vector<int>> &program, const std::string &sectie, const std::vector<std::string> &proceduri_efectuate) : PersonalSpital(nume,
         prenume, CNP, salariu, experienta, program) {
     this->sectie=sectie;
     this->proceduri_efectuate=proceduri_efectuate;
@@ -81,6 +81,11 @@ void Asistent :: efectueazaProcedura(Pacient *p, const std::string &procedura) {
     p->adaugaIstoric(procedura);
     std::cout<<"Procedură efectuată de asistentul " + getNume() + " " + getPrenume() + ": " + procedura;
 }
+void Asistent :: calclueazaBonus() const {
+    int bonus=this->salariu*0.05*this->experienta/10;
+    std::cout<<"Bonus pentru asistentul "<<this->nume<< " " <<this->prenume<<": "<<bonus<<" RON\n";
+}
+
 // template<typename T>
 // void Asistent::verificaStoc(const Medicament<T>& med) {
 //     std::cout<<"Verificare stoc:\n";

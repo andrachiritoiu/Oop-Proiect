@@ -14,7 +14,7 @@ public:
     //constructors
     Asistent();
     Asistent(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta,
-        const std::string &program, const std::string &sectie, const std::vector<std::string> &proceduri_efectuate);
+         std::map<std::string, std::vector<int>> &program, const std::string &sectie, const std::vector<std::string> &proceduri_efectuate);
     //copy constructor
     Asistent(const Asistent &a);
 
@@ -29,9 +29,8 @@ public:
     friend std::istream& operator>>(std::istream &in, Asistent &a);
     friend std::ostream& operator<<(std::ostream &out,const Asistent &a);
 
-
     //methods
-    // void calclueazaBonus() const override;
+    void calclueazaBonus() const override;
     void addProcedura(const std::string &procedura);
     void efectueazaProcedura(Pacient *p, const std::string &procedura);
     // template<typename T>
