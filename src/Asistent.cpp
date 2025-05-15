@@ -8,7 +8,7 @@ Asistent::Asistent() : PersonalSpital() {
     this->proceduri_efectuate={};
 }
 Asistent::Asistent(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta,
-         std::map<std::string, std::vector<int>> &program, const std::string &sectie, const std::vector<std::string> &proceduri_efectuate) : PersonalSpital(nume,
+         const std::map<std::string, std::vector<std::pair<int,int>>> &program, const std::string &sectie, const std::vector<std::string> &proceduri_efectuate) : PersonalSpital(nume,
         prenume, CNP, salariu, experienta, program) {
     this->sectie=sectie;
     this->proceduri_efectuate=proceduri_efectuate;

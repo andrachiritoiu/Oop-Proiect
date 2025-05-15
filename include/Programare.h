@@ -8,7 +8,8 @@
 class Programare {
   private:
     std::string data;
-    int ora{};
+    int ora_inceput{};
+    int ora_sfarsit{};
     //mai multe entitati(programari) acceseaza si folosesc acelasi obj(medic - fara sa se creeze duplicate)
     std::shared_ptr<Pacient> pacient;
     std::shared_ptr<Medic> medic;
@@ -16,18 +17,20 @@ class Programare {
   public:
     //constructors
     Programare()=default;
-    Programare(const std::string &data, int ora, const std::shared_ptr<Pacient> &pacient, const std::shared_ptr<Medic> &medic);
+    Programare(const std::string &data,  int ora_inceput, int ora_sfarsit, const std::shared_ptr<Pacient> &pacient, const std::shared_ptr<Medic> &medic);
 
     //getters
     std::string getData() const;
-    int getOra() const;
+    int getOraInceput() const;
+    int getOraSfarsit() const;
     //const(1)-obj returnat nu poate fi modificat
     const std::shared_ptr<Pacient>& getPacient() const;
     const std::shared_ptr<Medic>& getMedic() const;
 
     //setters
     void setData(const std::string &data);
-    void setOra(int ora);
+    void setOraInceput(int ora_inceput);
+    void setOraSfarsit(int ora_sfarsit);
     void setPacient(const std::shared_ptr<Pacient> &pacient);
     void setMedic(const std::shared_ptr<Medic> &med);
 

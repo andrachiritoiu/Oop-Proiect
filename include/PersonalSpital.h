@@ -12,8 +12,8 @@ protected:
   static int next_id;
   int salariu;
   int experienta;
-  //{ziua:[ora_inceput,ora_sfarsit], ..... }
-  std::map<std::string, std::vector<int>> program;
+  //{ziua:[(ora_inceput,ora_sfarsit),.....], ..... }
+  std::map<std::string, std::vector<std::pair<int,int>>> program;
   static int salariu_mediu;
   static int suma_totala_salarii;
   static int nr_angajati;
@@ -22,8 +22,8 @@ public:
   //constructors
   PersonalSpital();
 
-  PersonalSpital(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta,
-    std::map<std::string, std::vector<int>> &program);
+    PersonalSpital(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu,
+      int experienta, const std::map<std::string, std::vector<std::pair<int,int>>> &program);
   //copy constructor
   PersonalSpital(const PersonalSpital &p);
 

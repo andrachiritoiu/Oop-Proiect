@@ -5,6 +5,8 @@
 #include "PersonalSpital.h"
 #include "Medic.h"
 #include "Asistent.h"
+#include "Programare.h"
+#include "GestiuneProgramari.h"
 #include "Meniu.h"
 
 
@@ -59,6 +61,29 @@ int main() {
     // std::cin>>asistent;
     // std::cout<<asistent;
 
-    Meniu::getInstanta()->ruleaza();
+
+
+    // Meniu::getInstanta()->ruleaza();
+
+
+    GestiuneProgramari gestiune;
+    std::map<std::string, std::vector<int>> program;
+    program["luni"] = {9, 12, 14, 18};   // intervale orare, ore de lucru
+    program["miercuri"] = {8, 11, 13, 17};
+
+    auto medic_ptr = std::make_shared<Medic>(
+        "Popescu", "Andrei", "1234567890123", 5000, 10, program,
+        "Cardiologie", 100, 50, std::map<int, Pacient>{}
+    );
+
+    auto pacient_ptr = std::make_shared<Pacient>(
+        "Ionescu", "Maria", "9876543210987", "Tensiune mare",
+        3, "2024-10-01", "2024-10-10", true, std::vector<std::string>{"Hipertensiune"}
+    );
+
+    Programare programare1("2025-05-20", 9, pacient_ptr, medic_ptr);
+    gestiune.adaugaProgramare(programare1);
+
+
     return 0;
 }

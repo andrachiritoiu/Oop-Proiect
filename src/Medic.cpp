@@ -10,7 +10,7 @@ Medic::Medic() : PersonalSpital() {
     this->pacienti={};
 }
 Medic::Medic(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta,
-       std::map<std::string, std::vector<int>> &program, const std::string &specializare, int numar_pacienti_tratati, int numar_operatii, const std::map<int, Pacient>& pacienti) : PersonalSpital(nume,
+       const std::map<std::string, std::vector<std::pair<int,int>>> &program, const std::string &specializare, int numar_pacienti_tratati, int numar_operatii, const std::map<int, Pacient>& pacienti) : PersonalSpital(nume,
        prenume, CNP, salariu, experienta, program) {
     this->specializare=specializare;
     this->numar_pacienti_tratati=numar_pacienti_tratati;

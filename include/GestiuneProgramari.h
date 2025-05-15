@@ -9,13 +9,13 @@
 
 class GestiuneProgramari {
   private:
-    std::map<std::shared_ptr<Medic>,std::map<std::string,std::vector<int>>> programari;
+    std::map<std::shared_ptr<Medic>,std::map<std::string,std::vector<std::pair<int,int>>>> programari_facute;
+    std::vector<Programare> programari;
   public:
     //methods
-    bool adaugaProgramare(const Programare& programare);
+    bool adaugaProgramare(const Programare &programare);
     void afiseazaProgram(const std::shared_ptr<Medic>& medic, const std::string &zi);
 };
-
 
 
 #endif //GESTIUNEPROGRAMARI_H

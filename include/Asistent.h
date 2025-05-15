@@ -14,7 +14,7 @@ public:
     //constructors
     Asistent();
     Asistent(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta,
-         std::map<std::string, std::vector<int>> &program, const std::string &sectie, const std::vector<std::string> &proceduri_efectuate);
+         const std::map<std::string, std::vector<std::pair<int,int>>> &program, const std::string &sectie, const std::vector<std::string> &proceduri_efectuate);
     //copy constructor
     Asistent(const Asistent &a);
 

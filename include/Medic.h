@@ -15,7 +15,7 @@ private:
 public:
     //constructors
     Medic();
-    Medic(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta, std::map<std::string, std::vector<int>> &program,
+    Medic(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta, const std::map<std::string, std::vector<std::pair<int,int>>> &program,
         const std::string &specializare, int numar_pacienti_tratati, int numar_operatii, const std::map<int, Pacient>& pacienti);
     //copy constructor
     Medic(const Medic &m);

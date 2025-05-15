@@ -14,7 +14,7 @@ PersonalSpital::PersonalSpital():Persoana() {
     this->program;
 }
 PersonalSpital::PersonalSpital(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu,
-    int experienta,  std::map<std::string, std::vector<int>> &program) : Persoana(nume, prenume, CNP){
+    int experienta, const std::map<std::string, std::vector<std::pair<int,int>>> &program) : Persoana(nume, prenume, CNP){
     this->id_angajat=next_id++;
     this->salariu=salariu;
     this->experienta=experienta;
@@ -90,7 +90,7 @@ std::istream& operator>>(std::istream &in, PersonalSpital &p) {
         std::cout<<"Numar de intervale orare pentru "<<zi<<": ";
         in>>nr_intervale;
 
-        std::vector<int> ore;
+        std::vector<std::pair<int,int>> ore;
         std::string interval;
         int ora_inceput,ora_sfarsit;
         for (int j=0;j<nr_intervale;j++) {
@@ -106,8 +106,7 @@ std::istream& operator>>(std::istream &in, PersonalSpital &p) {
                 --j;
             }
 
-            ore.push_back(ora_inceput);
-            ore.push_back(ora_sfarsit);
+            ore.push_back(std::make_pair(ora_inceput,ora_sfarsit));
         }
         p.program[zi]=ore;
     }
@@ -126,8 +125,9 @@ std::ostream& operator<<(std::ostream &out, const PersonalSpital &p) {
        <<"Program: ";
     for (const auto& zi : p.program) {
         out << zi.first << ": ";
-        for (int ora : zi.second)
-            out << ora << " ";
+        for (const auto& interval : zi.second)
+            out <<"["<<interval.first<<"-"<<interval.second<<"] ";
+        out<<"\n";
     }
     return out;
 }

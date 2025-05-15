@@ -1,9 +1,10 @@
 #include "Programare.h"
 
 //constructors
-Programare::Programare(const std::string& data, int ora, const std::shared_ptr<Pacient> &pacient, const std::shared_ptr<Medic> &medic){
+Programare::Programare(const std::string& data, int ora_inceput, int ora_sfarsit, const std::shared_ptr<Pacient> &pacient, const std::shared_ptr<Medic> &medic){
   this->data = data;
-  this->ora = ora;
+  this->ora_inceput = ora_inceput;
+  this->ora_sfarsit = ora_sfarsit;
   this->pacient = pacient;
   this->medic = medic;
 }
@@ -12,8 +13,11 @@ Programare::Programare(const std::string& data, int ora, const std::shared_ptr<P
 std::string Programare::getData() const {
   return this->data;
 }
-int Programare::getOra() const {
-  return this->ora;
+int Programare::getOraInceput() const {
+  return this->ora_inceput;
+}
+int Programare::getOraSfarsit() const {
+  return this->ora_sfarsit;
 }
 const std::shared_ptr<Pacient>& Programare::getPacient() const {
   return this->pacient;
@@ -26,8 +30,11 @@ const std::shared_ptr<Medic>& Programare::getMedic() const {
 void Programare::setData(const std::string &data) {
   this->data=data;
 }
-void Programare::setOra(int ora) {
-  this->ora=ora;
+void Programare::setOraInceput(int ora_inceput) {
+  this->ora_inceput=ora_inceput;
+}
+void Programare::setOraSfarsit(int ora_sfarsit) {
+  this->ora_sfarsit=ora_sfarsit;
 }
 void Programare::setPacient(const std::shared_ptr<Pacient> &pacient) {
   this->pacient=pacient;
