@@ -2,7 +2,6 @@
 #include "Pacient.h"
 #include "Medicament.h"
 #include "MedicamentFactory.h"
-#include "TratamentManager.h"
 #include<iostream>
 #include<vector>
 #include<memory>
@@ -366,7 +365,7 @@ void Meniu::ruleazaMeniuMedic() {
             std::cout<<"\n---- Meniu Actiuni Medic (ID: "<<idMedicCurent<<") ----\n";
             std::cout<<"1. Vizualizare pacienti activi\n";
             std::cout<<"2. Evaluare pacient\n";
-            std::cout<<"3. Prescriere reteta\n";
+            std::cout<<"3. Prescriere tratament\n";
             std::cout<<"4. Programare operatie\n";
             std::cout<<"5. Externare pacient\n";
             std::cout<<"6. Deconectare\n";
@@ -419,15 +418,34 @@ void Meniu::ruleazaMeniuMedic() {
 
                 case 3: {
                     //prescriere tratament
-                    int tipDoza;
-                    std::cout<<"1. Doza in mg\n";
-                    std::cout<<"2. Alta doza\n";
-                    std::cin>>tipDoza;
+                    if (pacienti.empty()) {
+                        std::cout << "Nu exista pacienti inregistrati.\n";
+                    }
+                    else {
+                        int idPacient;
+                        std::cout<<"Introduceti ID-ul pacientului: ";
+                        std::cin>>idPacient;
 
-                    if (tipDoza==1)
-                        TratamentManager::prescrieTratament<int>(pacienti);
-                    else if (tipDoza==2)
-                        TratamentManager::prescrieTratament<std::string>(pacienti);
+                        bool gasit=false;
+                        for (auto &p:pacienti) {
+                            if (p->getId()==idPacient) {
+                                gasit=true;
+                                std::string categorie, forma;
+                                std::cout<<"Introduceti categoria medicamentului(antibiotic / analgezic / antiinflamator): ";
+                                std::cin>>categorie;
+                                std::cout<<"Introduceti forma medicamentului(pastila / sirop / injectabil / crema): ";
+                                std::cin>>forma;
+
+                                std::shared_ptr<Medicament>med=MedicamentFactory::creeazaMedicament(categorie, forma);
+                                p->adaugaIstoric("Medicament: " + med->getNume() + ", pret: " + std::to_string(med->getPret()) + ", cantitate: " + med->getCantitate() );
+                                std::cout<<"Medicamentul" + med->getNume() + "a fost adaugat cu succes.\n";
+                                break;
+                            }
+                        }
+                        if (!gasit) {
+                            std::cout<<"Pacient inexistent.\n";
+                        }
+                    }
                     break;
                 }
 

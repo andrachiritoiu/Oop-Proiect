@@ -3,75 +3,34 @@
 #include<string>
 #include<iostream>
 
-//in .h
-template<typename T>
 class Medicament {
 private:
   std::string nume;
   float pret{};
-  T cantitate;
+  std::string cantitate;
 
 public:
-  //constructors
-  Medicament()=default;
-  Medicament(const std::string& nume, float pret,const T &cantitate);
+    //constructors
+    Medicament()=default;
+    Medicament(const std::string& nume, float pret,const std::string &cantitate);
 
-  //getters
-  std::string getNume()const;
-  float getPret()const;
-  T getCantitate()const;
+    //getters
+    std::string getNume()const;
+    float getPret()const;
+    std::string getCantitate()const;
 
-  //setters
+    //setters
 
-  //methods
+    //methods
 
-  //destructor
-  ~Medicament()=default;
+    //operators
+    friend std::istream& operator>>(std::istream &in, Medicament &m);
+    friend std::ostream& operator<<(std::ostream &out, const Medicament &m);
+
+    //destructor
+    ~Medicament()=default;
 };
 
 
-//constructor
-template<typename T>
-Medicament<T>::Medicament(const std::string& nume, float pret,const T &cantitate) {
-  this->nume=nume;
-  this->pret=pret;
-  this->cantitate=cantitate;
-}
-
-//getters
-template<typename T>
-std::string Medicament<T>::getNume()const{
-  return this->nume;
-}
-template<typename T>
-float Medicament<T>::getPret()const{
-  return this->pret;
-}
-template<typename T>
-T Medicament<T>::getCantitate()const{
-  return this->cantitate;
-}
-
-//operators
-template<typename T>
-std::istream& operator>>(std::istream &in, Medicament<T> &m) {
-  std::cout<<"Introduceti numele medicamentului: ";
-  in>>m.nume;
-  std::cout<< "Introduceti pretul medicamentului: ";
-  in>>m.pret;
-  std::cout<<"Introduceti cantitatea medicamentului: ";
-  in>>m.cantitate;
-
-  return in;
-}
-template<typename T>
-std::ostream& operator<<(std::ostream &out, const Medicament<T> &m) {
-  out<<"Medicament: "<< m.getNume() << "\n"
-     <<"Pret: "<<m.getPret()<<"\n"
-     <<"Cantitate: "<<m.getCantitate()<<"\n";
-  return out;
-}
-
-//methods
 
 #endif //MEDICAMENT_H
