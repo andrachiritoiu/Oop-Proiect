@@ -31,7 +31,7 @@ public:
   int getId() const;
   int getSalariu() const;
   int getExperienta() const;
-
+  std::map<std::string, std::vector<std::pair<int,int>>> getProgram() const;
 
   //setters
   void setSalariu(int salariu);

@@ -17,9 +17,9 @@ public:
   Medicament(const std::string& nume, float pret, T cantitate);
 
   //getters
-  std::string getNume();
-  float getPret();
-  T getCantitate();
+  std::string getNume()const;
+  float getPret()const;
+  T getCantitate()const;
 
   //setters
 
@@ -40,15 +40,15 @@ Medicament<T>::Medicament(const std::string& nume, float pret, T cantitate) {
 
 //getters
 template<typename T>
-std::string Medicament<T>::getNume(){
+std::string Medicament<T>::getNume()const{
   return this->nume;
 }
 template<typename T>
-float Medicament<T>::getPret(){
+float Medicament<T>::getPret()const{
   return this->pret;
 }
 template<typename T>
-T Medicament<T>::getCantitate(){
+T Medicament<T>::getCantitate()const{
   return this->cantitate;
 }
 

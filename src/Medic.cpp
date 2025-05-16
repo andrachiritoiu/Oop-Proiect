@@ -26,7 +26,7 @@ Medic::Medic(const Medic &m): PersonalSpital(m) {
 }
 
 //getters
-std::string Medic :: getSpecialziare() const {
+std::string Medic :: getSpecializare() const {
     return this->specializare;
 }
 int Medic :: getNrPacientiTratati() const {

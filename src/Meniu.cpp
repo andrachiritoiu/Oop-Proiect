@@ -2,7 +2,8 @@
 #include "Pacient.h"
 #include<iostream>
 #include<vector>
-// #include <windows.h>
+#include<memory>
+
 Meniu* Meniu::instanta=nullptr;
 
 Meniu* Meniu :: getInstanta(){
@@ -15,7 +16,6 @@ void Meniu::ruleaza(){
     int op;
 
     do{
-        // system("cls");
         std::cout<<"\n---- Sistem Management Spital ----\n";
         std::cout<<"1. Acces Pacient\n";
         std::cout<<"2. Acces Personal Medical\n";
@@ -60,9 +60,10 @@ void Meniu::ruleazaMeniuPacient() {
             switch (optiune) {
                 case 1: {
                     //pacient nou
-                    Pacient pacient;
-                    std::cin>>pacient;
-                    idPacientCurent=pacient.getId();
+                    auto pacient=std::make_shared<Pacient>();
+                    //*pacient-referrinta la obiectul real
+                    std::cin>>*pacient;
+                    idPacientCurent=pacient->getId();
                     this->pacienti.push_back(pacient);
                     autentificat=true;
                     std::cout<<"Pacient inregistrat cu ID: "<<idPacientCurent<<"\n";
@@ -77,7 +78,7 @@ void Meniu::ruleazaMeniuPacient() {
 
                     bool gasit=false;
                     for (const auto &p:this->pacienti) {
-                       if (p.getId()==id) {
+                       if (p->getId()==id) {
                         gasit=true;
                         idPacientCurent=id;
                         autentificat=true;
@@ -118,14 +119,14 @@ void Meniu::ruleazaMeniuPacient() {
                     bool gasit=false;
 
                     for (const auto &p:this->pacienti) {
-                        if (p.getId()==idPacientCurent) {
+                        if (p->getId()==idPacientCurent) {
                             gasit=true;
-                            if (p.getIstoricMedical().empty()){
+                            if (p->getIstoricMedical().empty()){
                                 std::cout<<"Nu exista proceduri in istoric.\n";
                             }
                             else {
                                 std::cout<<"Istoric medical: ";
-                                for (const auto &proced:p.getIstoricMedical())
+                                for (const auto &proced:p->getIstoricMedical())
                                     std::cout<<"-"<<proced<<"\n";
                             }
                             break;
@@ -141,19 +142,103 @@ void Meniu::ruleazaMeniuPacient() {
 
                 case 2: {
                     //programare noua
+                    std::string specializare;
+                    std::cout<<"Introduceti specializarea dorita: ";
+                    std::cin>>specializare;
+                    std::vector<std::shared_ptr<Medic>>medici_specializare;
+
+                    for (const auto &medic:this->medici) {
+                        if (medic->getSpecializare() == specializare)
+                            medici_specializare.push_back(medic);
+                    }
+
+                    if (medici_specializare.empty()) {
+                        std::cout<<"Nu exista medici cu specializarea aleasa.\n";
+                        break;
+                    }
+
+                    std::cout<<"Medici disponibili: \n";
+                    for (auto i=0;i<medici_specializare.size();i++) {
+                        std::cout<<i+1<<"."<<medici_specializare[i]->getNume()<<" "<<medici_specializare[i]->getPrenume()<<"\n";
+                    }
+
+                    int index;
+                    std::cout<<"Alege un medic(index): ";
+                    std::cin>>index;
+
+                    if(index<1 || index>medici_specializare.size()){
+                        std::cout<<"Index invalid.\n";
+                        break;
+                    }
+
+                    std::shared_ptr<Medic> medic_selectat=medici_specializare[index-1];
+
+                    std::cout<<"Zile disponibile: \n";
+                    for (const auto &zi:medic_selectat->getProgram()) {
+                        std::cout<<zi.first<<"\n";
+                    }
+
+                    std::string zi_aleasa;
+                    std::cout<<"alege o zi din cele disponibile: ";
+                    std::cin>>zi_aleasa;
+
+                    bool gasit=false;
+                    for (const auto &zi:medic_selectat->getProgram()) {
+                        if (zi.first==zi_aleasa)gasit=true;
+                    }
+                    if (gasit==false) {
+                        std::cout<<"Zi invalida! Medicul nu lucreaza in acea zi.\n";
+                        break;
+                    }
+
+                    std::cout<<"Intervale disponibile in "<<zi_aleasa<<": ";
+                    for (auto interval:medic_selectat->getProgram()[zi_aleasa])
+                        std::cout<<interval.first<<":00 - "<<interval.second<<":00 \n";
+
+                    int ora_start, ora_sfarsit;
+                    std::cout<<"Introdu ora de inceput: ";
+                    std::cin>>ora_start;
+                    std::cout<<"Introdu ora de sfarsit: ";
+                    std::cin>>ora_sfarsit;
+
+                    bool interval_valid=false;
+                    for (const auto &interval:medic_selectat->getProgram()[zi_aleasa]) {
+                        if (ora_start>=interval.first && ora_sfarsit<=interval.second)
+                            interval_valid=true;
+                    }
+                    if (!interval_valid) {
+                        std::cout<<"Interval invalid. Nu se incadreaza in programul medicului.\n";
+                        break;
+                    }
+
+                    std::shared_ptr<Pacient>pacient_curent=nullptr;
+                    for (const auto &p:pacienti) {
+                        if (p->getId()==idPacientCurent)
+                            pacient_curent=p;
+                    }
+
+                    Programare prog(zi_aleasa, ora_start, ora_sfarsit,pacient_curent, medic_selectat);
+
+                    if(gestiuneProgramari.adaugaProgramare(prog)) {
+                        std::cout<<"Programare adaugata cu succes!\n";
+                    }
+                    else{
+                        std::cout<<"Programarea nu a putut fi efectuata.\n";
+                    }
+
                     break;
-                }
+            }
 
                 case 3:{
                     //solicitare externare
                     bool gasit=false;
                     for (auto &p:this->pacienti) {
-                        if (p.getId()==idPacientCurent) {
+                        if (p->getId()==idPacientCurent) {
                             gasit=true;
                             std::string data;
                             std::cout<<"Introdu data externarii: ";
                             std::cin>>data;
-                            p.setData_externare(data);
+                            p->setData_externare(data);
                             std::cout<<"Cerere externare inregistrata.\n";
                             break;
                         }
@@ -230,9 +315,9 @@ void Meniu::ruleazaMeniuMedic() {
             switch (op) {
                 case 1: {
                     //medic nou
-                    Medic medic;
-                    std::cin>>medic;
-                    idMedicCurent=medic.getId();
+                    auto medic=std::make_shared<Medic>();
+                    std::cin>>*medic;
+                    idMedicCurent=medic->getId();
                     this->medici.push_back(medic);
                     autentificat=true;
                     std::cout<<"Medic inregistrat cu ID: "<<idMedicCurent<<"\n";
@@ -247,7 +332,7 @@ void Meniu::ruleazaMeniuMedic() {
 
                     bool gasit=false;
                     for (const auto &m:this->medici) {
-                        if (m.getId()==id) {
+                        if (m->getId()==id) {
                             gasit=true;
                             idMedicCurent=id;
                             autentificat=true;
@@ -292,7 +377,7 @@ void Meniu::ruleazaMeniuMedic() {
                         std::cout<<"Nu exista pacienti inregistrati.\n";
                     else {
                         for (const auto &p:pacienti) {
-                            std::cout<<p<<"\n";
+                            std::cout<<*p<<"\n";
                         }
                     }
                     break;
@@ -310,14 +395,14 @@ void Meniu::ruleazaMeniuMedic() {
 
                         bool gasit=false;
                         for (auto &p:pacienti) {
-                            if (p.getId()==id) {
+                            if (p->getId()==id) {
                                 gasit=true;
                                 std::string evaluare;
                                 std::cout<<"Introduceti evaluarea: ";
                                 std::string temp;
                                 std::getline(std::cin,temp);//sa golsesca bufferul de nl
                                 std::getline(std::cin, evaluare);
-                                p.adaugaIstoric("Evaluarea: "+evaluare);
+                                p->adaugaIstoric("Evaluarea: "+evaluare);
                                 std::cout << "Evaluare adaugata cu succes.\n";
                                 break;
                             }
@@ -341,14 +426,14 @@ void Meniu::ruleazaMeniuMedic() {
 
                         bool gasit=false;
                         for (auto &p:pacienti) {
-                            if (p.getId()==idPacient) {
+                            if (p->getId()==idPacient) {
                                 gasit=true;
                                 std::string reteta;
                                 std::cout<<"Introduceti medicamente: ";
                                 std::string temp;
                                 std::getline(std::cin,temp);
                                 std::getline(std::cin, reteta);
-                                p.adaugaIstoric("Reteta: "+reteta);
+                                p->adaugaIstoric("Reteta: "+reteta);
                                 std::cout << "Reteta adaugata cu succes.\n";
                                 break;
                             }
@@ -377,15 +462,15 @@ void Meniu::ruleazaMeniuMedic() {
 
                         bool gasit=false;
                         for (auto &p:pacienti) {
-                            if (p.getId()==idPacient) {
+                            if (p->getId()==idPacient) {
                                 gasit=true;
                                 std::string externare;
                                 std::cout<<"Introduceti data externarii: ";
                                 std::string temp;
                                 std::getline(std::cin,temp);
                                 std::getline(std::cin, externare);
-                                p.setData_externare(externare);
-                                p.adaugaIstoric("Externare programata: "+externare);
+                                p->setData_externare(externare);
+                                p->adaugaIstoric("Externare programata: "+externare);
                                 std::cout << "Externare programata cu succes.\n";
                                 break;
                             }
@@ -430,9 +515,9 @@ void Meniu::ruleazaMeniuAsistent() {
             switch (op) {
                 case 1: {
                     //asistent nou
-                    Asistent asistent;
-                    std::cin>>asistent;
-                    idAsistentCurent=asistent.getId();
+                    auto asistent=std::make_shared<Asistent>();
+                    std::cin>>*asistent;
+                    idAsistentCurent=asistent->getId();
                     this->asistenti.push_back(asistent);
                     autentificat=true;
                     std::cout<<"Asistent inregistrat cu ID: "<<idAsistentCurent<<"\n";
@@ -447,7 +532,7 @@ void Meniu::ruleazaMeniuAsistent() {
 
                     bool gasit=false;
                     for (const auto &m:this->asistenti) {
-                        if (m.getId()==id) {
+                        if (m->getId()==id) {
                             gasit=true;
                             idAsistentCurent=id;
                             autentificat=true;
@@ -488,7 +573,7 @@ void Meniu::ruleazaMeniuAsistent() {
                         std::cout<<"Nu exista pacienti inregistrati.\n";
                     else {
                         for (const auto &p:pacienti) {
-                            std::cout<<p<<"\n";
+                            std::cout<<*p<<"\n";
                         }
                     }
                     break;

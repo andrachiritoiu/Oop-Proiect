@@ -7,7 +7,6 @@ protected:
     std::string nume;
     std::string prenume;
     std::string CNP;
-
     static bool isCNPvalid(const std::string &cnp);
 
 public:

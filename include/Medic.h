@@ -21,7 +21,7 @@ public:
     Medic(const Medic &m);
 
     //getters
-    std::string getSpecialziare() const;
+    std::string getSpecializare() const;
     int getNrPacientiTratati() const;
     int getNrOperatii() const;
     const std::map<int, Pacient>& getPacienti()const;

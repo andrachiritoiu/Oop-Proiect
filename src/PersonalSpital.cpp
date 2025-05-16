@@ -46,6 +46,10 @@ int PersonalSpital :: getSalariu() const {
 int PersonalSpital :: getExperienta() const {
     return this->experienta;
 }
+std::map<std::string, std::vector<std::pair<int,int>>> PersonalSpital :: getProgram() const {
+    return this->program;
+}
+
 
 
 //setters
@@ -136,6 +140,7 @@ std::ostream& operator<<(std::ostream &out, const PersonalSpital &p) {
 int PersonalSpital :: calculeazaSalariuMediu(){
     return salariu_mediu;
 }
+
 //destructors
 PersonalSpital::~PersonalSpital() {
     nr_angajati--;
