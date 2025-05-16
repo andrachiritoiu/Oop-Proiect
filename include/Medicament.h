@@ -14,7 +14,7 @@ private:
 public:
   //constructors
   Medicament()=default;
-  Medicament(const std::string& nume, float pret, T cantitate);
+  Medicament(const std::string& nume, float pret,const T &cantitate);
 
   //getters
   std::string getNume()const;
@@ -32,7 +32,7 @@ public:
 
 //constructor
 template<typename T>
-Medicament<T>::Medicament(const std::string& nume, float pret, T cantitate) {
+Medicament<T>::Medicament(const std::string& nume, float pret,const T &cantitate) {
   this->nume=nume;
   this->pret=pret;
   this->cantitate=cantitate;

@@ -5,18 +5,15 @@ bool GestiuneProgramari :: adaugaProgramare(const Programare &programare){
     std::string data_programare=programare.getData();
     std::pair<int,int> interval_programare=std::make_pair(programare.getOraInceput(),programare.getOraSfarsit());
     auto medic=programare.getMedic();
-    auto ore_ocupate=programari_facute[medic][data_programare];
 
-    for (const auto &interval:ore_ocupate) {
+    for (const auto &interval:this->programari_facute[medic][data_programare]) {
         if (interval_programare.first<interval.second && interval_programare.second>interval.first)
             std::cout<<"Acest interval este deja ocupat. Alegeti alt interval.\n";
         return false;
     }
 
-
-    ore_ocupate.push_back(interval_programare);
-    programari.push_back(programare);
-    std::cout<<"Programare adaugata cu succes!\n";
+    this->programari_facute[medic][data_programare].push_back(interval_programare);
+    this->programari.push_back(programare);
     return true;
 }
 

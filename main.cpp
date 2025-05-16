@@ -61,9 +61,7 @@ int main() {
     // std::cin>>asistent;
     // std::cout<<asistent;
 
-
-
-    // Meniu::getInstanta()->ruleaza();
+    Meniu::getInstanta()->ruleaza();
 
     return 0;
 }

@@ -1,5 +1,8 @@
 #include "Meniu.h"
 #include "Pacient.h"
+#include "Medicament.h"
+#include "MedicamentFactory.h"
+#include "TratamentManager.h"
 #include<iostream>
 #include<vector>
 #include<memory>
@@ -219,7 +222,7 @@ void Meniu::ruleazaMeniuPacient() {
 
                     Programare prog(zi_aleasa, ora_start, ora_sfarsit,pacient_curent, medic_selectat);
 
-                    if(gestiuneProgramari.adaugaProgramare(prog)) {
+                    if(gestiuneProgramari.adaugaProgramare(prog)==true) {
                         std::cout<<"Programare adaugata cu succes!\n";
                     }
                     else{
@@ -416,32 +419,15 @@ void Meniu::ruleazaMeniuMedic() {
 
                 case 3: {
                     //prescriere tratament
-                    if (pacienti.empty()) {
-                        std::cout << "Nu exista pacienti inregistrati.\n";
-                    }
-                    else {
-                        int idPacient;
-                        std::cout<<"Introduceti ID-ul pacientului: ";
-                        std::cin>>idPacient;
+                    int tipDoza;
+                    std::cout<<"1. Doza in mg\n";
+                    std::cout<<"2. Alta doza\n";
+                    std::cin>>tipDoza;
 
-                        bool gasit=false;
-                        for (auto &p:pacienti) {
-                            if (p->getId()==idPacient) {
-                                gasit=true;
-                                std::string reteta;
-                                std::cout<<"Introduceti medicamente: ";
-                                std::string temp;
-                                std::getline(std::cin,temp);
-                                std::getline(std::cin, reteta);
-                                p->adaugaIstoric("Reteta: "+reteta);
-                                std::cout << "Reteta adaugata cu succes.\n";
-                                break;
-                            }
-                        }
-                        if (!gasit) {
-                            std::cout<<"Pacient inexistent.\n";
-                        }
-                    }
+                    if (tipDoza==1)
+                        TratamentManager::prescrieTratament<int>(pacienti);
+                    else if (tipDoza==2)
+                        TratamentManager::prescrieTratament<std::string>(pacienti);
                     break;
                 }
 
