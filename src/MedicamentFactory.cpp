@@ -2,17 +2,17 @@
 
 std::shared_ptr<Medicament> MedicamentFactory :: creeazaMedicament(const std::string &categorie, const std::string &forma){
     if (categorie=="antibiotic") {
-        if (forma=="pastila")return std::make_shared<Medicament>("Amoxicilina",35,"20mg");
-        else if (forma=="injectabil")return std::make_shared<Medicament>("Augumentin",50,"1doza");
+        if (forma=="pastila")return std::make_shared<Medicament>("Amoxicilina",35,"amoxicilina");
+        else if (forma=="injectabil")return std::make_shared<Medicament>("Augumentin",50,"acid clavulanic");
     }
     else if (categorie=="analgezic") {
-        if (forma=="pastila")return std::make_shared<Medicament>("Paracetamol",10,"1");
-        else if (forma=="sirop")return std::make_shared<Medicament>("Panadol",30,"1lingura");
-        else if (forma=="injectabil")return std::make_shared<Medicament>("Algocalmin",20,"1doza");
+        if (forma=="pastila")return std::make_shared<Medicament>("Paracetamol",10,"paracetamol");
+        else if (forma=="sirop")return std::make_shared<Medicament>("Panadol",30,"paracetamol");
+        else if (forma=="injectabil")return std::make_shared<Medicament>("Algocalmin",20,"metamizol");
     }
     else if (categorie=="antiinflamator") {
-        if (forma=="pastila")return std::make_shared<Medicament>("Ibuprofen",12,"1");
-        else if (forma=="crema")return std::make_shared<Medicament>("Voltaren",45,"1tub");
+        if (forma=="pastila")return std::make_shared<Medicament>("Ibuprofen",12,"ibuprofen");
+        else if (forma=="crema")return std::make_shared<Medicament>("Voltaren",45,"diclofenac");
     }
 
     throw std::invalid_argument("Combinatie necunoscuta de medicamente");

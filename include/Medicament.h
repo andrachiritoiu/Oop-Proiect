@@ -6,18 +6,18 @@
 class Medicament {
 private:
   std::string nume;
-  float pret{};
-  std::string cantitate;
+  int pret{};
+  std::string substanta_activa;
 
 public:
     //constructors
     Medicament()=default;
-    Medicament(const std::string& nume, float pret,const std::string &cantitate);
+    Medicament(const std::string& nume, int pret,const std::string &substanta_activa);
 
     //getters
     std::string getNume()const;
-    float getPret()const;
-    std::string getCantitate()const;
+    int getPret()const;
+    std::string getSubstantaActiva()const;
 
     //setters
 

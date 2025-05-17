@@ -5,12 +5,10 @@
 #include<string>
 #include "Medicament.h"
 
-//design patern Factory(creational)
+//design pattern Factory(creational)
 class MedicamentFactory {
   public:
     static std::shared_ptr<Medicament> creeazaMedicament(const std::string &categorie, const std::string &forma);
 };
-
-
 
 #endif //MEDICAMENTFACTORY_H

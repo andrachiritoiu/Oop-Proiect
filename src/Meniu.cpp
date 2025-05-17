@@ -2,6 +2,7 @@
 #include "Pacient.h"
 #include "Medicament.h"
 #include "MedicamentFactory.h"
+#include "Reteta.h"
 #include<iostream>
 #include<vector>
 #include<memory>
@@ -111,7 +112,8 @@ void Meniu::ruleazaMeniuPacient() {
             std::cout << "1. Vizualizare istoric medical\n";
             std::cout << "2. Programare noua\n";
             std::cout << "3. Solicitare externare\n";
-            std::cout << "4. Deconectare\n";
+            std::cout << "4. Vizualizare retete\n";
+            std::cout << "5. Deconectare\n";
             std::cout << "Alege: ";
             std::cin >> optiune;
 
@@ -251,6 +253,26 @@ void Meniu::ruleazaMeniuPacient() {
                 }
 
                 case 4: {
+                    //retete
+                    bool gasit=false;
+                    for (auto &p:this->pacienti) {
+                        if (p->getId()==idPacientCurent) {
+                            gasit=true;
+                            for (const auto &reteta_var:p->getRetete()) {
+                                //std::visit - este din std::variant si apeleaza functia corecta pentru tipul actual tinut de variant
+                                std::visit([](const auto &reteta) {
+                                    std::cout<<reteta<<"\n";
+                                },reteta_var);
+                            }
+                            break;
+                        }
+                    }
+
+                    if (!gasit) std::cout<<"Pacientul nu a fost gasit.\n";
+                    break;
+                }
+
+                case 5: {
                     //deconectare
                     autentificat=false;
                     idPacientCurent=-1;
@@ -430,16 +452,55 @@ void Meniu::ruleazaMeniuMedic() {
                         for (auto &p:pacienti) {
                             if (p->getId()==idPacient) {
                                 gasit=true;
-                                std::string categorie, forma;
-                                std::cout<<"Introduceti categoria medicamentului(antibiotic / analgezic / antiinflamator): ";
-                                std::cin>>categorie;
-                                std::cout<<"Introduceti forma medicamentului(pastila / sirop / injectabil / crema): ";
-                                std::cin>>forma;
 
-                                std::shared_ptr<Medicament>med=MedicamentFactory::creeazaMedicament(categorie, forma);
-                                p->adaugaIstoric("Medicament: " + med->getNume() + ", pret: " + std::to_string(med->getPret()) + ", cantitate: " + med->getCantitate() );
-                                std::cout<<"Medicamentul" + med->getNume() + "a fost adaugat cu succes.\n";
-                                break;
+                                std::cout<<"Numar de medicamente recomandate: ";
+                                int numar_med;
+                                std::cin>>numar_med;
+
+                                Reteta<int> reteta_int;
+                                Reteta<std::string> reteta_string;
+                                for (int i=0;i<numar_med;i++) {
+                                    std::string categorie, forma;
+                                    std::cout<<"Introduceti categoria medicamentului(antibiotic / analgezic / antiinflamator): ";
+                                    std::cin>>categorie;
+                                    std::cout<<"Introduceti forma medicamentului(pastila / sirop / injectabil / crema): ";
+                                    std::cin>>forma;
+
+                                    std::shared_ptr<Medicament>med=MedicamentFactory::creeazaMedicament(categorie, forma);
+
+                                    std::cout<<"Medicament: " + med->getNume() + ", Pret: " + std::to_string(med->getPret()) + ", Substanta activa: " + med->getSubstantaActiva() + "\n";
+
+                                    std::cout<<"Doza recoamndata: \n";
+                                    std::cout<<"1. Numar de pastile/zi\n";
+                                    std::cout<<"2. Alta doza/zi\n";
+
+                                    int var;
+                                    std::cout<<"Alege tipul de doza: \n";
+                                    std::cin>>var;
+
+                                    switch (var) {
+                                        case 1: {
+                                            int info;
+                                            std::cout<<"Doza: ";
+                                            std::cin>>info;
+                                            reteta_int.adaugaMedicament(med,info);
+                                            break;
+                                        }
+                                        case 2: {
+                                            std::string info;
+                                            std::cout<<"Doza: ";
+                                            std::cin>>info;
+                                            reteta_string.adaugaMedicament(med,info);
+                                            break;
+                                        }
+                                        default:
+                                            std::cout<<"Optiune invalida\n";
+                                        break;
+                                    }
+                                }
+
+                                p->adaugaReteta(reteta_int);
+                                p->adaugaReteta(reteta_string);
                             }
                         }
                         if (!gasit) {

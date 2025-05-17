@@ -2,7 +2,11 @@
 #define PACIENT_H
 #include<string>
 #include<vector>
+#include<variant>
 #include "Persoana.h"
+#include "Reteta.h"
+
+using RetetaVariant=std::variant<Reteta<int>,Reteta<std::string>>;
 
 class Pacient: public Persoana{
 private:
@@ -14,6 +18,7 @@ private:
     std::string data_externare;
     bool asigurat{};
     std::vector<std::string> istoric_medical;
+    std::vector<RetetaVariant> retete;
 
 public:
     //constructors
@@ -31,6 +36,7 @@ public:
     std::string getData_externare() const;
     bool getAsigurat() const;
     const std::vector<std::string>& getIstoricMedical() const;
+    const std::vector<RetetaVariant>& getRetete() const;
 
     //setters
     void setDiagnostic(const std::string &diagnostic);
@@ -46,6 +52,7 @@ public:
 
     //methods
     void adaugaIstoric(const std::string &noua_interventie);
+    void adaugaReteta(RetetaVariant reteta);
 
     //destructor
     ~Pacient() override = default;

@@ -59,6 +59,9 @@ bool Pacient :: getAsigurat() const {
 const std::vector<std::string>& Pacient :: getIstoricMedical() const {
     return this->istoric_medical;
 }
+const std::vector<RetetaVariant>& Pacient :: getRetete() const {
+    return this->retete;
+}
 
 //setters
 void Pacient :: setDiagnostic(const std::string &diagnostic) {
@@ -140,5 +143,8 @@ std::ostream& operator<<(std::ostream &out, const Pacient &p) {
 //methods
 void Pacient :: adaugaIstoric(const std::string &noua_interventie) {
     this->istoric_medical.push_back(noua_interventie);
+}
+void Pacient :: adaugaReteta(RetetaVariant reteta) {
+    this->retete.push_back(reteta);
 }
 
