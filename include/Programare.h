@@ -6,7 +6,7 @@
 #include "Medic.h"
 
 class Programare {
-  private:
+  protected:
     std::string data;
     int ora_inceput{};
     int ora_sfarsit{};
