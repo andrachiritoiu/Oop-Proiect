@@ -2,6 +2,7 @@
 #define MEDIC_H
 #include<string>
 #include<map>
+#include<memory>
 #include "PersonalSpital.h"
 #include "Pacient.h"
 
@@ -10,13 +11,13 @@ private:
   std::string specializare;
   int numar_pacienti_tratati{};
   int numar_operatii{};
-  std::map<int, Pacient>pacienti;//dictionar cu cheia id_pacient
+  std::map<int, std::shared_ptr<Pacient>>pacienti;//dictionar cu cheia id_pacient
 
 public:
     //constructors
     Medic();
     Medic(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta, const std::map<std::string, std::vector<std::pair<int,int>>> &program,
-        const std::string &specializare, int numar_pacienti_tratati, int numar_operatii, const std::map<int, Pacient>& pacienti);
+        const std::string &specializare, int numar_pacienti_tratati, int numar_operatii, std::map<int, std::shared_ptr<Pacient>> pacienti);
     //copy constructor
     Medic(const Medic &m);
 
@@ -24,7 +25,7 @@ public:
     std::string getSpecializare() const;
     int getNrPacientiTratati() const;
     int getNrOperatii() const;
-    const std::map<int, Pacient>& getPacienti()const;
+    const std::map<int, std::shared_ptr<Pacient>> getPacienti()const;
 
     //setters
 
@@ -34,12 +35,10 @@ public:
     friend std::ostream& operator<<(std::ostream &out, const  Medic &m);
 
     //methods
-    void adaugaPacient(const Pacient& p);
+    void adaugaPacient(std::shared_ptr<Pacient> p);
     void stergePacient(int id_pacient);
     void calclueazaBonus() const override;
 
-    // template<typename T>
-    // void prescrieTratament(const Medicament<T>& med);
 
     //destructor
     ~Medic() override = default;

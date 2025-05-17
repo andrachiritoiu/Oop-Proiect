@@ -29,3 +29,20 @@ void GestiuneProgramari :: afiseazaProgram(const std::shared_ptr<Medic>& medic, 
         }
     }
 }
+void GestiuneProgramari::afiseazaProgramariFacute(const std::shared_ptr<Medic>& medic) {
+    std::cout<<"Programul medicului "<<medic->getNume()<<" "<<medic->getPrenume()<<":\n";
+    bool gasit=false;
+
+    for (const auto &programare:this->programari) {
+        if (programare.getMedic()==medic) {
+            gasit=true;
+            std::cout<<"Data: "<<programare.getData()<<"\n";
+            std::cout<<"Interval: "<<programare.getOraInceput()<<":00"<<programare.getOraSfarsit()<<":00\n";
+            std::cout<<"Pacient: "<<programare.getPacient()->getNume()<<" "<<programare.getPacient()->getPrenume()<<"\n";
+        }
+    }
+
+    if (!gasit) {
+        std::cout<<"Nu exista programari.";
+    }
+}

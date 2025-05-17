@@ -15,6 +15,7 @@ class GestiuneProgramari {
     //methods
     bool adaugaProgramare(const Programare &programare);
     void afiseazaProgram(const std::shared_ptr<Medic>& medic, const std::string &zi);
+    void afiseazaProgramariFacute(const std::shared_ptr<Medic>& medic);
 };
 
 

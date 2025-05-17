@@ -85,9 +85,3 @@ void Asistent :: calclueazaBonus() const {
     int bonus=this->salariu*0.05*this->experienta/10;
     std::cout<<"Bonus pentru asistentul "<<this->nume<< " " <<this->prenume<<": "<<bonus<<" RON\n";
 }
-
-// template<typename T>
-// void Asistent::verificaStoc(const Medicament<T>& med) {
-//     std::cout<<"Verificare stoc:\n";
-//     std::cout<<"Cantitate in stoc: "<<med.getCantitate()<<"\n";
-// }

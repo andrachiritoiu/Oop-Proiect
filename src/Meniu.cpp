@@ -66,11 +66,25 @@ void Meniu::ruleazaMeniuPacient() {
                     auto pacient=std::make_shared<Pacient>();
                     //*pacient-referrinta la obiectul real
                     std::cin>>*pacient;
-                    idPacientCurent=pacient->getId();
-                    this->pacienti.push_back(pacient);
-                    autentificat=true;
-                    std::cout<<"Pacient inregistrat cu ID: "<<idPacientCurent<<"\n";
-                    break;
+
+                    bool gasit=false;
+                    for (const auto &p:this->pacienti) {
+                        if (*p==*pacient) {
+                            gasit=true;
+                            std::cout<<"Pacientul cu acest CNP exista deja.\n";
+                            idPacientCurent=pacient->getId();
+                            autentificat=true;
+                            break;
+                        }
+                    }
+
+                    if (!gasit) {
+                        idPacientCurent=pacient->getId();
+                        this->pacienti.push_back(pacient);
+                        autentificat=true;
+                        std::cout<<"Pacient inregistrat cu ID: "<<idPacientCurent<<"\n";
+                        break;
+                    }
                 }
 
                 case 2:{
@@ -183,7 +197,7 @@ void Meniu::ruleazaMeniuPacient() {
                     }
 
                     std::string zi_aleasa;
-                    std::cout<<"alege o zi din cele disponibile: ";
+                    std::cout<<"Alege o zi din cele disponibile: ";
                     std::cin>>zi_aleasa;
 
                     bool gasit=false;
@@ -195,7 +209,7 @@ void Meniu::ruleazaMeniuPacient() {
                         break;
                     }
 
-                    std::cout<<"Intervale disponibile in "<<zi_aleasa<<": ";
+                    std::cout<<"Intervale disponibile "<<zi_aleasa<<": ";
                     for (auto interval:medic_selectat->getProgram()[zi_aleasa])
                         std::cout<<interval.first<<":00 - "<<interval.second<<":00 \n";
 
@@ -225,6 +239,7 @@ void Meniu::ruleazaMeniuPacient() {
 
                     if(gestiuneProgramari.adaugaProgramare(prog)==true) {
                         std::cout<<"Programare adaugata cu succes!\n";
+                        medic_selectat->adaugaPacient(pacient_curent);
                     }
                     else{
                         std::cout<<"Programarea nu a putut fi efectuata.\n";
@@ -385,12 +400,13 @@ void Meniu::ruleazaMeniuMedic() {
             //este conectat
             int opt;
             std::cout<<"\n---- Meniu Actiuni Medic (ID: "<<idMedicCurent<<") ----\n";
-            std::cout<<"1. Vizualizare pacienti activi\n";
-            std::cout<<"2. Evaluare pacient\n";
-            std::cout<<"3. Prescriere tratament\n";
-            std::cout<<"4. Programare operatie\n";
-            std::cout<<"5. Externare pacient\n";
-            std::cout<<"6. Deconectare\n";
+            std::cout<<"1. Vizualizare pacienti activi din spital\n";
+            std::cout<<"2. Vizualizare programari\n";
+            std::cout<<"3. Evaluare pacient\n";
+            std::cout<<"4. Prescriere tratament\n";
+            std::cout<<"5. Programare operatie\n";
+            std::cout<<"6. Externare pacient\n";
+            std::cout<<"7. Deconectare\n";
             std::cout<<"Alege: ";
             std::cin>>opt;
 
@@ -408,6 +424,18 @@ void Meniu::ruleazaMeniuMedic() {
                 }
 
                 case 2: {
+                    //vizualizare pacienti programati la acest medic
+                    std::shared_ptr<Medic> medicCurent=nullptr;
+                    for (const auto &m: this->medici) {
+                        if (m->getId()==idMedicCurent) {
+                            medicCurent=m;
+                        }
+                    }
+                    gestiuneProgramari.afiseazaProgramariFacute(medicCurent);
+                    break;
+                }
+
+                case 3: {
                     //evaluare pacient
                     if (pacienti.empty()) {
                         std::cout << "Nu exista pacienti inregistrati.\n";
@@ -421,12 +449,25 @@ void Meniu::ruleazaMeniuMedic() {
                         for (auto &p:pacienti) {
                             if (p->getId()==id) {
                                 gasit=true;
-                                std::string evaluare;
-                                std::cout<<"Introduceti evaluarea: ";
-                                std::string temp;
-                                std::getline(std::cin,temp);//sa golsesca bufferul de nl
-                                std::getline(std::cin, evaluare);
-                                p->adaugaIstoric("Evaluarea: "+evaluare);
+
+                                std::string diagnostic;
+                                std::cout<<"Introduceti diagnosticul: ";
+                                p->setDiagnostic(diagnostic);
+
+                                int severitate;
+                                std::cout<<"Severitate: ";
+                                p->setSeveritate(severitate);
+
+                                std::string data_internare;
+                                std::cout<<"Data internare: ";
+                                p->setData_internare(data_internare);
+
+                                std::string data_externare;
+                                std::cout<<"Data externare: ";
+                                p->setData_externare(data_externare);
+
+                                p->adaugaIstoric("Evaluare: Diagnostic=" + diagnostic +", Severitate=" +
+                                    std::to_string(severitate) + ", Internare=" + data_internare + ", Externare=" + data_externare);
                                 std::cout << "Evaluare adaugata cu succes.\n";
                                 break;
                             }
@@ -438,7 +479,7 @@ void Meniu::ruleazaMeniuMedic() {
                     break;
                     }
 
-                case 3: {
+                case 4: {
                     //prescriere tratament
                     if (pacienti.empty()) {
                         std::cout << "Nu exista pacienti inregistrati.\n";
@@ -510,12 +551,12 @@ void Meniu::ruleazaMeniuMedic() {
                     break;
                 }
 
-                case 4: {
+                case 5: {
                     //programare operatie
                     break;
                 }
 
-                case 5: {
+                case 6: {
                     //externare pacient
                     if (pacienti.empty()) {
                         std::cout << "Nu exista pacienti inregistrati.\n";
@@ -547,7 +588,7 @@ void Meniu::ruleazaMeniuMedic() {
                     break;
                 }
 
-                case 6: {
+                case 7: {
                     //deconectare
                     idMedicCurent=-1;
                     autentificat=false;
@@ -632,7 +673,6 @@ void Meniu::ruleazaMeniuAsistent() {
 
             switch (op) {
                 case 1:
-
                     //vizualizare pacienti
                     if (pacienti.empty())
                         std::cout<<"Nu exista pacienti inregistrati.\n";

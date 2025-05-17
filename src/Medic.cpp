@@ -10,7 +10,7 @@ Medic::Medic() : PersonalSpital() {
     this->pacienti={};
 }
 Medic::Medic(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu, int experienta,
-       const std::map<std::string, std::vector<std::pair<int,int>>> &program, const std::string &specializare, int numar_pacienti_tratati, int numar_operatii, const std::map<int, Pacient>& pacienti) : PersonalSpital(nume,
+       const std::map<std::string, std::vector<std::pair<int,int>>> &program, const std::string &specializare, int numar_pacienti_tratati, int numar_operatii, std::map<int, std::shared_ptr<Pacient>> pacienti) : PersonalSpital(nume,
        prenume, CNP, salariu, experienta, program) {
     this->specializare=specializare;
     this->numar_pacienti_tratati=numar_pacienti_tratati;
@@ -36,7 +36,7 @@ int Medic :: getNrOperatii() const {
     return this->numar_operatii;
 }
 //ofera acces doar la citirea listei
-const std::map<int, Pacient>& Medic :: getPacienti()const {
+const std::map<int, std::shared_ptr<Pacient>> Medic :: getPacienti()const {
     return this->pacienti;
 }
 
@@ -92,21 +92,13 @@ std::ostream& operator<<(std::ostream &out, const  Medic &m) {
 }
 
 //methods
-void Medic::adaugaPacient(const Pacient& p) {
-    pacienti[p.getId()]=p;
+void Medic::adaugaPacient(std::shared_ptr<Pacient> p) {
+    this->pacienti[p->getId()]=p;
 }
 void Medic::stergePacient(int id_pacient) {
-    pacienti.erase(id_pacient);
+    this->pacienti.erase(id_pacient);
 }
 void Medic :: calclueazaBonus() const {
     int bonus=this->salariu*0.1*this->experienta/10;
     std::cout<<"Bonus pentru medicul "<<this->nume<< " " <<this->prenume<<": "<<bonus<<" RON\n";
 }
-
-// template<typename T>
-// void Medic::prescrieTratament(const Medicament<T>& med) {
-//     std::cout<<"Tratament prescris:\n";
-//     std::cout<<"Medicament: " << med.getNume() << "\n";
-//     std::cout<<"Pret: " << med.getPret() << "\n";
-//     std::cout<<"Cantitate: " << med.getCantitate() << "\n";
-// }
