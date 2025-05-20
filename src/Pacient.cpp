@@ -44,7 +44,7 @@ int Pacient :: getId() const {
 std::string Pacient :: getDiagnostic() const {
     return this->diagnostic;
 }
-int Pacient :: getSeveritatBoala() const {
+int Pacient :: getSeveritateBoala() const {
     return this->severitate_boala;
 }
 std::string Pacient :: getData_internare() const {

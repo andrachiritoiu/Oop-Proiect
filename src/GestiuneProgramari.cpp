@@ -37,7 +37,7 @@ void GestiuneProgramari::afiseazaProgramariFacute(const std::shared_ptr<Medic>& 
         if (programare.getMedic()==medic) {
             gasit=true;
             std::cout<<"Data: "<<programare.getData()<<"\n";
-            std::cout<<"Interval: "<<programare.getOraInceput()<<":00"<<programare.getOraSfarsit()<<":00\n";
+            std::cout<<"Interval: "<<programare.getOraInceput()<<":00-"<<programare.getOraSfarsit()<<":00\n";
             std::cout<<"Pacient: "<<programare.getPacient()->getNume()<<" "<<programare.getPacient()->getPrenume()<<"\n";
         }
     }

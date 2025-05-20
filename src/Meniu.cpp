@@ -3,6 +3,10 @@
 #include "Medicament.h"
 #include "MedicamentFactory.h"
 #include "Reteta.h"
+#include "Servicii.h"
+#include "Consultatie.h"
+#include "Operatie.h"
+#include "Analize.h"
 #include<iostream>
 #include<vector>
 #include<memory>
@@ -36,7 +40,7 @@ void Meniu::ruleaza(){
                 break;
 
             case 3:
-                std::cout<<"La revedere";
+                std::cout<<"La revedere!";
                 break;
 
             default:
@@ -406,7 +410,8 @@ void Meniu::ruleazaMeniuMedic() {
             std::cout<<"4. Prescriere tratament\n";
             std::cout<<"5. Programare operatie\n";
             std::cout<<"6. Externare pacient\n";
-            std::cout<<"7. Deconectare\n";
+            std::cout<<"7. Calculeaza bonus salarial\n";
+            std::cout<<"8. Deconectare\n";
             std::cout<<"Alege: ";
             std::cin>>opt;
 
@@ -449,26 +454,15 @@ void Meniu::ruleazaMeniuMedic() {
                         for (auto &p:pacienti) {
                             if (p->getId()==id) {
                                 gasit=true;
+                                int pret;
+                                bool urgenta;
 
-                                std::string diagnostic;
-                                std::cout<<"Introduceti diagnosticul: ";
-                                p->setDiagnostic(diagnostic);
-
-                                int severitate;
-                                std::cout<<"Severitate: ";
-                                p->setSeveritate(severitate);
-
-                                std::string data_internare;
-                                std::cout<<"Data internare: ";
-                                p->setData_internare(data_internare);
-
-                                std::string data_externare;
-                                std::cout<<"Data externare: ";
-                                p->setData_externare(data_externare);
-
-                                p->adaugaIstoric("Evaluare: Diagnostic=" + diagnostic +", Severitate=" +
-                                    std::to_string(severitate) + ", Internare=" + data_internare + ", Externare=" + data_externare);
-                                std::cout << "Evaluare adaugata cu succes.\n";
+                                std::cout<<"Introduceti pretul consultatiei: ";
+                                std::cin>>pret;
+                                std::cout<<"Este urgenta? (1 - da, 0 - nu): ";
+                                std::cin>>urgenta;
+                                std::shared_ptr<Consultatie> consultatie=std::make_shared<Consultatie>("Consultatie",p,pret,urgenta);
+                                consultatie->executa();
                                 break;
                             }
                         }
@@ -553,6 +547,26 @@ void Meniu::ruleazaMeniuMedic() {
 
                 case 5: {
                     //programare operatie
+                    if (pacienti.empty()) {
+                        std::cout << "Nu exista pacienti inregistrati.\n";
+                    }
+                    else {
+                        int idPacient;
+                        std::cout<<"Introduceti ID-ul pacientului: ";
+                        std::cin>>idPacient;
+
+                        bool gasit=false;
+                        for (auto &p:pacienti) {
+                            if (p->getId()==idPacient && p->getSeveritateBoala()!=0) {
+                                gasit=true;
+                                std::shared_ptr<Operatie>operatie=std::make_shared<Operatie>(p);
+                                operatie->executa();
+                            }
+                        }
+                        if (!gasit) {
+                            std::cout<<"Pacient invalid.\n";
+                        }
+                    }
                     break;
                 }
 
@@ -589,6 +603,18 @@ void Meniu::ruleazaMeniuMedic() {
                 }
 
                 case 7: {
+                    //bonus salariu
+                    std::shared_ptr<Medic> medicCurent=nullptr;
+                    for (const auto &m: this->medici) {
+                        if (m->getId()==idMedicCurent) {
+                            medicCurent=m;
+                        }
+                    }
+                    medicCurent->calculeazaBonus();
+                    break;
+                }
+
+                case 8: {
                     //deconectare
                     idMedicCurent=-1;
                     autentificat=false;
@@ -601,7 +627,7 @@ void Meniu::ruleazaMeniuMedic() {
                 }
             }
         }
-    }while (op!=3);
+    }while (autentificat || op!=3);
 }
 
 void Meniu::ruleazaMeniuAsistent() {
@@ -667,12 +693,13 @@ void Meniu::ruleazaMeniuAsistent() {
             std::cout<<"1. Vizualizare pacienti activi\n";
             std::cout<<"2. Administrare tratament\n";
             std::cout<<"3. Verificare stoc medicamente.\n";
-            std::cout<<"4. Deconectare\n";
+            std::cout<<"4. Calculeaza bonus salarial.\n";
+            std::cout<<"5. Deconectare\n";
             std::cout<<"Alege: ";
             std::cin >> op;
 
             switch (op) {
-                case 1:
+                case 1: {
                     //vizualizare pacienti
                     if (pacienti.empty())
                         std::cout<<"Nu exista pacienti inregistrati.\n";
@@ -682,22 +709,38 @@ void Meniu::ruleazaMeniuAsistent() {
                         }
                     }
                     break;
+                }
 
-                case 2:
+                case 2: {
                     //administrare tratament
                     std::cout<<"Administrare tratament";
                     break;
+                }
 
-                case 3:
+                case 3: {
                     //verificare stoc medicamente
                     std::cout<<"Verificare stoc medicamnete";
                     break;
+                }
 
-                case 4:
+                case 4: {
+                    //bonus salariu
+                    std::shared_ptr<Asistent> asistentCurent=nullptr;
+                    for (const auto &a: this->asistenti) {
+                        if (a->getId()==idAsistentCurent) {
+                            asistentCurent=a;
+                        }
+                    }
+                    asistentCurent->calculeazaBonus();
+                    break;
+                }
+
+                case 5: {
                     //deconectare
                     idAsistentCurent=-1;
                     autentificat=false;
                     break;
+                }
 
                 default: {
                     std::cout<<"Optiune invalida\n";
@@ -705,5 +748,5 @@ void Meniu::ruleazaMeniuAsistent() {
                 }
             }
         }
-    }while (op!=3);
+    }while (autentificat || op!=3);
 }

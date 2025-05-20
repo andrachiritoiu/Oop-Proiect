@@ -4,15 +4,16 @@
 #include<memory>
 #include "Pacient.h"
 #include "Medic.h"
+#include "Servicii.h"
 
 class Programare {
-  protected:
+  private:
     std::string data;
     int ora_inceput{};
     int ora_sfarsit{};
-    //mai multe entitati(programari) acceseaza si folosesc acelasi obj(medic - fara sa se creeze duplicate)
     std::shared_ptr<Pacient> pacient;
     std::shared_ptr<Medic> medic;
+    std::vector<std::shared_ptr<Servicii>>servicii;
 
   public:
     //constructors
@@ -35,6 +36,10 @@ class Programare {
     void setMedic(const std::shared_ptr<Medic> &med);
 
     //methods
+    //upcast
+    void adaugaServiciu();
+    //downcast
+    void afiseazaServiciu();
 
     //destructor
     ~Programare()=default;

@@ -30,7 +30,7 @@ public:
     friend std::ostream& operator<<(std::ostream &out,const Asistent &a);
 
     //methods
-    void calclueazaBonus() const override;
+    void calculeazaBonus() override;
     void addProcedura(const std::string &procedura);
     void efectueazaProcedura(Pacient *p, const std::string &procedura);
 

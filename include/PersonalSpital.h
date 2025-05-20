@@ -41,7 +41,7 @@ public:
   friend std::ostream& operator<<(std::ostream &out, const PersonalSpital &p);
 
   //methods
-  virtual void calclueazaBonus() const = 0 ;
+  virtual void calculeazaBonus() = 0 ;
   static int calculeazaSalariuMediu();
 
   //destructor

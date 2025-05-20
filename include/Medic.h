@@ -37,7 +37,7 @@ public:
     //methods
     void adaugaPacient(std::shared_ptr<Pacient> p);
     void stergePacient(int id_pacient);
-    void calclueazaBonus() const override;
+    void calculeazaBonus() override;
 
 
     //destructor

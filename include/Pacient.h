@@ -31,7 +31,7 @@ public:
     //getters
     int getId() const;
     std::string getDiagnostic() const;
-    int getSeveritatBoala() const;
+    int getSeveritateBoala() const;
     std::string getData_internare() const;
     std::string getData_externare() const;
     bool getAsigurat() const;

@@ -81,7 +81,9 @@ void Asistent :: efectueazaProcedura(Pacient *p, const std::string &procedura) {
     p->adaugaIstoric(procedura);
     std::cout<<"Procedură efectuată de asistentul " + getNume() + " " + getPrenume() + ": " + procedura;
 }
-void Asistent :: calclueazaBonus() const {
+void Asistent :: calculeazaBonus() {
     int bonus=this->salariu*0.05*this->experienta/10;
     std::cout<<"Bonus pentru asistentul "<<this->nume<< " " <<this->prenume<<": "<<bonus<<" RON\n";
+    this->salariu+=bonus;
+    std::cout<<"Salariu actualizat: "<<salariu<<" RON\n";
 }

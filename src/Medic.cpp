@@ -98,7 +98,9 @@ void Medic::adaugaPacient(std::shared_ptr<Pacient> p) {
 void Medic::stergePacient(int id_pacient) {
     this->pacienti.erase(id_pacient);
 }
-void Medic :: calclueazaBonus() const {
+void Medic :: calculeazaBonus() {
     int bonus=this->salariu*0.1*this->experienta/10;
     std::cout<<"Bonus pentru medicul "<<this->nume<< " " <<this->prenume<<": "<<bonus<<" RON\n";
+    this->salariu+=bonus;
+    std::cout<<"Salariu actualizat: "<<salariu<<" RON\n";
 }
