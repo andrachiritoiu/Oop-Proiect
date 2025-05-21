@@ -22,7 +22,6 @@ class Reteta{
       //operator
       //trebuie declarat in header pt template pt ca nu este instatiat corect de compliator la likare
       friend std::ostream& operator<<(std::ostream& out, const Reteta<T>& reteta) {
-          out<<"Reteta: "<<"\n";
           for (const auto &pereche:reteta.medicamente) {
               out<<"Medicament: "<<pereche.first->getNume()
                  <<", Pret: "<<pereche.first->getPret()

@@ -6,3 +6,7 @@ Analize::Analize(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacien
         this->rezulatat=rezulatat;
 
 }
+
+void Analize::executa() {
+        std::cout<<"analize";
+}

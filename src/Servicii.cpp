@@ -9,3 +9,4 @@ Servicii::Servicii(const std::string &nume_serviciu,std::shared_ptr<Pacient>paci
   this->nume_serviciu=nume_serviciu;
   this->pacient=pacient;
 }
+

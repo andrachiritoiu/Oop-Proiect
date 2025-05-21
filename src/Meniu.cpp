@@ -112,7 +112,7 @@ void Meniu::ruleazaMeniuPacient() {
                         std::cout<<"Pacient inexistent.\n";
                     }
                 break;
-            }
+                }
 
                 case 3:
                     break;
@@ -277,6 +277,7 @@ void Meniu::ruleazaMeniuPacient() {
                     for (auto &p:this->pacienti) {
                         if (p->getId()==idPacientCurent) {
                             gasit=true;
+                            std::cout<<"Reteta: "<<"\n";
                             for (const auto &reteta_var:p->getRetete()) {
                                 //std::visit - este din std::variant si apeleaza functia corecta pentru tipul actual tinut de variant
                                 std::visit([](const auto &reteta) {
@@ -501,9 +502,31 @@ void Meniu::ruleazaMeniuMedic() {
                                     std::cout<<"Introduceti forma medicamentului(pastila / sirop / injectabil / crema): ";
                                     std::cin>>forma;
 
-                                    std::shared_ptr<Medicament>med=MedicamentFactory::creeazaMedicament(categorie, forma);
-
-                                    std::cout<<"Medicament: " + med->getNume() + ", Pret: " + std::to_string(med->getPret()) + ", Substanta activa: " + med->getSubstantaActiva() + "\n";
+                                    std::shared_ptr<Medicament> med;
+                                    if (categorie=="antibiotic" && forma=="pastila") {
+                                        med=MedicamentFactory::antibiotic_pastila();
+                                    }
+                                    else if (categorie=="antibiotic" && forma=="injectabil") {
+                                        med=MedicamentFactory::antibiotic_injectabil();
+                                    }
+                                    else if (categorie=="analgezic" && forma=="pastila") {
+                                        med=MedicamentFactory::analgezic_pastila();
+                                    }
+                                    else if (categorie=="analgezic" && forma=="sirop") {
+                                        med=MedicamentFactory::analgezic_sirop();
+                                    }
+                                    else if (categorie=="analgezic" && forma=="injectabil") {
+                                        med=MedicamentFactory::analgezic_injectabil();
+                                    }
+                                    else if (categorie=="antiinflamator" && forma=="pastila") {
+                                        med=MedicamentFactory::antiinflamator_pastila();
+                                    }
+                                    else if (categorie=="antiinflamator" && forma=="crema") {
+                                        med=MedicamentFactory::antiinflamator_crema();
+                                    }
+                                    else {
+                                        std::cout<<"Nu exista in stoc acest medicament.";
+                                    }
 
                                     std::cout<<"Doza recoamndata: \n";
                                     std::cout<<"1. Numar de pastile/zi\n";
