@@ -98,7 +98,9 @@ void Persoana :: setNume(const std::string &nume_p) {
 void Persoana :: setPrenume(const std::string &prenume_p) {
     this->prenume = prenume_p;
 }
-
+void Persoana :: setCNP(const std::string &CNP) {
+    this->CNP = CNP;
+}
 
 //operators
 Persoana& Persoana::operator= (const Persoana &p) {
@@ -118,18 +120,6 @@ std::istream& operator>>(std::istream &in, Persoana &p) {
     std::cout<<"Prenumele: ";
     in>>p.prenume;
 
-    bool ok=false;
-    std::string cnp;
-    while (!ok) {
-        std::cout<<"CNP: ";
-        in>>cnp;
-
-        if (Persoana::isCNPvalid(cnp)) {
-            p.CNP=cnp;
-            ok=true;
-        }
-        else std::cout<<"CNP invalid. Incerca din nou. \n";
-    }
     return in;
 }
 std::ostream& operator<<(std::ostream &out, const Persoana &p) {

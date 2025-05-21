@@ -9,7 +9,6 @@
 
 class GestiuneProgramari {
   private:
-    std::map<std::shared_ptr<Medic>,std::map<std::string,std::vector<std::pair<int,int>>>> programari_facute;
     std::vector<Programare> programari;
   public:
     //methods

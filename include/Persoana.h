@@ -7,7 +7,6 @@ protected:
     std::string nume;
     std::string prenume;
     std::string CNP;
-    static bool isCNPvalid(const std::string &cnp);
 
 public:
     //constructors
@@ -24,7 +23,7 @@ public:
     //setters
     void setNume(const std::string &nume_p);
     void setPrenume(const std::string &prenume_p);
-    //void setCNP(const std::string &CNP);
+    void setCNP(const std::string &CNP);
 
     //operators
     Persoana& operator= (const Persoana &p);
@@ -35,6 +34,7 @@ public:
     friend std::ostream& operator<<(std::ostream &out, const Persoana &p);
 
     //methods
+    static bool isCNPvalid(const std::string &cnp);
 
     //destructor
     virtual ~Persoana()=default;

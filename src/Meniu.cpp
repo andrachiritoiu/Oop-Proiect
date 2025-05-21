@@ -67,28 +67,42 @@ void Meniu::ruleazaMeniuPacient() {
             switch (optiune) {
                 case 1: {
                     //pacient nou
-                    auto pacient=std::make_shared<Pacient>();
-                    //*pacient-referrinta la obiectul real
-                    std::cin>>*pacient;
+                    //verif daca exista
+                    std::string cnp;
+                    while (true) {
+                        std::cout<<"CNP: ";
+                        std::cin>>cnp;
+
+                        if (!Persoana::isCNPvalid(cnp)) {
+                            std::cout<<"Cnp invalid. Incearca din nou.\n";
+                            continue;
+                        }
 
                     bool gasit=false;
                     for (const auto &p:this->pacienti) {
-                        if (*p==*pacient) {
+                        if (p->getCNP()==cnp) {
                             gasit=true;
                             std::cout<<"Pacientul cu acest CNP exista deja.\n";
-                            idPacientCurent=pacient->getId();
+                            idPacientCurent=p->getId();
                             autentificat=true;
-                            break;
                         }
                     }
 
-                    if (!gasit) {
-                        idPacientCurent=pacient->getId();
-                        this->pacienti.push_back(pacient);
-                        autentificat=true;
-                        std::cout<<"Pacient inregistrat cu ID: "<<idPacientCurent<<"\n";
-                        break;
+                    if (gasit)break;
+
+                    //nu exista
+                    auto pacient=std::make_shared<Pacient>();
+                    //*pacient-referinta la obiectul real
+                    pacient->setCNP(cnp);
+                    std::cin>>*pacient;
+
+                    idPacientCurent=pacient->getId();
+                    this->pacienti.push_back(pacient);
+                    autentificat=true;
+                    std::cout<<"Pacient inregistrat cu ID: "<<idPacientCurent<<"\n";
+                    break;
                     }
+                break;
                 }
 
                 case 2:{
@@ -274,15 +288,20 @@ void Meniu::ruleazaMeniuPacient() {
                 case 4: {
                     //retete
                     bool gasit=false;
+                    bool gasit_reteta=false;
                     for (auto &p:this->pacienti) {
                         if (p->getId()==idPacientCurent) {
                             gasit=true;
                             std::cout<<"Reteta: "<<"\n";
                             for (const auto &reteta_var:p->getRetete()) {
+                                gasit_reteta=true;
                                 //std::visit - este din std::variant si apeleaza functia corecta pentru tipul actual tinut de variant
                                 std::visit([](const auto &reteta) {
                                     std::cout<<reteta<<"\n";
                                 },reteta_var);
+                            }
+                            if (!gasit_reteta) {
+                                std::cout<<"Nu are retete recomandate";
                             }
                             break;
                         }
@@ -359,12 +378,39 @@ void Meniu::ruleazaMeniuMedic() {
             switch (op) {
                 case 1: {
                     //medic nou
-                    auto medic=std::make_shared<Medic>();
-                    std::cin>>*medic;
-                    idMedicCurent=medic->getId();
-                    this->medici.push_back(medic);
-                    autentificat=true;
-                    std::cout<<"Medic inregistrat cu ID: "<<idMedicCurent<<"\n";
+                    std::string cnp;
+                    while (true) {
+                        std::cout<<"CNP: ";
+                        std::cin>>cnp;
+
+                        if (!Persoana::isCNPvalid(cnp)) {
+                            std::cout<<"Cnp invalid. Incearca din nou.\n";
+                            continue;
+                        }
+
+                        bool gasit=false;
+                        for (const auto &m:this->medici) {
+                            if (m->getCNP()==cnp) {
+                                gasit=true;
+                                std::cout<<"Medicul cu acest CNP exista deja.\n";
+                                idMedicCurent=m->getId();
+                                autentificat=true;
+                            }
+                        }
+
+                        if (gasit)break;
+
+                        //nu exista
+                        auto medic=std::make_shared<Medic>();
+                        std::cin>>*medic;
+                        medic->setCNP(cnp);
+
+                        idMedicCurent=medic->getId();
+                        this->medici.push_back(medic);
+                        autentificat=true;
+                        std::cout<<"Medic inregistrat cu ID: "<<idMedicCurent<<"\n";
+                        break;
+                    }
                     break;
                 }
 
@@ -670,12 +716,39 @@ void Meniu::ruleazaMeniuAsistent() {
             switch (op) {
                 case 1: {
                     //asistent nou
-                    auto asistent=std::make_shared<Asistent>();
-                    std::cin>>*asistent;
-                    idAsistentCurent=asistent->getId();
-                    this->asistenti.push_back(asistent);
-                    autentificat=true;
-                    std::cout<<"Asistent inregistrat cu ID: "<<idAsistentCurent<<"\n";
+                    std::string cnp;
+                    while (true) {
+                        std::cout<<"CNP: ";
+                        std::cin>>cnp;
+
+                        if (!Persoana::isCNPvalid(cnp)) {
+                            std::cout<<"Cnp invalid. Incearca din nou.\n";
+                            continue;
+                        }
+
+                        bool gasit=false;
+                        for (const auto &a:this->asistenti) {
+                            if (a->getCNP()==cnp) {
+                                gasit=true;
+                                std::cout<<"Asistentul cu acest CNP exista deja.\n";
+                                idAsistentCurent=a->getId();
+                                autentificat=true;
+                            }
+                        }
+
+                        if (gasit)break;
+
+                        //nu exista
+                        auto asistent=std::make_shared<Asistent>();
+                        std::cin>>*asistent;
+                        asistent->setCNP(cnp);
+
+                        idAsistentCurent=asistent->getId();
+                        this->asistenti.push_back(asistent);
+                        autentificat=true;
+                        std::cout<<"Asistent inregistrat cu ID: "<<idAsistentCurent<<"\n";
+                        break;
+                    }
                     break;
                 }
 
