@@ -1,10 +1,15 @@
 #include "Consultatie.h"
+//conswtructors
+Consultatie::Consultatie(std::shared_ptr<Pacient>pacient) {
+    this->pacient=pacient;
+}
 
 Consultatie::Consultatie(const std::string nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta): Servicii(nume_serviciu,pacient) {
     this->pret=pret;
     this->urgenta=urgenta;
 }
 
+//methods
 void Consultatie::executa(){
     std::string diagnostic;
     std::cout<<"Introduceti diagnosticul: ";
@@ -26,8 +31,18 @@ void Consultatie::executa(){
     std::cin>>data_externare;
     this->pacient->setData_externare(data_externare);
 
-    this->pacient->adaugaIstoric("Evaluare: Diagnostic=" + diagnostic +", Severitate=" +
-        std::to_string(severitate) + ", Internare=" + data_internare + ", Externare=" + data_externare);
+    int pret;
+    std::cout<<"Introduceti pretul consultatiei: ";
+    std::cin>>pret;
+    this->pret=pret;
+
+    bool urgenta;
+    std::cout<<"Este urgenta? (1-da, 0-nu): ";
+    std::cin>>urgenta;
+    this->urgenta=urgenta;
+
+    this->pacient->adaugaIstoric("Evaluare: Diagnostic:" + diagnostic +", Severitate:" +
+        std::to_string(severitate) + ", Internare:" + data_internare + ", Externare:" + data_externare+" ");
     std::cout << "Evaluare adaugata cu succes.\n";
 
 }

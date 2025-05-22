@@ -4,7 +4,7 @@
 #include<memory>
 #include "Pacient.h"
 #include "Medic.h"
-#include "Servicii.h"
+#include "Consultatie.h"
 
 class Programare {
   private:
@@ -13,11 +13,12 @@ class Programare {
     int ora_sfarsit{};
     std::shared_ptr<Pacient> pacient;
     std::shared_ptr<Medic> medic;
+    std::shared_ptr<Consultatie> consultatie;
 
   public:
     //constructors
     Programare()=default;
-    Programare(const std::string &data,  int ora_inceput, int ora_sfarsit, const std::shared_ptr<Pacient> &pacient, const std::shared_ptr<Medic> &medic);
+    Programare(const std::string &data,  int ora_inceput, int ora_sfarsit, const std::shared_ptr<Pacient> &pacient, const std::shared_ptr<Medic> &medic,const std::shared_ptr<Consultatie> &consultatie);
 
     //getters
     std::string getData() const;
@@ -26,6 +27,7 @@ class Programare {
     //const(1)-obj returnat nu poate fi modificat
     const std::shared_ptr<Pacient>& getPacient() const;
     const std::shared_ptr<Medic>& getMedic() const;
+    const std::shared_ptr<Consultatie>& getConsultatie() const;
 
     //setters
     void setData(const std::string &data);

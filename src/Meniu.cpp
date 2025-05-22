@@ -1,8 +1,4 @@
 #include "Meniu.h"
-
-#include <ConsultatieCardiologica.h>
-#include <ConsultatieEndocrinologica.h>
-
 #include "Pacient.h"
 #include "Medicament.h"
 #include "MedicamentFactory.h"
@@ -11,6 +7,8 @@
 #include "Consultatie.h"
 #include "Operatie.h"
 #include "Analize.h"
+#include "ConsultatieInitiala.h"
+#include "ConsultatieUrmarire.h"
 #include<iostream>
 #include<vector>
 #include<memory>
@@ -184,21 +182,27 @@ void Meniu::ruleazaMeniuPacient() {
                     //programare noua
                     int tip_serviciu;
                     std::cout<<"Alege tipul serviciului: \n";
-                    std::cout<<"1. Consultatie cardiologica\n";
-                    std::cout<<"2. Consultatie endocrinologica\n";
+                    std::cout<<"1. Consultatie initiala\n";
+                    std::cout<<"2. Consultatie de urmarire\n";
                     std::cout<<"Introdu optiunea: ";
                     std::cin>>tip_serviciu;
+
+                    std::shared_ptr<Pacient>pacient_curent=nullptr;
+                    for (const auto &p:pacienti) {
+                        if (p->getId()==idPacientCurent)
+                            pacient_curent=p;
+                    }
 
                     //upcasting
                     std::shared_ptr<Consultatie>serviciu=nullptr;
 
                     switch (tip_serviciu) {
                         case 1: {
-                            serviciu=std::make_shared<ConsultatieCardiologica>();
+                            serviciu=std::make_shared<ConsultatieInitiala>(pacient_curent);
                             break;
                         }
                         case 2: {
-                            serviciu=std::make_shared<ConsultatieEndocrinologica>();
+                            serviciu=std::make_shared<ConsultatieUrmarire>(pacient_curent);
                             break;
                         }
                         default: {
@@ -279,13 +283,7 @@ void Meniu::ruleazaMeniuPacient() {
                         break;
                     }
 
-                    std::shared_ptr<Pacient>pacient_curent=nullptr;
-                    for (const auto &p:pacienti) {
-                        if (p->getId()==idPacientCurent)
-                            pacient_curent=p;
-                    }
-
-                    Programare prog(zi_aleasa, ora_start, ora_sfarsit,pacient_curent, medic_selectat);
+                    Programare prog(zi_aleasa, ora_start, ora_sfarsit,pacient_curent, medic_selectat,serviciu);
 
                     if(gestiuneProgramari.adaugaProgramare(prog)==true) {
                         std::cout<<"Programare adaugata cu succes!\n";
@@ -529,21 +527,39 @@ void Meniu::ruleazaMeniuMedic() {
                         std::cin>>id;
 
                         bool gasit=false;
+                        bool gasit_consultatie=false;
                         for (auto &p:pacienti) {
                             if (p->getId()==id) {
                                 gasit=true;
-                                int pret;
-                                bool urgenta;
 
-                                std::cout<<"Introduceti pretul consultatiei: ";
-                                std::cin>>pret;
-                                std::cout<<"Este urgenta? (1-da, 0-nu): ";
-                                std::cin>>urgenta;
-                                std::shared_ptr<Consultatie> consultatie=std::make_shared<Consultatie>("Consultatie",p,pret,urgenta);
-                                consultatie->executa();
+                                for (const auto &prog: this->gestiuneProgramari.getProgramari()) {
+                                    if (prog.getPacient()->getId()==id && prog.getMedic()->getId()==idMedicCurent) {
+                                        gasit_consultatie=true;
+                                        auto consultatie=prog.getConsultatie();
+
+                                        //downcast
+                                        if (auto cardio=std::dynamic_pointer_cast<ConsultatieInitiala>(consultatie)) {
+                                            std::cout<<"Consultatie initiala\n";
+                                            cardio->executa();
+                                        }
+                                        else if (auto endo=std::dynamic_pointer_cast<ConsultatieUrmarire>(consultatie)) {
+                                            std::cout<<"Consultatie urmarire\n";
+                                            endo->executa();
+                                        }
+                                        else {
+                                            std::cout<<"Consultatie generica\n";
+                                            consultatie->executa();
+                                        }
+                                    }
+                                }
                                 break;
                             }
                         }
+
+                        if (!gasit_consultatie) {
+                            std::cout<<"Pacientul nu are nicio programare la acest medic.\n";
+                        }
+
                         if (!gasit) {
                             std::cout<<"Pacient inexistent.\n";
                         }

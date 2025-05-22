@@ -13,6 +13,7 @@ class Consultatie: public Servicii {
   public:
   //constructors
   Consultatie()=default;
+  Consultatie(std::shared_ptr<Pacient>pacient);
   Consultatie(const std::string nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta);
 
   //methods

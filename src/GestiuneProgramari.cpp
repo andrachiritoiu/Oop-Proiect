@@ -1,5 +1,10 @@
 #include "GestiuneProgramari.h"
 
+//getter
+const std::vector<Programare>& GestiuneProgramari :: getProgramari()const {
+    return this->programari;
+}
+
 //methods
 bool GestiuneProgramari :: adaugaProgramare(const Programare &programare){
     std::string data_programare=programare.getData();

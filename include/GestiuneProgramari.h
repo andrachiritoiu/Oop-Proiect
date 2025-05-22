@@ -11,10 +11,14 @@ class GestiuneProgramari {
   private:
     std::vector<Programare> programari;
   public:
+    //getter
+    const std::vector<Programare>& getProgramari()const;
+
     //methods
     bool adaugaProgramare(const Programare &programare);
     void afiseazaProgram(const std::shared_ptr<Medic>& medic, const std::string &zi);
     void afiseazaProgramariFacute(const std::shared_ptr<Medic>& medic);
+
 };
 
 
