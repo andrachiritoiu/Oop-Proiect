@@ -538,13 +538,13 @@ void Meniu::ruleazaMeniuMedic() {
                                         auto consultatie=prog.getConsultatie();
 
                                         //downcast
-                                        if (auto cardio=std::dynamic_pointer_cast<ConsultatieInitiala>(consultatie)) {
+                                        if (auto initiala=std::dynamic_pointer_cast<ConsultatieInitiala>(consultatie)) {
                                             std::cout<<"Consultatie initiala\n";
-                                            cardio->executa();
+                                            initiala->executa();
                                         }
-                                        else if (auto endo=std::dynamic_pointer_cast<ConsultatieUrmarire>(consultatie)) {
+                                        else if (auto urmarire=std::dynamic_pointer_cast<ConsultatieUrmarire>(consultatie)) {
                                             std::cout<<"Consultatie urmarire\n";
-                                            endo->executa();
+                                            urmarire->executa();
                                         }
                                         else {
                                             std::cout<<"Consultatie generica\n";
@@ -862,7 +862,35 @@ void Meniu::ruleazaMeniuAsistent() {
 
                 case 3: {
                     //analiza
+                    if (pacienti.empty()) {
+                        std::cout << "Nu exista pacienti inregistrati.\n";
+                    }
+                    else {
+                        int idPacient;
+                        std::cout<<"Introduceti ID-ul pacientului: ";
+                        std::cin>>idPacient;
 
+                        bool gasit=false;
+                        for (auto &p:pacienti) {
+                            if (p->getId()==idPacient) {
+                                gasit=true;
+
+                                std::string tip, rezultat;
+                                std::cout<<"Introduceti tipul analizei: ";
+                                std::cin>>tip;
+                                std::cout<<"Introduceti rezultat: ";
+                                std::cin>>rezultat;
+
+                                Analize analiza(tip,rezultat);
+                                analiza.executa();
+                                p->adaugaIstoric("Analize: Tipul analizei:" + tip + ", Rezultat:" + rezultat);
+                                break;
+                            }
+                        }
+                        if (!gasit) {
+                            std::cout<<"Pacient inexistent.\n";
+                        }
+                    }
                     break;
                 }
 

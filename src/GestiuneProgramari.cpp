@@ -1,5 +1,8 @@
 #include "GestiuneProgramari.h"
 
+#include <ConsultatieInitiala.h>
+#include <ConsultatieUrmarire.h>
+
 //getter
 const std::vector<Programare>& GestiuneProgramari :: getProgramari()const {
     return this->programari;
@@ -49,6 +52,17 @@ void GestiuneProgramari::afiseazaProgramariFacute(const std::shared_ptr<Medic>& 
             std::cout<<"Data: "<<programare.getData()<<"\n";
             std::cout<<"Interval: "<<programare.getOraInceput()<<":00-"<<programare.getOraSfarsit()<<":00\n";
             std::cout<<"Pacient: "<<programare.getPacient()->getNume()<<" "<<programare.getPacient()->getPrenume()<<"\n";
+
+            auto consultatie=programare.getConsultatie();
+            if (auto initiala=std::dynamic_pointer_cast<ConsultatieInitiala>(consultatie)) {
+                std::cout<<"Tip: Consultatie initiala\n";
+            }
+            else if (auto urmarire=std::dynamic_pointer_cast<ConsultatieUrmarire>(consultatie)) {
+                    std::cout<<"Tip: Consultatie de urmarire\n";
+            }
+            else {
+                std::cout<<"Cosnultatie generala\n";
+            }
         }
     }
 
