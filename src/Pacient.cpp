@@ -98,15 +98,6 @@ std::istream& operator>>(std::istream &in, Pacient &p) {
     //static_cast - converteste
     in>>static_cast<Persoana&>(p); //upcasting
 
-    // std::cout<<"Diagnostic: ";
-    // in>>p.diagnostic;
-    // std::cout<<"Severitate boala: ";
-    // in>>p.severitate_boala;
-    // std::cout<<"Data internare: ";
-    // in>>p.data_internare;
-    // std::cout<<"Data externare: ";
-    // in>>p.data_externare;
-
     std::cout<<"Asigurat(0-nu/1-da): ";
     in>>p.asigurat;
     std::cout<<"Istoric medical: \n";

@@ -45,18 +45,6 @@ std::istream& operator>>(std::istream &in,  Medic &m) {
     std::cout<<"Specializare: ";
     in>>m.specializare;
 
-    // int nr_pacienti;
-    // std::cout<<"Introduceti numarul de pacienti: ";
-    // in>>nr_pacienti;
-    // std::string temp;
-    // std::getline(in,temp);//sa golsesca bufferul de nl
-    // for (int i=0;i<nr_pacienti;i++) {
-    //     std::cout<<"Cititi pacientul " << i + 1 << ":\n";
-    //     Pacient p;
-    //     in>>p;
-    //     m.adaugaPacient(p);
-    //}
-
     return in;
 
 }
@@ -64,10 +52,6 @@ std::ostream& operator<<(std::ostream &out, const  Medic &m) {
     out<<static_cast<const PersonalSpital&>(m);
     out<<"Specializare: "<< m.specializare<< "\n";
     out<<"Pacienti:\n";
-
-   // for (const auto& [id,pacient]: m.pacienti) {
-   //     out<<"Pacient ID"<< id<<":\n"<<pacient<<"\n";
-   // }
 
     return out;
 }

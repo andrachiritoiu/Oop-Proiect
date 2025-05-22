@@ -6,16 +6,18 @@
 
 
 class Consultatie: public Servicii {
-  private:
+  protected:
     int pret;
     bool urgenta;
 
   public:
-  //constructor
-  Consultatie(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta);
+  //constructors
+  Consultatie()=default;
+  Consultatie(const std::string nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta);
 
   //methods
   void executa()override;
+  virtual std::string getTip()const =0;
 
   //destructor
   ~Consultatie()override = default;

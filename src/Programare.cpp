@@ -2,11 +2,11 @@
 
 //constructors
 Programare::Programare(const std::string& data, int ora_inceput, int ora_sfarsit, const std::shared_ptr<Pacient> &pacient, const std::shared_ptr<Medic> &medic){
-  this->data = data;
-  this->ora_inceput = ora_inceput;
-  this->ora_sfarsit = ora_sfarsit;
-  this->pacient = pacient;
-  this->medic = medic;
+  this->data=data;
+  this->ora_inceput=ora_inceput;
+  this->ora_sfarsit=ora_sfarsit;
+  this->pacient=pacient;
+  this->medic=medic;
 }
 
 //getters

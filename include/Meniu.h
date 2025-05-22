@@ -14,6 +14,7 @@ private:
     std::vector<std::shared_ptr<Pacient>> pacienti;
     std::vector<std::shared_ptr<Medic>> medici;
     std::vector<std::shared_ptr<Asistent>> asistenti;
+    std::vector<std::shared_ptr<Servicii>> servicii;
     GestiuneProgramari gestiuneProgramari;
     //constructor privat - impiedica instantierea din exterior
     Meniu()= default;
@@ -28,12 +29,6 @@ public:
     void ruleazaMeniuPersonalMedical();
     void ruleazaMeniuMedic();
     void ruleazaMeniuAsistent();
-
-    //getters
-    //&-sa nu copiem obj
-    // std::vector<std::shared_ptr<Medic>>& getPacienti()const;
-    // std::vector<std::shared_ptr<Medic>>& getMedici()const;
-    // std::vector<std::shared_ptr<Medic>>& getAsistenti()const;
 };
 
 

@@ -1,4 +1,8 @@
 #include "Meniu.h"
+
+#include <ConsultatieCardiologica.h>
+#include <ConsultatieEndocrinologica.h>
+
 #include "Pacient.h"
 #include "Medicament.h"
 #include "MedicamentFactory.h"
@@ -178,6 +182,34 @@ void Meniu::ruleazaMeniuPacient() {
 
                 case 2: {
                     //programare noua
+                    int tip_serviciu;
+                    std::cout<<"Alege tipul serviciului: \n";
+                    std::cout<<"1. Consultatie cardiologica\n";
+                    std::cout<<"2. Consultatie endocrinologica\n";
+                    std::cout<<"Introdu optiunea: ";
+                    std::cin>>tip_serviciu;
+
+                    //upcasting
+                    std::shared_ptr<Consultatie>serviciu=nullptr;
+
+                    switch (tip_serviciu) {
+                        case 1: {
+                            serviciu=std::make_shared<ConsultatieCardiologica>();
+                            break;
+                        }
+                        case 2: {
+                            serviciu=std::make_shared<ConsultatieEndocrinologica>();
+                            break;
+                        }
+                        default: {
+                            std::cout<<"Optiune invalida\n";
+                            break;
+                        }
+                        if (!serviciu) {
+                            std::cout<<"Serviciu invalid.\n";
+                        }
+                    }
+
                     std::string specializare;
                     std::cout<<"Introduceti specializarea dorita: ";
                     std::cin>>specializare;
@@ -262,7 +294,6 @@ void Meniu::ruleazaMeniuPacient() {
                     else{
                         std::cout<<"Programarea nu a putut fi efectuata.\n";
                     }
-
                     break;
             }
 
@@ -506,7 +537,7 @@ void Meniu::ruleazaMeniuMedic() {
 
                                 std::cout<<"Introduceti pretul consultatiei: ";
                                 std::cin>>pret;
-                                std::cout<<"Este urgenta? (1 - da, 0 - nu): ";
+                                std::cout<<"Este urgenta? (1-da, 0-nu): ";
                                 std::cin>>urgenta;
                                 std::shared_ptr<Consultatie> consultatie=std::make_shared<Consultatie>("Consultatie",p,pret,urgenta);
                                 consultatie->executa();
@@ -788,7 +819,7 @@ void Meniu::ruleazaMeniuAsistent() {
             std::cout<<"\n---- Meniu Asistent (ID: " << idAsistentCurent<< ") ----\n";
             std::cout<<"1. Vizualizare pacienti activi\n";
             std::cout<<"2. Administrare tratament\n";
-            std::cout<<"3. Verificare stoc medicamente.\n";
+            std::cout<<"3. Realizare analiza\n";
             std::cout<<"4. Calculeaza bonus salarial.\n";
             std::cout<<"5. Deconectare\n";
             std::cout<<"Alege: ";
@@ -814,8 +845,8 @@ void Meniu::ruleazaMeniuAsistent() {
                 }
 
                 case 3: {
-                    //verificare stoc medicamente
-                    std::cout<<"Verificare stoc medicamnete";
+                    //analiza
+
                     break;
                 }
 

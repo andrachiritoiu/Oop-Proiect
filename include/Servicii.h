@@ -10,7 +10,8 @@ protected:
   std::shared_ptr<Pacient>pacient;
 
 public:
-  //constructor
+  //constructors
+  Servicii()=default;
   Servicii(std::shared_ptr<Pacient>pacient);
   Servicii(const std::string &nume_serviciu, std::shared_ptr<Pacient>pacient);
 

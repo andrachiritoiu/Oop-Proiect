@@ -8,5 +8,6 @@ Analize::Analize(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacien
 }
 
 void Analize::executa() {
-        std::cout<<"analize";
+        std::cout<<"Executam analiza: "<<this->tip_analiza<<"\n";
+        std::cout<<"Rezultatul este: "<<this->rezulatat<<"\n";
 }

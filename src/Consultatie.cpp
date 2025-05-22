@@ -1,6 +1,6 @@
 #include "Consultatie.h"
 
-Consultatie::Consultatie(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta): Servicii(nume_serviciu,pacient) {
+Consultatie::Consultatie(const std::string nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta): Servicii(nume_serviciu,pacient) {
     this->pret=pret;
     this->urgenta=urgenta;
 }

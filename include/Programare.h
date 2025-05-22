@@ -13,7 +13,6 @@ class Programare {
     int ora_sfarsit{};
     std::shared_ptr<Pacient> pacient;
     std::shared_ptr<Medic> medic;
-    std::vector<std::shared_ptr<Servicii>>servicii;
 
   public:
     //constructors

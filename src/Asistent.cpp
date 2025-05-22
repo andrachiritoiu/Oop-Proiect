@@ -68,10 +68,6 @@ std::ostream& operator<<(std::ostream &out,const Asistent &a) {
     return out;
 }
 
-//methods
-// void Asistent :: calclueazaBonus() const override {
-//
-// }
 void Asistent :: addProcedura(const std::string &procedura) {
     this->proceduri_efectuate.push_back(procedura);
 }
