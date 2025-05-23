@@ -71,8 +71,7 @@ std::ostream& operator<<(std::ostream &out,const Asistent &a) {
 void Asistent :: addProcedura(const std::string &procedura) {
     this->proceduri_efectuate.push_back(procedura);
 }
-void Asistent :: efectueazaProcedura(Pacient *p, const std::string &procedura) {
-    //*p - modificarea obiectului
+void Asistent :: efectueazaProcedura(const std::shared_ptr<Pacient> &p, const std::string &procedura) {
     addProcedura(procedura);
     p->adaugaIstoric(procedura);
     std::cout<<"Procedură efectuată de asistentul " + getNume() + " " + getPrenume() + ": " + procedura;
@@ -82,4 +81,29 @@ void Asistent :: calculeazaBonus() {
     std::cout<<"Bonus pentru asistentul "<<this->nume<< " " <<this->prenume<<": "<<bonus<<" RON\n";
     this->salariu+=bonus;
     std::cout<<"Salariu actualizat: "<<salariu<<" RON\n";
+}
+
+void Asistent :: administrareTratament(const std::vector<Programare> &programari, int id_pacient) {
+    bool gasit=false;
+    bool gasit_reteta=false;
+    for (const auto &prog:programari) {
+        if (prog.getPacient()->getId()==id_pacient) {
+            gasit=true;
+            std::cout<<"Tratament administrat: "<<"\n";
+            for (const auto &reteta_var : prog.getPacient()->getRetete()) {
+                gasit_reteta=true;
+                //std::visit - este din std::variant si apeleaza functia corecta pentru tipul actual tinut de variant
+                std::visit([](const auto &reteta) {
+                    std::cout<<reteta<<"\n";
+                },reteta_var);
+            }
+            if (!gasit_reteta) {
+                std::cout<<"Nu are retete recomandate";
+            }
+        }
+    }
+
+    if (!gasit) {
+        std::cout<<"Pacientul nu a fost gasit.\n";
+    }
 }

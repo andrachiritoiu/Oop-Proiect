@@ -4,8 +4,8 @@
 ConsultatieUrmarire::ConsultatieUrmarire(std::shared_ptr<Pacient>pacient) {
     this->pacient=pacient;
 }
-ConsultatieUrmarire::ConsultatieUrmarire(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta, const std::string &diagnostic_anterior):Consultatie(nume_serviciu,pacient,pret,urgenta) {
-    this->diagnostic_anterior=diagnostic_anterior;
+ConsultatieUrmarire::ConsultatieUrmarire(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta, const std::string &evaluare_progres):Consultatie(nume_serviciu,pacient,pret,urgenta) {
+    this->evaluare_progres=evaluare_progres;
 }
 
 //getter
@@ -14,8 +14,8 @@ std::string ConsultatieUrmarire::getTip() const{
 }
 
 //setter
-void ConsultatieUrmarire::setDiagnosticAnterior(int glicemie) {
-    this->diagnostic_anterior=diagnostic_anterior;
+void ConsultatieUrmarire::setEvaluareProgres(std::string evaluare_progres) {
+    this->evaluare_progres=evaluare_progres;
 }
 
 //methods
@@ -50,12 +50,12 @@ void ConsultatieUrmarire::executa() {
     std::cin>>urgenta;
     this->urgenta=urgenta;
 
-    std::string diagnostic_anterior;
-    std::cout<<"Diagnostic anterior: ";
-    std::cin>>diagnostic_anterior;
+    std::string evaluare_progres;
+    std::cout<<"Evaluare progres: ";
+    std::cin>>evaluare_progres;
 
     this->pacient->adaugaIstoric("Evaluare: Diagnostic:" + diagnostic +", Severitate:" +
-        std::to_string(severitate) + ", Internare:" + data_internare + ", Externare:" + data_externare + ", Diagnostic anterior: " + diagnostic_anterior);
+        std::to_string(severitate) + ", Internare:" + data_internare + ", Externare:" + data_externare + ", Progres: " + evaluare_progres);
     std::cout << "Evaluare endocrinologica cardiologica adaugata cu succes.\n";
 }
 

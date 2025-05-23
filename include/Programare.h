@@ -39,7 +39,8 @@ class Programare {
     //methods
     //upcast
     void adaugaServiciu();
-    //downcast
+    //downcastin programare am asa
+
     void afiseazaServiciu();
 
     //destructor

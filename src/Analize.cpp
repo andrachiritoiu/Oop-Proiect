@@ -14,5 +14,5 @@ Analize::Analize(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacien
 //methods
 void Analize::executa() {
         std::cout<<"Executam analiza: "<<this->tip_analiza<<"\n";
-        std::cout<<"Rezultatul este: "<<this->rezulatat<<"\n";
+        // std::cout<<"Rezultatul este: "<<this->rezulatat<<"\n";
 }

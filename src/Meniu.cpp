@@ -856,8 +856,23 @@ void Meniu::ruleazaMeniuAsistent() {
 
                 case 2: {
                     //administrare tratament
-                    std::cout<<"Administrare tratament";
-                    break;
+                    if (pacienti.empty()) {
+                        std::cout << "Nu exista pacienti inregistrati.\n";
+                    }
+                    else {
+                        int idPacient;
+                        std::cout<<"Introduceti ID-ul pacientului: ";
+                        std::cin>>idPacient;
+
+                        bool gasit=false;
+                        for (auto &a:asistenti) {
+                            if (a->getId()==idAsistentCurent) {
+                                gasit=true;
+                                a->administrareTratament(gestiuneProgramari.getProgramari(),idPacient);
+                            }
+                        }
+                        break;
+                    }
                 }
 
                 case 3: {

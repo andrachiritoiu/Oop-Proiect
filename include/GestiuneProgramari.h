@@ -9,6 +9,7 @@
 
 class GestiuneProgramari {
   private:
+  //obj dirct - nu are mosteniri
     std::vector<Programare> programari;
   public:
     //getter

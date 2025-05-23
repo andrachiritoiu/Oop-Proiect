@@ -4,6 +4,7 @@
 #include<vector>
 #include "PersonalSpital.h"
 #include "Pacient.h"
+#include "Programare.h"
 
 class Asistent: public PersonalSpital {
 private:
@@ -32,8 +33,8 @@ public:
     //methods
     void calculeazaBonus() override;
     void addProcedura(const std::string &procedura);
-    void efectueazaProcedura(Pacient *p, const std::string &procedura);
-
+    void efectueazaProcedura(const std::shared_ptr<Pacient>&p, const std::string &procedura);
+    void administrareTratament(const std::vector<Programare> &programari, int id_pacient);
 
     //destructor
     ~Asistent() override = default;

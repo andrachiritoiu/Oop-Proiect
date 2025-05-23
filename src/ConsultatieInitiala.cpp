@@ -4,8 +4,8 @@
 ConsultatieInitiala::ConsultatieInitiala(std::shared_ptr<Pacient>pacient) {
     this->pacient=pacient;
 }
-ConsultatieInitiala::ConsultatieInitiala(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta, const std::string &motiv_programare):Consultatie(nume_serviciu,pacient,pret,urgenta) {
-    this->motiv_programare=motiv_programare;
+ConsultatieInitiala::ConsultatieInitiala(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta, const std::string &simptome_initiale):Consultatie(nume_serviciu,pacient,pret,urgenta) {
+    this->simptome_initiale=simptome_initiale;
 }
 
 //getter
@@ -14,8 +14,8 @@ std::string ConsultatieInitiala::getTip() const{
 }
 
 //setter
-void ConsultatieInitiala::setMotiv(int tensiune) {
-    this->motiv_programare=motiv_programare;
+void ConsultatieInitiala::setSimptome(std::string simptome_initiale) {
+    this->simptome_initiale=simptome_initiale;
 }
 
 //methods
@@ -50,13 +50,13 @@ void ConsultatieInitiala::executa(){
     std::cin>>urgenta;
     this->urgenta=urgenta;
 
-    std::string motiv_programare;
-    std::cout<<"MOtiv programare: ";
-    std::cin>>motiv_programare;
-    this->motiv_programare=motiv_programare;
+    std::string simptome_initiale;
+    std::cout<<"Simptome initiale: ";
+    std::cin>>simptome_initiale;
+    this->simptome_initiale=simptome_initiale;
 
     this->pacient->adaugaIstoric("Evaluare: Diagnostic:" + diagnostic +", Severitate:" +
-        std::to_string(severitate) + ", Internare:" + data_internare + ", Externare:" + data_externare + ", Motiv programare:" + motiv_programare);
+        std::to_string(severitate) + ", Internare:" + data_internare + ", Externare:" + data_externare + ", Simptome initiale:" + simptome_initiale);
     std::cout << "Evaluare initiala adaugata cu succes.\n";
 }
 
