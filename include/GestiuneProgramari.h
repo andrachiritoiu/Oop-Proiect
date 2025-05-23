@@ -2,7 +2,6 @@
 #define GESTIUNEPROGRAMARI_H
 #include<memory>
 #include<string>
-#include<map>
 #include<vector>
 #include "Medic.h"
 #include "Programare.h"
@@ -13,7 +12,7 @@ class GestiuneProgramari {
     std::vector<Programare> programari;
   public:
     //getter
-    const std::vector<Programare>& getProgramari()const;
+    [[nodiscard]] const std::vector<Programare>& getProgramari()const;
 
     //methods
     bool adaugaProgramare(const Programare &programare);

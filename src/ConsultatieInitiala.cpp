@@ -1,10 +1,10 @@
 #include "ConsultatieInitiala.h"
 
 //constructors
-ConsultatieInitiala::ConsultatieInitiala(std::shared_ptr<Pacient>pacient) {
+ConsultatieInitiala::ConsultatieInitiala(const std::shared_ptr<Pacient> &pacient) {
     this->pacient=pacient;
 }
-ConsultatieInitiala::ConsultatieInitiala(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta, const std::string &simptome_initiale):Consultatie(nume_serviciu,pacient,pret,urgenta) {
+ConsultatieInitiala::ConsultatieInitiala(const std::string &nume_serviciu, const std::shared_ptr<Pacient> &pacient, int pret, bool urgenta, const std::string &simptome_initiale):Consultatie(nume_serviciu,pacient,pret,urgenta) {
     this->simptome_initiale=simptome_initiale;
 }
 
@@ -14,7 +14,7 @@ std::string ConsultatieInitiala::getTip() const{
 }
 
 //setter
-void ConsultatieInitiala::setSimptome(std::string simptome_initiale) {
+void ConsultatieInitiala::setSimptome(const std::string &simptome_initiale) {
     this->simptome_initiale=simptome_initiale;
 }
 

@@ -1,10 +1,10 @@
 #include "ConsultatieUrmarire.h"
 
 //cosntructors
-ConsultatieUrmarire::ConsultatieUrmarire(std::shared_ptr<Pacient>pacient) {
+ConsultatieUrmarire::ConsultatieUrmarire(const std::shared_ptr<Pacient> &pacient) {
     this->pacient=pacient;
 }
-ConsultatieUrmarire::ConsultatieUrmarire(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta, const std::string &evaluare_progres):Consultatie(nume_serviciu,pacient,pret,urgenta) {
+ConsultatieUrmarire::ConsultatieUrmarire(const std::string &nume_serviciu, const std::shared_ptr<Pacient> &pacient, int pret, bool urgenta, const std::string &evaluare_progres):Consultatie(nume_serviciu,pacient,pret,urgenta) {
     this->evaluare_progres=evaluare_progres;
 }
 
@@ -14,7 +14,7 @@ std::string ConsultatieUrmarire::getTip() const{
 }
 
 //setter
-void ConsultatieUrmarire::setEvaluareProgres(std::string evaluare_progres) {
+void ConsultatieUrmarire::setEvaluareProgres(const std::string &evaluare_progres) {
     this->evaluare_progres=evaluare_progres;
 }
 

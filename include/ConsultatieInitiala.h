@@ -9,14 +9,14 @@ private:
 public:
     //constructors
     ConsultatieInitiala()=default;
-    ConsultatieInitiala(std::shared_ptr<Pacient>pacient);
-    ConsultatieInitiala(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta, const std::string &simptome_initiale);
+    ConsultatieInitiala(const std::shared_ptr<Pacient> &pacient);
+    ConsultatieInitiala(const std::string &nume_serviciu, const std::shared_ptr<Pacient> &pacient, int pret, bool urgenta, const std::string &simptome_initiale);
 
     //getter
-    std::string getTip()const override;
+    [[nodiscard]] std::string getTip()const override;
 
     //setter
-    void setSimptome(std::string simptome_initiale);
+    void setSimptome(const std::string &simptome_initiale);
 
     //methods
     void executa()override;

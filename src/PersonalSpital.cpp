@@ -101,7 +101,7 @@ std::istream& operator>>(std::istream &in, PersonalSpital &p) {
             std::cout << "Introduceti intervalul de ore "<<"(ora inceput - ora sfarsit): ";
             in>>interval;
 
-            int poz=interval.find("-");
+            int poz=interval.find('-');
             ora_inceput=std::stoi(interval.substr(0,poz));
             ora_sfarsit=std::stoi(interval.substr(poz+1));
 
@@ -110,7 +110,7 @@ std::istream& operator>>(std::istream &in, PersonalSpital &p) {
                 --j;
             }
 
-            ore.push_back(std::make_pair(ora_inceput,ora_sfarsit));
+            ore.emplace_back(ora_inceput,ora_sfarsit);
         }
         p.program[zi]=ore;
     }

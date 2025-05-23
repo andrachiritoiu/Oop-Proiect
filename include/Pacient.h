@@ -29,14 +29,14 @@ public:
     Pacient(const Pacient &p);
 
     //getters
-    int getId() const;
-    std::string getDiagnostic() const;
-    int getSeveritateBoala() const;
-    std::string getData_internare() const;
-    std::string getData_externare() const;
-    bool getAsigurat() const;
-    const std::vector<std::string>& getIstoricMedical() const;
-    const std::vector<RetetaVariant>& getRetete() const;
+    [[nodiscard]] int getId() const;
+    [[nodiscard]] std::string getDiagnostic() const;
+    [[nodiscard]] int getSeveritateBoala() const;
+    [[nodiscard]] std::string getData_internare() const;
+    [[nodiscard]] std::string getData_externare() const;
+    [[nodiscard]] bool getAsigurat() const;
+    [[nodiscard]] const std::vector<std::string>& getIstoricMedical() const;
+    [[nodiscard]] const std::vector<RetetaVariant>& getRetete() const;
 
     //setters
     void setDiagnostic(const std::string &diagnostic);
@@ -52,7 +52,7 @@ public:
 
     //methods
     void adaugaIstoric(const std::string &noua_interventie);
-    void adaugaReteta(RetetaVariant reteta);
+    void adaugaReteta(const RetetaVariant& reteta);
 
     //destructor
     ~Pacient() override = default;

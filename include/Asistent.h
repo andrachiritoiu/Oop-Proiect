@@ -20,8 +20,8 @@ public:
     Asistent(const Asistent &a);
 
     //getters
-    std::string getSectie() const;
-    std::vector<std::string> getProceduri() const;
+    [[nodiscard]] std::string getSectie() const;
+    [[nodiscard]] std::vector<std::string> getProceduri() const;
 
     //setters
 
@@ -34,7 +34,7 @@ public:
     void calculeazaBonus() override;
     void addProcedura(const std::string &procedura);
     void efectueazaProcedura(const std::shared_ptr<Pacient>&p, const std::string &procedura);
-    void administrareTratament(const std::vector<Programare> &programari, int id_pacient);
+    static void administrareTratament(const std::vector<Programare> &programari, int id_pacient);
 
     //destructor
     ~Asistent() override = default;

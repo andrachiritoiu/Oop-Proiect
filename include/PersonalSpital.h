@@ -27,10 +27,10 @@ public:
   PersonalSpital(const PersonalSpital &p);
 
   //getters
-  int getId() const;
-  int getSalariu() const;
-  int getExperienta() const;
-  std::map<std::string, std::vector<std::pair<int,int>>> getProgram() const;
+  [[nodiscard]] int getId() const;
+  [[nodiscard]] int getSalariu() const;
+  [[nodiscard]] int getExperienta() const;
+  [[nodiscard]] std::map<std::string, std::vector<std::pair<int,int>>> getProgram() const;
 
   //setters
   void setSalariu(int salariu);

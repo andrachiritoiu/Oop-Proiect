@@ -4,14 +4,14 @@
 
 class Operatie:public Servicii{
   private:
-    int sala_operatie;
+    int sala_operatie{};
     std::string tip_anestezie;
-    int timp_recuperare;
+    int timp_recuperare{};
 
   public:
   //constructor
-  Operatie(std::shared_ptr<Pacient>pacient);
-  Operatie(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacient,int sala_operatie,
+  Operatie(const std::shared_ptr<Pacient> &pacient);
+  Operatie(const std::string &nume_serviciu, const std::shared_ptr<Pacient> &pacient,int sala_operatie,
     std::string tip_anestezie, int timp_recuperare);
 
   //methods

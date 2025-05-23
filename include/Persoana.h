@@ -16,9 +16,9 @@ public:
     Persoana(const Persoana &p);
 
     //getters
-    std::string getNume() const;
-    std::string getPrenume() const;
-    std::string getCNP() const;
+    [[nodiscard]] std::string getNume() const;
+    [[nodiscard]] std::string getPrenume() const;
+    [[nodiscard]] std::string getCNP() const;
 
     //setters
     void setNume(const std::string &nume_p);

@@ -1,12 +1,3 @@
-#include <iostream>
-#include <array>
-#include "Persoana.h"
-#include "Pacient.h"
-#include "PersonalSpital.h"
-#include "Medic.h"
-#include "Asistent.h"
-#include "Programare.h"
-#include "GestiuneProgramari.h"
 #include "Meniu.h"
 
 

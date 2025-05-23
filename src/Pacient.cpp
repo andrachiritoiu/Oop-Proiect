@@ -135,7 +135,7 @@ std::ostream& operator<<(std::ostream &out, const Pacient &p) {
 void Pacient :: adaugaIstoric(const std::string &noua_interventie) {
     this->istoric_medical.push_back(noua_interventie);
 }
-void Pacient :: adaugaReteta(RetetaVariant reteta) {
+void Pacient :: adaugaReteta(const RetetaVariant& reteta) {
     this->retete.push_back(reteta);
 }
 

@@ -1,8 +1,6 @@
 #ifndef MEDICAMENTFACTORY_H
 #define MEDICAMENTFACTORY_H
 #include<memory>
-#include<stdexcept>
-#include<string>
 #include "Medicament.h"
 
 //design pattern Factory(creational)

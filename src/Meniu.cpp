@@ -3,7 +3,6 @@
 #include "Medicament.h"
 #include "MedicamentFactory.h"
 #include "Reteta.h"
-#include "Servicii.h"
 #include "Consultatie.h"
 #include "Operatie.h"
 #include "Analize.h"
@@ -12,6 +11,7 @@
 #include<iostream>
 #include<vector>
 #include<memory>
+#include<algorithm>
 
 Meniu* Meniu::instanta=nullptr;
 
@@ -209,9 +209,7 @@ void Meniu::ruleazaMeniuPacient() {
                             std::cout<<"Optiune invalida\n";
                             break;
                         }
-                        if (!serviciu) {
-                            std::cout<<"Serviciu invalid.\n";
-                        }
+
                     }
 
                     std::string specializare;
@@ -833,7 +831,7 @@ void Meniu::ruleazaMeniuAsistent() {
 
         else {
             std::cout<<"\n---- Meniu Asistent (ID: " << idAsistentCurent<< ") ----\n";
-            std::cout<<"1. Vizualizare pacienti activi\n";
+            std::cout<<"1. Vizualizare pacienti activi sortati alfabetic\n";
             std::cout<<"2. Administrare tratament\n";
             std::cout<<"3. Realizare analiza\n";
             std::cout<<"4. Calculeaza bonus salarial.\n";
@@ -847,6 +845,10 @@ void Meniu::ruleazaMeniuAsistent() {
                     if (pacienti.empty())
                         std::cout<<"Nu exista pacienti inregistrati.\n";
                     else {
+                        std::sort(pacienti.begin(),pacienti.end(),[](const std::shared_ptr<Pacient> &a ,const std::shared_ptr<Pacient> &b) {
+                            return a->getNume()<b->getNume();
+                        });
+
                         for (const auto &p:pacienti) {
                             std::cout<<*p<<"\n";
                         }
@@ -869,7 +871,11 @@ void Meniu::ruleazaMeniuAsistent() {
                             if (a->getId()==idAsistentCurent) {
                                 gasit=true;
                                 a->administrareTratament(gestiuneProgramari.getProgramari(),idPacient);
+                                break;
                             }
+                        }
+                        if (!gasit) {
+                            std::cout<<"Asistent inexistent.\n";
                         }
                         break;
                     }

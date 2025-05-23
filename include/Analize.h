@@ -12,7 +12,7 @@ private:
 public:
     //constructor
     Analize(const std::string &tip_analiza, const std::string &rezulatat);
-    Analize(const std::string &nume_serviciu,std::shared_ptr<Pacient>pacient, const std::string &tip_analiza, const std::string &rezulatat);
+    Analize(const std::string &nume_serviciu, const std::shared_ptr<Pacient> &pacient, const std::string &tip_analiza, const std::string &rezulatat);
 
     //methods
     void executa()override;

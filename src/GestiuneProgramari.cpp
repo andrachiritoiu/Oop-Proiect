@@ -12,7 +12,7 @@ const std::vector<Programare>& GestiuneProgramari :: getProgramari()const {
 bool GestiuneProgramari :: adaugaProgramare(const Programare &programare){
     std::string data_programare=programare.getData();
     std::pair<int,int> interval_programare=std::make_pair(programare.getOraInceput(),programare.getOraSfarsit());
-    auto medic=programare.getMedic();
+    const auto& medic=programare.getMedic();
 
     for (const auto &p:this->programari) {
         if (p.getMedic()==medic && p.getData()==data_programare) {
