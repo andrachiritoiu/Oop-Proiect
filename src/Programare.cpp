@@ -38,5 +38,8 @@ void Programare::setOraInceput(int ora_inceput_n) {
   this->ora_inceput=ora_inceput_n;
 }
 void Programare::setOraSfarsit(int ora_sfarsit_n) {
+  if (ora_sfarsit_n<this->ora_inceput) {
+    throw std::invalid_argument("Ora de sfarsit nu poat efi inainte de ora de inceput");
+  }
   this->ora_sfarsit=ora_sfarsit_n;
 }

@@ -45,10 +45,10 @@ void ConsultatieInitiala::executa(){
     std::cin>>pret_n;
     this->pret=pret_n;
 
-    bool urgenta;
+    bool urgenta_n;
     std::cout<<"Este urgenta? (1-da, 0-nu): ";
-    std::cin>>urgenta;
-    this->urgenta=urgenta;
+    std::cin>>urgenta_n;
+    this->urgenta=urgenta_n;
 
     std::string simptome_initiale_n;
     std::cout<<"Simptome initiale: ";
