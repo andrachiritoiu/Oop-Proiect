@@ -431,7 +431,7 @@ void Meniu::ruleazaMeniuPersonalMedical() {
 }
 
 void Meniu::ruleazaMeniuMedic() {
-    int op;
+    int op=0;
     int idMedicCurent=-1;
     bool autentificat=false;
 
