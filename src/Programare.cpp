@@ -30,8 +30,4 @@ const std::shared_ptr<Consultatie>& Programare::getConsultatie() const {
   return this->consultatie;
 }
 
-//setters
-void Programare::setData(const std::string &data_n) {
-  this->data=data_n;
-}
 
