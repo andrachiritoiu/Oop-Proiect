@@ -137,7 +137,9 @@ std::ostream& operator<<(std::ostream &out, const PersonalSpital &p) {
 
 //methods
 int PersonalSpital :: calculeazaSalariuMediu(){
-    return salariu_mediu;
+    if (nr_angajati>0)
+        return salariu_mediu;
+    else return 0;
 }
 
 //destructors
