@@ -2,9 +2,6 @@
 #include<iostream>
 
 int PersonalSpital::next_id=1;
-int PersonalSpital::salariu_mediu=0;
-int PersonalSpital::suma_totala_salarii=0;
-int PersonalSpital::nr_angajati=0;
 
 //constructors
 PersonalSpital::PersonalSpital():Persoana() {
@@ -19,9 +16,6 @@ PersonalSpital::PersonalSpital(const std::string &nume, const std::string &prenu
     this->experienta=experienta;
     this->program=program;
 
-    suma_totala_salarii+=this->salariu;
-    nr_angajati++;
-    salariu_mediu=suma_totala_salarii/nr_angajati;
 }
 //copy constructor
 PersonalSpital::PersonalSpital(const PersonalSpital &p): Persoana(p){
@@ -30,9 +24,6 @@ PersonalSpital::PersonalSpital(const PersonalSpital &p): Persoana(p){
     this->experienta=p.experienta;
     this->program=p.program;
 
-    suma_totala_salarii+=this->salariu;
-    nr_angajati++;
-    salariu_mediu=suma_totala_salarii/nr_angajati;
 }
 
 //getters
@@ -49,27 +40,19 @@ std::map<std::string, std::vector<std::pair<int,int>>> PersonalSpital :: getProg
     return this->program;
 }
 
-
-
 //setters
 void PersonalSpital :: setSalariu(int salariu_n) {
-    PersonalSpital::suma_totala_salarii = PersonalSpital::suma_totala_salarii - this->salariu + salariu_n;
     this->salariu=salariu_n;
-    if (nr_angajati>0)
-        PersonalSpital::salariu_mediu = PersonalSpital::suma_totala_salarii / PersonalSpital::nr_angajati;
 }
 
 //operators
 PersonalSpital& PersonalSpital :: operator=(const PersonalSpital &p) {
     if (this!=&p) {
         Persoana::operator=(p);
-        suma_totala_salarii=suma_totala_salarii - this->salariu + p.salariu;
         this->salariu=p.salariu;
         this->experienta=p.experienta;
         this->program=p.program;
 
-        if (nr_angajati>0)
-            salariu_mediu=suma_totala_salarii / nr_angajati;
     }
     return *this;
 }
@@ -114,10 +97,6 @@ std::istream& operator>>(std::istream &in, PersonalSpital &p) {
         p.program[zi]=ore;
     }
 
-    //recalculare daca este obiect nou
-    PersonalSpital::suma_totala_salarii+=p.salariu;
-    PersonalSpital::nr_angajati++;
-    PersonalSpital::salariu_mediu=PersonalSpital::suma_totala_salarii/PersonalSpital::nr_angajati;
     return in;
 }
 std::ostream& operator<<(std::ostream &out, const PersonalSpital &p) {
@@ -133,14 +112,4 @@ std::ostream& operator<<(std::ostream &out, const PersonalSpital &p) {
         out<<"\n";
     }
     return out;
-}
-
-//methods
-int PersonalSpital :: calculeazaSalariuMediu(){
-    return salariu_mediu;
-}
-
-//destructors
-PersonalSpital::~PersonalSpital() {
-    nr_angajati--;
 }
