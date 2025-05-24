@@ -8,6 +8,15 @@
 #include "Analize.h"
 #include "ConsultatieInitiala.h"
 #include "ConsultatieUrmarire.h"
+#include "ExceptieCNPInvalid.h"
+#include "ExceptiePacientNegasit.h"
+#include "ExceptieReteta.h"
+#include "ExceptieMedic.h"
+#include "ExceptieAsistent.h"
+#include "ExceptieZi.h"
+#include "ExceptieIndex.h"
+#include "ExceptieProgramare.h"
+#include "ExceptieIntervalinvalid.h"
 #include<iostream>
 #include<vector>
 #include<memory>
@@ -75,8 +84,13 @@ void Meniu::ruleazaMeniuPacient() {
                         std::cout<<"CNP: ";
                         std::cin>>cnp;
 
-                        if (!Persoana::isCNPvalid(cnp)) {
-                            std::cout<<"Cnp invalid. Incearca din nou.\n";
+                        try{
+                            if (!Persoana::isCNPvalid(cnp)) {
+                                throw ExceptieCNPInvalid();
+                            }
+                        }
+                        catch (const ExceptieCNPInvalid& e) {
+                            std::cout<<e.what()<<"Incearca din nou.\n";
                             continue;
                         }
 
@@ -109,25 +123,30 @@ void Meniu::ruleazaMeniuPacient() {
 
                 case 2:{
                     //pacient existent
-                    int id;
-                    std::cout<<"Introdu ID pacient: ";
-                    std::cin>>id;
+                    try {
+                        int id;
+                        std::cout<<"Introdu ID pacient: ";
+                        std::cin>>id;
 
-                    bool gasit=false;
-                    for (const auto &p:this->pacienti) {
-                       if (p->getId()==id) {
-                        gasit=true;
-                        idPacientCurent=id;
-                        autentificat=true;
-                        std::cout<<"Autentificare reusita. Bine ai venit!\n";
-                        break;
+                        bool gasit=false;
+                        for (const auto &p:this->pacienti) {
+                            if (p->getId()==id) {
+                                gasit=true;
+                                idPacientCurent=id;
+                                autentificat=true;
+                                std::cout<<"Autentificare reusita. Bine ai venit!\n";
+                                break;
+                            }
+                        }
+
+                        if (!gasit) {
+                            throw ExceptiePacientNegasit();
                         }
                     }
-
-                    if (!gasit) {
-                        std::cout<<"Pacient inexistent.\n";
+                    catch (const ExceptiePacientNegasit &e) {
+                        std::cout<<e.what();
                     }
-                break;
+                    break;
                 }
 
                 case 3:
@@ -180,161 +199,182 @@ void Meniu::ruleazaMeniuPacient() {
 
                 case 2: {
                     //programare noua
-                    int tip_serviciu;
-                    std::cout<<"Alege tipul serviciului: \n";
-                    std::cout<<"1. Consultatie initiala\n";
-                    std::cout<<"2. Consultatie de urmarire\n";
-                    std::cout<<"Introdu optiunea: ";
-                    std::cin>>tip_serviciu;
+                    try {
+                        int tip_serviciu;
+                        std::cout<<"Alege tipul serviciului: \n";
+                        std::cout<<"1. Consultatie initiala\n";
+                        std::cout<<"2. Consultatie de urmarire\n";
+                        std::cout<<"Introdu optiunea: ";
+                        std::cin>>tip_serviciu;
 
-                    std::shared_ptr<Pacient>pacient_curent=nullptr;
-                    for (const auto &p:pacienti) {
-                        if (p->getId()==idPacientCurent)
-                            pacient_curent=p;
-                    }
-
-                    //upcasting
-                    std::shared_ptr<Consultatie>serviciu=nullptr;
-
-                    switch (tip_serviciu) {
-                        case 1: {
-                            serviciu=std::make_shared<ConsultatieInitiala>(pacient_curent);
-                            break;
-                        }
-                        case 2: {
-                            serviciu=std::make_shared<ConsultatieUrmarire>(pacient_curent);
-                            break;
-                        }
-                        default: {
-                            std::cout<<"Optiune invalida\n";
-                            break;
+                        std::shared_ptr<Pacient>pacient_curent=nullptr;
+                        for (const auto &p:pacienti) {
+                            if (p->getId()==idPacientCurent)
+                                pacient_curent=p;
                         }
 
-                    }
+                        if (pacient_curent==nullptr) {
+                            throw ExceptiePacientNegasit();
+                        }
 
-                    std::string specializare;
-                    std::cout<<"Introduceti specializarea dorita: ";
-                    std::cin>>specializare;
-                    std::vector<std::shared_ptr<Medic>>medici_specializare;
+                        //upcasting
+                        std::shared_ptr<Consultatie>serviciu=nullptr;
 
-                    for (const auto &medic:this->medici) {
-                        if (medic->getSpecializare() == specializare)
-                            medici_specializare.push_back(medic);
-                    }
+                        switch (tip_serviciu) {
+                            case 1: {
+                                serviciu=std::make_shared<ConsultatieInitiala>(pacient_curent);
+                                break;
+                            }
+                            case 2: {
+                                serviciu=std::make_shared<ConsultatieUrmarire>(pacient_curent);
+                                break;
+                            }
+                            default: {
+                                std::cout<<"Optiune invalida\n";
+                                break;
+                            }
 
-                    if (medici_specializare.empty()) {
-                        std::cout<<"Nu exista medici cu specializarea aleasa.\n";
+                        }
+
+                        std::string specializare;
+                        std::cout<<"Introduceti specializarea dorita: ";
+                        std::cin>>specializare;
+                        std::vector<std::shared_ptr<Medic>>medici_specializare;
+
+                        for (const auto &medic:this->medici) {
+                            if (medic->getSpecializare() == specializare)
+                                medici_specializare.push_back(medic);
+                        }
+
+                        if (medici_specializare.empty()) {
+                            std::cout<<"Nu exista medici la aceasta specializare.\n";\
+                            break;
+                        }
+
+                        std::cout<<"Medici disponibili: \n";
+                        for (auto i=0;i<medici_specializare.size();i++) {
+                            std::cout<<i+1<<"."<<medici_specializare[i]->getNume()<<" "<<medici_specializare[i]->getPrenume()<<"\n";
+                        }
+
+                        int index;
+                        std::cout<<"Alege un medic(index): ";
+                        std::cin>>index;
+
+                        if(index<1 || index>medici_specializare.size()){
+                            throw ExceptieIndex();
+                        }
+
+                        std::shared_ptr<Medic> medic_selectat=medici_specializare[index-1];
+
+                        std::cout<<"Zile disponibile: \n";
+                        for (const auto &zi:medic_selectat->getProgram()) {
+                            std::cout<<zi.first<<"\n";
+                        }
+
+                        std::string zi_aleasa;
+                        std::cout<<"Alege o zi din cele disponibile: ";
+                        std::cin>>zi_aleasa;
+
+                        bool gasit=false;
+                        for (const auto &zi:medic_selectat->getProgram()) {
+                            if (zi.first==zi_aleasa)gasit=true;
+                        }
+                        if (gasit==false) {
+                            throw ExceptieZi();
+                        }
+
+                        std::cout<<"Intervale disponibile "<<zi_aleasa<<": ";
+                        for (auto interval:medic_selectat->getProgram()[zi_aleasa])
+                            std::cout<<interval.first<<":00 - "<<interval.second<<":00 \n";
+
+                        int ora_start, ora_sfarsit;
+                        std::cout<<"Introdu ora de inceput: ";
+                        std::cin>>ora_start;
+                        std::cout<<"Introdu ora de sfarsit: ";
+                        std::cin>>ora_sfarsit;
+
+                        bool interval_valid=false;
+                        for (const auto &interval:medic_selectat->getProgram()[zi_aleasa]) {
+                            if (ora_start>=interval.first && ora_sfarsit<=interval.second)
+                                interval_valid=true;
+                        }
+                        if (!interval_valid) {
+                            throw ExceptieIntervalinvalid();
+                        }
+
+                        Programare prog(zi_aleasa, ora_start, ora_sfarsit,pacient_curent, medic_selectat,serviciu);
+
+                        if(gestiuneProgramari.adaugaProgramare(prog)==true) {
+                            std::cout<<"Programare adaugata cu succes!\n";
+                            medic_selectat->adaugaPacient(pacient_curent);
+                        }
+                        else{
+                            throw ExceptieProgramare();
+                        }
                         break;
                     }
-
-                    std::cout<<"Medici disponibili: \n";
-                    for (auto i=0;i<medici_specializare.size();i++) {
-                        std::cout<<i+1<<"."<<medici_specializare[i]->getNume()<<" "<<medici_specializare[i]->getPrenume()<<"\n";
-                    }
-
-                    int index;
-                    std::cout<<"Alege un medic(index): ";
-                    std::cin>>index;
-
-                    if(index<1 || index>medici_specializare.size()){
-                        std::cout<<"Index invalid.\n";
-                        break;
-                    }
-
-                    std::shared_ptr<Medic> medic_selectat=medici_specializare[index-1];
-
-                    std::cout<<"Zile disponibile: \n";
-                    for (const auto &zi:medic_selectat->getProgram()) {
-                        std::cout<<zi.first<<"\n";
-                    }
-
-                    std::string zi_aleasa;
-                    std::cout<<"Alege o zi din cele disponibile: ";
-                    std::cin>>zi_aleasa;
-
-                    bool gasit=false;
-                    for (const auto &zi:medic_selectat->getProgram()) {
-                        if (zi.first==zi_aleasa)gasit=true;
-                    }
-                    if (gasit==false) {
-                        std::cout<<"Zi invalida! Medicul nu lucreaza in acea zi.\n";
-                        break;
-                    }
-
-                    std::cout<<"Intervale disponibile "<<zi_aleasa<<": ";
-                    for (auto interval:medic_selectat->getProgram()[zi_aleasa])
-                        std::cout<<interval.first<<":00 - "<<interval.second<<":00 \n";
-
-                    int ora_start, ora_sfarsit;
-                    std::cout<<"Introdu ora de inceput: ";
-                    std::cin>>ora_start;
-                    std::cout<<"Introdu ora de sfarsit: ";
-                    std::cin>>ora_sfarsit;
-
-                    bool interval_valid=false;
-                    for (const auto &interval:medic_selectat->getProgram()[zi_aleasa]) {
-                        if (ora_start>=interval.first && ora_sfarsit<=interval.second)
-                            interval_valid=true;
-                    }
-                    if (!interval_valid) {
-                        std::cout<<"Interval invalid. Nu se incadreaza in programul medicului.\n";
-                        break;
-                    }
-
-                    Programare prog(zi_aleasa, ora_start, ora_sfarsit,pacient_curent, medic_selectat,serviciu);
-
-                    if(gestiuneProgramari.adaugaProgramare(prog)==true) {
-                        std::cout<<"Programare adaugata cu succes!\n";
-                        medic_selectat->adaugaPacient(pacient_curent);
-                    }
-                    else{
-                        std::cout<<"Programarea nu a putut fi efectuata.\n";
+                    catch (const ExceptieSpital &e) {
+                        std::cout<<e.what()<<"\n";
                     }
                     break;
             }
 
                 case 3:{
                     //solicitare externare
-                    bool gasit=false;
-                    for (auto &p:this->pacienti) {
-                        if (p->getId()==idPacientCurent) {
-                            gasit=true;
-                            std::string data;
-                            std::cout<<"Introdu data externarii: ";
-                            std::cin>>data;
-                            p->setData_externare(data);
-                            std::cout<<"Cerere externare inregistrata.\n";
-                            break;
+                    try {
+                        bool gasit=false;
+                        for (auto &p:this->pacienti) {
+                            if (p->getId()==idPacientCurent) {
+                                gasit=true;
+                                std::string data;
+                                std::cout<<"Introdu data externarii: ";
+                                std::cin>>data;
+                                p->setData_externare(data);
+                                std::cout<<"Cerere externare inregistrata.\n";
+                                break;
+                            }
+                        }
+
+                        if (!gasit) {
+                            throw ExceptiePacientNegasit();
                         }
                     }
-
-                    if (!gasit) std::cout<<"Pacientul nu a fost gasit.\n";
+                    catch (const ExceptiePacientNegasit &e) {
+                        std::cout<<e.what()<<"\n";
+                    }
                     break;
                 }
 
                 case 4: {
                     //retete
-                    bool gasit=false;
-                    bool gasit_reteta=false;
-                    for (auto &p:this->pacienti) {
-                        if (p->getId()==idPacientCurent) {
-                            gasit=true;
-                            std::cout<<"Reteta: "<<"\n";
-                            for (const auto &reteta_var:p->getRetete()) {
-                                gasit_reteta=true;
-                                //std::visit - este din std::variant si apeleaza functia corecta pentru tipul actual tinut de variant
-                                std::visit([](const auto &reteta) {
-                                    std::cout<<reteta<<"\n";
-                                },reteta_var);
+                    try {
+                        bool gasit=false;
+                        bool gasit_reteta=false;
+                        for (auto &p:this->pacienti) {
+                            if (p->getId()==idPacientCurent) {
+                                gasit=true;
+                                std::cout<<"Reteta: "<<"\n";
+                                for (const auto &reteta_var:p->getRetete()) {
+                                    gasit_reteta=true;
+                                    //std::visit - este din std::variant si apeleaza functia corecta pentru tipul actual tinut de variant
+                                    std::visit([](const auto &reteta) {
+                                        std::cout<<reteta<<"\n";
+                                    },reteta_var);
+                                }
+                                if (!gasit_reteta) {
+                                   throw ExceptieReteta();
+                                }
+                                break;
                             }
-                            if (!gasit_reteta) {
-                                std::cout<<"Nu are retete recomandate";
-                            }
-                            break;
+                        }
+
+                        if (!gasit) {
+                            throw ExceptiePacientNegasit();
                         }
                     }
-
-                    if (!gasit) std::cout<<"Pacientul nu a fost gasit.\n";
+                    catch (const ExceptieSpital &e) {
+                        std::cout<<e.what()<<"\n";
+                    }
                     break;
                 }
 
@@ -410,8 +450,13 @@ void Meniu::ruleazaMeniuMedic() {
                         std::cout<<"CNP: ";
                         std::cin>>cnp;
 
-                        if (!Persoana::isCNPvalid(cnp)) {
-                            std::cout<<"Cnp invalid. Incearca din nou.\n";
+                        try {
+                            if (!Persoana::isCNPvalid(cnp)) {
+                                throw ExceptieCNPInvalid();
+                            }
+                        }
+                        catch (const ExceptieCNPInvalid &e) {
+                            std::cout<<e.what()<<"Incearca din nou.\n";
                             continue;
                         }
 
@@ -443,23 +488,28 @@ void Meniu::ruleazaMeniuMedic() {
 
                 case 2: {
                     //medic existent
-                    int id;
-                    std::cout<<"Introdu ID medic: ";
-                    std::cin>>id;
+                    try {
+                        int id;
+                        std::cout<<"Introdu ID medic: ";
+                        std::cin>>id;
 
-                    bool gasit=false;
-                    for (const auto &m:this->medici) {
-                        if (m->getId()==id) {
-                            gasit=true;
-                            idMedicCurent=id;
-                            autentificat=true;
-                            std::cout<<"Autentificare reusita. Bine ai venit!\n";
-                            break;
+                        bool gasit=false;
+                        for (const auto &m:this->medici) {
+                            if (m->getId()==id) {
+                                gasit=true;
+                                idMedicCurent=id;
+                                autentificat=true;
+                                std::cout<<"Autentificare reusita. Bine ai venit!\n";
+                                break;
+                            }
+                        }
+
+                        if (!gasit) {
+                            throw ExceptieMedic();
                         }
                     }
-
-                    if (!gasit) {
-                            std::cout<<"Medic inexistent.\n";
+                    catch (const ExceptieMedic &e) {
+                        std::cout<<e.what()<<"\n";
                     }
                     break;
 
@@ -516,204 +566,222 @@ void Meniu::ruleazaMeniuMedic() {
 
                 case 3: {
                     //evaluare pacient
-                    if (pacienti.empty()) {
-                        std::cout << "Nu exista pacienti inregistrati.\n";
-                    }
-                    else {
-                        int id;
-                        std::cout<<"Introduceti ID-ul pacientului: ";
-                        std::cin>>id;
+                    try {
+                        if (pacienti.empty()) {
+                            std::cout << "Nu exista pacienti inregistrati.\n";
+                        }
+                        else {
+                            int id;
+                            std::cout<<"Introduceti ID-ul pacientului: ";
+                            std::cin>>id;
 
-                        bool gasit=false;
-                        bool gasit_consultatie=false;
-                        for (auto &p:pacienti) {
-                            if (p->getId()==id) {
-                                gasit=true;
+                            bool gasit=false;
+                            bool gasit_consultatie=false;
+                            for (auto &p:pacienti) {
+                                if (p->getId()==id) {
+                                    gasit=true;
 
-                                for (const auto &prog: this->gestiuneProgramari.getProgramari()) {
-                                    if (prog.getPacient()->getId()==id && prog.getMedic()->getId()==idMedicCurent) {
-                                        gasit_consultatie=true;
-                                        auto consultatie=prog.getConsultatie();
+                                    for (const auto &prog: this->gestiuneProgramari.getProgramari()) {
+                                        if (prog.getPacient()->getId()==id && prog.getMedic()->getId()==idMedicCurent) {
+                                            gasit_consultatie=true;
+                                            auto consultatie=prog.getConsultatie();
 
-                                        //downcast
-                                        if (auto initiala=std::dynamic_pointer_cast<ConsultatieInitiala>(consultatie)) {
-                                            std::cout<<"Consultatie initiala\n";
-                                            initiala->executa();
-                                        }
-                                        else if (auto urmarire=std::dynamic_pointer_cast<ConsultatieUrmarire>(consultatie)) {
-                                            std::cout<<"Consultatie urmarire\n";
-                                            urmarire->executa();
-                                        }
-                                        else {
-                                            std::cout<<"Consultatie generica\n";
-                                            consultatie->executa();
+                                            //downcast
+                                            if (auto initiala=std::dynamic_pointer_cast<ConsultatieInitiala>(consultatie)) {
+                                                std::cout<<"Consultatie initiala\n";
+                                                initiala->executa();
+                                            }
+                                            else if (auto urmarire=std::dynamic_pointer_cast<ConsultatieUrmarire>(consultatie)) {
+                                                std::cout<<"Consultatie urmarire\n";
+                                                urmarire->executa();
+                                            }
+                                            else {
+                                                std::cout<<"Consultatie generica\n";
+                                                consultatie->executa();
+                                            }
                                         }
                                     }
+                                    break;
                                 }
-                                break;
+                            }
+
+                            if (!gasit_consultatie) {
+                                std::cout<<"Pacientul nu are nicio programare la acest medic.\n";
+                            }
+
+                            if (!gasit) {
+                                throw ExceptiePacientNegasit();
                             }
                         }
-
-                        if (!gasit_consultatie) {
-                            std::cout<<"Pacientul nu are nicio programare la acest medic.\n";
-                        }
-
-                        if (!gasit) {
-                            std::cout<<"Pacient inexistent.\n";
-                        }
+                    }
+                    catch (const ExceptiePacientNegasit &e) {
+                        std::cout<<e.what()<<"\n";
                     }
                     break;
-                    }
+                }
 
                 case 4: {
                     //prescriere tratament
-                    if (pacienti.empty()) {
-                        std::cout << "Nu exista pacienti inregistrati.\n";
-                    }
-                    else {
-                        int idPacient;
-                        std::cout<<"Introduceti ID-ul pacientului: ";
-                        std::cin>>idPacient;
+                    try {
+                        if (pacienti.empty()) {
+                            std::cout << "Nu exista pacienti inregistrati.\n";
+                        }
+                        else {
+                            int idPacient;
+                            std::cout<<"Introduceti ID-ul pacientului: ";
+                            std::cin>>idPacient;
 
-                        bool gasit=false;
-                        for (auto &p:pacienti) {
-                            if (p->getId()==idPacient) {
-                                gasit=true;
+                            bool gasit=false;
+                            for (auto &p:pacienti) {
+                                if (p->getId()==idPacient) {
+                                    gasit=true;
 
-                                std::cout<<"Numar de medicamente recomandate: ";
-                                int numar_med;
-                                std::cin>>numar_med;
+                                    std::cout<<"Numar de medicamente recomandate: ";
+                                    int numar_med;
+                                    std::cin>>numar_med;
 
-                                Reteta<int> reteta_int;
-                                Reteta<std::string> reteta_string;
-                                for (int i=0;i<numar_med;i++) {
-                                    std::string categorie, forma;
-                                    std::cout<<"Introduceti categoria medicamentului(antibiotic / analgezic / antiinflamator): ";
-                                    std::cin>>categorie;
-                                    std::cout<<"Introduceti forma medicamentului(pastila / sirop / injectabil / crema): ";
-                                    std::cin>>forma;
+                                    Reteta<int> reteta_int;
+                                    Reteta<std::string> reteta_string;
+                                    for (int i=0;i<numar_med;i++) {
+                                        std::string categorie, forma;
+                                        std::cout<<"Introduceti categoria medicamentului(antibiotic / analgezic / antiinflamator): ";
+                                        std::cin>>categorie;
+                                        std::cout<<"Introduceti forma medicamentului(pastila / sirop / injectabil / crema): ";
+                                        std::cin>>forma;
 
-                                    std::shared_ptr<Medicament> med;
-                                    if (categorie=="antibiotic" && forma=="pastila") {
-                                        med=MedicamentFactory::antibiotic_pastila();
-                                    }
-                                    else if (categorie=="antibiotic" && forma=="injectabil") {
-                                        med=MedicamentFactory::antibiotic_injectabil();
-                                    }
-                                    else if (categorie=="analgezic" && forma=="pastila") {
-                                        med=MedicamentFactory::analgezic_pastila();
-                                    }
-                                    else if (categorie=="analgezic" && forma=="sirop") {
-                                        med=MedicamentFactory::analgezic_sirop();
-                                    }
-                                    else if (categorie=="analgezic" && forma=="injectabil") {
-                                        med=MedicamentFactory::analgezic_injectabil();
-                                    }
-                                    else if (categorie=="antiinflamator" && forma=="pastila") {
-                                        med=MedicamentFactory::antiinflamator_pastila();
-                                    }
-                                    else if (categorie=="antiinflamator" && forma=="crema") {
-                                        med=MedicamentFactory::antiinflamator_crema();
-                                    }
-                                    else {
-                                        std::cout<<"Nu exista in stoc acest medicament.";
-                                    }
+                                        std::shared_ptr<Medicament> med;
+                                        if (categorie=="antibiotic" && forma=="pastila") {
+                                            med=MedicamentFactory::antibiotic_pastila();
+                                        }
+                                        else if (categorie=="antibiotic" && forma=="injectabil") {
+                                            med=MedicamentFactory::antibiotic_injectabil();
+                                        }
+                                        else if (categorie=="analgezic" && forma=="pastila") {
+                                            med=MedicamentFactory::analgezic_pastila();
+                                        }
+                                        else if (categorie=="analgezic" && forma=="sirop") {
+                                            med=MedicamentFactory::analgezic_sirop();
+                                        }
+                                        else if (categorie=="analgezic" && forma=="injectabil") {
+                                            med=MedicamentFactory::analgezic_injectabil();
+                                        }
+                                        else if (categorie=="antiinflamator" && forma=="pastila") {
+                                            med=MedicamentFactory::antiinflamator_pastila();
+                                        }
+                                        else if (categorie=="antiinflamator" && forma=="crema") {
+                                            med=MedicamentFactory::antiinflamator_crema();
+                                        }
+                                        else {
+                                            std::cout<<"Nu exista in stoc acest medicament.";
+                                        }
 
-                                    std::cout<<"Doza recoamndata: \n";
-                                    std::cout<<"1. Numar de pastile/zi\n";
-                                    std::cout<<"2. Alta doza/zi\n";
+                                        std::cout<<"Doza recoamndata: \n";
+                                        std::cout<<"1. Numar de pastile/zi\n";
+                                        std::cout<<"2. Alta doza/zi\n";
 
-                                    int var;
-                                    std::cout<<"Alege tipul de doza: \n";
-                                    std::cin>>var;
+                                        int var;
+                                        std::cout<<"Alege tipul de doza: \n";
+                                        std::cin>>var;
 
-                                    switch (var) {
-                                        case 1: {
-                                            int info;
-                                            std::cout<<"Doza: ";
-                                            std::cin>>info;
-                                            reteta_int.adaugaMedicament(med,info);
+                                        switch (var) {
+                                            case 1: {
+                                                int info;
+                                                std::cout<<"Doza: ";
+                                                std::cin>>info;
+                                                reteta_int.adaugaMedicament(med,info);
+                                                break;
+                                            }
+                                            case 2: {
+                                                std::string info;
+                                                std::cout<<"Doza: ";
+                                                std::cin>>info;
+                                                reteta_string.adaugaMedicament(med,info);
+                                                break;
+                                            }
+                                            default:
+                                                std::cout<<"Optiune invalida\n";
                                             break;
                                         }
-                                        case 2: {
-                                            std::string info;
-                                            std::cout<<"Doza: ";
-                                            std::cin>>info;
-                                            reteta_string.adaugaMedicament(med,info);
-                                            break;
-                                        }
-                                        default:
-                                            std::cout<<"Optiune invalida\n";
-                                        break;
                                     }
+
+                                    p->adaugaReteta(reteta_int);
+                                    p->adaugaReteta(reteta_string);
                                 }
-
-                                p->adaugaReteta(reteta_int);
-                                p->adaugaReteta(reteta_string);
+                            }
+                            if (!gasit) {
+                                throw ExceptiePacientNegasit();
                             }
                         }
-                        if (!gasit) {
-                            std::cout<<"Pacient inexistent.\n";
-                        }
+                    }
+                    catch (const ExceptiePacientNegasit &e) {
+                        std::cout<<e.what()<<"\n";
                     }
                     break;
                 }
 
                 case 5: {
                     //programare operatie
-                    if (pacienti.empty()) {
-                        std::cout << "Nu exista pacienti inregistrati.\n";
-                    }
-                    else {
-                        int idPacient;
-                        std::cout<<"Introduceti ID-ul pacientului: ";
-                        std::cin>>idPacient;
+                    try {
+                        if (pacienti.empty()) {
+                            std::cout << "Nu exista pacienti inregistrati.\n";
+                        }
+                        else {
+                            int idPacient;
+                            std::cout<<"Introduceti ID-ul pacientului: ";
+                            std::cin>>idPacient;
 
-                        bool gasit=false;
-                        for (auto &p:pacienti) {
-                            if (p->getId()==idPacient && p->getSeveritateBoala()!=0) {
-                                gasit=true;
-                                std::shared_ptr<Operatie>operatie=std::make_shared<Operatie>(p);
-                                operatie->executa();
+                            bool gasit=false;
+                            for (auto &p:pacienti) {
+                                if (p->getId()==idPacient && p->getSeveritateBoala()!=0) {
+                                    gasit=true;
+                                    std::shared_ptr<Operatie>operatie=std::make_shared<Operatie>(p);
+                                    operatie->executa();
+                                }
+                            }
+                            if (!gasit) {
+                                throw ExceptiePacientNegasit();
                             }
                         }
-                        if (!gasit) {
-                            std::cout<<"Pacient invalid.\n";
-                        }
                     }
-                    break;
+                    catch (const ExceptiePacientNegasit &e) {
+                        std::cout<<e.what()<<"\n";
+                    }
                 }
 
                 case 6: {
                     //externare pacient
-                    if (pacienti.empty()) {
-                        std::cout << "Nu exista pacienti inregistrati.\n";
-                    }
-                    else {
-                        int idPacient;
-                        std::cout<<"Introduceti ID-ul pacientului: ";
-                        std::cin>>idPacient;
+                    try {
+                        if (pacienti.empty()) {
+                            std::cout << "Nu exista pacienti inregistrati.\n";
+                        }
+                        else {
+                            int idPacient;
+                            std::cout<<"Introduceti ID-ul pacientului: ";
+                            std::cin>>idPacient;
 
-                        bool gasit=false;
-                        for (auto &p:pacienti) {
-                            if (p->getId()==idPacient) {
-                                gasit=true;
-                                std::string externare;
-                                std::cout<<"Introduceti data externarii: ";
-                                std::string temp;
-                                std::getline(std::cin,temp);
-                                std::getline(std::cin, externare);
-                                p->setData_externare(externare);
-                                p->adaugaIstoric("Externare programata: "+externare);
-                                std::cout << "Externare programata cu succes.\n";
-                                break;
+                            bool gasit=false;
+                            for (auto &p:pacienti) {
+                                if (p->getId()==idPacient) {
+                                    gasit=true;
+                                    std::string externare;
+                                    std::cout<<"Introduceti data externarii: ";
+                                    std::string temp;
+                                    std::getline(std::cin,temp);
+                                    std::getline(std::cin, externare);
+                                    p->setData_externare(externare);
+                                    p->adaugaIstoric("Externare programata: "+externare);
+                                    std::cout << "Externare programata cu succes.\n";
+                                    break;
+                                }
+                            }
+                            if (!gasit) {
+                                throw ExceptiePacientNegasit();
                             }
                         }
-                        if (!gasit) {
-                            std::cout<<"Pacient inexistent.\n";
-                        }
                     }
-                    break;
+                    catch (const ExceptiePacientNegasit &e) {
+                        std::cout<<e.what()<<"\n";
+                    }
                 }
 
                 case 7: {
@@ -766,10 +834,16 @@ void Meniu::ruleazaMeniuAsistent() {
                         std::cout<<"CNP: ";
                         std::cin>>cnp;
 
-                        if (!Persoana::isCNPvalid(cnp)) {
-                            std::cout<<"Cnp invalid. Incearca din nou.\n";
+                        try {
+                            if (!Persoana::isCNPvalid(cnp)) {
+                                throw ExceptieCNPInvalid();
+                            }
+                        }
+                        catch (const ExceptieCNPInvalid &e) {
+                            std::cout<<e.what()<<"Incearca din nou.\n";
                             continue;
                         }
+
 
                         bool gasit=false;
                         for (const auto &a:this->asistenti) {
@@ -799,23 +873,28 @@ void Meniu::ruleazaMeniuAsistent() {
 
                 case 2: {
                     //asistent existent
-                    int id;
-                    std::cout<<"Introdu ID asistent: ";
-                    std::cin>>id;
+                    try {
+                        int id;
+                        std::cout<<"Introdu ID asistent: ";
+                        std::cin>>id;
 
-                    bool gasit=false;
-                    for (const auto &m:this->asistenti) {
-                        if (m->getId()==id) {
-                            gasit=true;
-                            idAsistentCurent=id;
-                            autentificat=true;
-                            std::cout<<"Autentificare reusita. Bine ai venit!\n";
-                            break;
+                        bool gasit=false;
+                        for (const auto &m:this->asistenti) {
+                            if (m->getId()==id) {
+                                gasit=true;
+                                idAsistentCurent=id;
+                                autentificat=true;
+                                std::cout<<"Autentificare reusita. Bine ai venit!\n";
+                                break;
+                            }
+                        }
+
+                        if (!gasit) {
+                            throw ExceptieAsistent();
                         }
                     }
-
-                    if (!gasit) {
-                        std::cout<<"Asistent inexistent.\n";
+                    catch (const ExceptieAsistent &e) {
+                        std::cout<<e.what()<<"\n";
                     }
                     break;
                 }
@@ -858,59 +937,69 @@ void Meniu::ruleazaMeniuAsistent() {
 
                 case 2: {
                     //administrare tratament
-                    if (pacienti.empty()) {
-                        std::cout << "Nu exista pacienti inregistrati.\n";
-                    }
-                    else {
-                        int idPacient;
-                        std::cout<<"Introduceti ID-ul pacientului: ";
-                        std::cin>>idPacient;
+                    try {
+                        if (pacienti.empty()) {
+                            std::cout << "Nu exista pacienti inregistrati.\n";
+                        }
+                        else {
+                            int idPacient;
+                            std::cout<<"Introduceti ID-ul pacientului: ";
+                            std::cin>>idPacient;
 
-                        bool gasit=false;
-                        for (auto &a:asistenti) {
-                            if (a->getId()==idAsistentCurent) {
-                                gasit=true;
-                                a->administrareTratament(gestiuneProgramari.getProgramari(),idPacient);
-                                break;
+                            bool gasit=false;
+                            for (auto &a:asistenti) {
+                                if (a->getId()==idAsistentCurent) {
+                                    gasit=true;
+                                    a->administrareTratament(gestiuneProgramari.getProgramari(),idPacient);
+                                    break;
+                                }
+                            }
+                            if (!gasit) {
+                                throw ExceptieAsistent();
                             }
                         }
-                        if (!gasit) {
-                            std::cout<<"Asistent inexistent.\n";
-                        }
-                        break;
                     }
+                    catch (const ExceptieAsistent &e) {
+                           std::cout<<e.what()<<"\n";
+                    }
+                    break;
                 }
 
                 case 3: {
                     //analiza
-                    if (pacienti.empty()) {
-                        std::cout << "Nu exista pacienti inregistrati.\n";
-                    }
-                    else {
-                        int idPacient;
-                        std::cout<<"Introduceti ID-ul pacientului: ";
-                        std::cin>>idPacient;
+                    try {
+                        if (pacienti.empty()) {
+                            std::cout << "Nu exista pacienti inregistrati.\n";
+                        }
+                        else {
+                            int idPacient;
+                            std::cout<<"Introduceti ID-ul pacientului: ";
+                            std::cin>>idPacient;
 
-                        bool gasit=false;
-                        for (auto &p:pacienti) {
-                            if (p->getId()==idPacient) {
-                                gasit=true;
+                            bool gasit=false;
+                            for (auto &p:pacienti) {
+                                if (p->getId()==idPacient) {
+                                    gasit=true;
 
-                                std::string tip, rezultat;
-                                std::cout<<"Introduceti tipul analizei: ";
-                                std::cin>>tip;
-                                std::cout<<"Introduceti rezultat: ";
-                                std::cin>>rezultat;
+                                    std::string tip, rezultat;
+                                    std::cout<<"Introduceti tipul analizei: ";
+                                    std::cin>>tip;
+                                    std::cout<<"Introduceti rezultat: ";
+                                    std::cin>>rezultat;
 
-                                Analize analiza(tip,rezultat);
-                                analiza.executa();
-                                p->adaugaIstoric("Analize: Tipul analizei:" + tip + ", Rezultat:" + rezultat);
-                                break;
+                                    Analize analiza(tip,rezultat);
+                                    analiza.executa();
+                                    p->adaugaIstoric("Analize: Tipul analizei:" + tip + ", Rezultat:" + rezultat);
+                                    break;
+                                }
+                            }
+                            if (!gasit) {
+                                throw ExceptiePacientNegasit();
                             }
                         }
-                        if (!gasit) {
-                            std::cout<<"Pacient inexistent.\n";
-                        }
+                    }
+                    catch (const ExceptiePacientNegasit &e) {
+                        std::cout<<e.what()<<"\n";
                     }
                     break;
                 }

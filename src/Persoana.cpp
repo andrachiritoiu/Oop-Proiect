@@ -1,4 +1,6 @@
 #include "Persoana.h"
+
+#include <ExceptieCNPInvalid.h>
 #include<stdexcept>
 #include<iostream>
 #include<string>
@@ -64,8 +66,7 @@ bool Persoana::isCNPvalid(const std::string &cnp) {
 //constructors
 Persoana::Persoana(const std::string &nume, const std::string &prenume, const std::string &CNP) {
     if (!isCNPvalid(CNP)) {
-        //std::invalid_argument - exceptie din biblioteca standard C++
-        throw std::invalid_argument("CNP invalid");
+        throw ExceptieCNPInvalid();
     }
 
     this->nume=nume;
