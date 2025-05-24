@@ -34,14 +34,4 @@ const std::shared_ptr<Consultatie>& Programare::getConsultatie() const {
 void Programare::setData(const std::string &data_n) {
   this->data=data_n;
 }
-void Programare::setOraInceput(int ora_inceput_n) {
-  this->ora_inceput=ora_inceput_n;
-}
-void Programare::setOraSfarsit(int ora_sfarsit_n) {
-  if (ora_sfarsit_n<this->ora_inceput) {
-    this->ora_sfarsit=this->ora_inceput;
-  }
-  else {
-    this->ora_sfarsit=ora_sfarsit_n;
-  }
-}
+
