@@ -39,7 +39,7 @@ public:
     [[nodiscard]] const std::vector<RetetaVariant>& getRetete() const;
 
     //setters
-    void setDiagnostic(const std::string &diagnostic);
+    void setDiagnostic(const std::string &diagnostic_n);
     void setSeveritate(int severitate);
     void setData_internare(const std::string &data_internare);
     void setData_externare(const std::string &data_externare);

@@ -33,10 +33,10 @@ void Consultatie::executa(){
     std::cin>>data_externare;
     this->pacient->setData_externare(data_externare);
 
-    int pret;
+    int pret_n;
     std::cout<<"Introduceti pretul consultatiei: ";
-    std::cin>>pret;
-    this->pret=pret;
+    std::cin>>pret_n;
+    this->pret=pret_n;
 
     bool urgenta;
     std::cout<<"Este urgenta? (1-da, 0-nu): ";

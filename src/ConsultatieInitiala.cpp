@@ -14,8 +14,8 @@ std::string ConsultatieInitiala::getTip() const{
 }
 
 //setter
-void ConsultatieInitiala::setSimptome(const std::string &simptome_initiale) {
-    this->simptome_initiale=simptome_initiale;
+void ConsultatieInitiala::setSimptome(const std::string &simptome_initiale_n) {
+    this->simptome_initiale=simptome_initiale_n;
 }
 
 //methods
@@ -50,10 +50,10 @@ void ConsultatieInitiala::executa(){
     std::cin>>urgenta;
     this->urgenta=urgenta;
 
-    std::string simptome_initiale;
+    std::string simptome_initiale_n;
     std::cout<<"Simptome initiale: ";
-    std::cin>>simptome_initiale;
-    this->simptome_initiale=simptome_initiale;
+    std::cin>>simptome_initiale_n;
+    this->simptome_initiale=simptome_initiale_n;
 
     this->pacient->adaugaIstoric("Evaluare: Diagnostic:" + diagnostic +", Severitate:" +
         std::to_string(severitate) + ", Internare:" + data_internare + ", Externare:" + data_externare + ", Simptome initiale:" + simptome_initiale);

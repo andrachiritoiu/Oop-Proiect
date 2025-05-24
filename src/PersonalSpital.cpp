@@ -52,11 +52,11 @@ std::map<std::string, std::vector<std::pair<int,int>>> PersonalSpital :: getProg
 
 
 //setters
-void PersonalSpital :: setSalariu(int salariu) {
-    suma_totala_salarii = suma_totala_salarii - this->salariu + salariu;
-    this->salariu=salariu;
+void PersonalSpital :: setSalariu(int salariu_n) {
+    PersonalSpital::suma_totala_salarii = PersonalSpital::suma_totala_salarii - this->salariu + salariu_n;
+    this->salariu=salariu_n;
     if (nr_angajati>0)
-        salariu_mediu = suma_totala_salarii / nr_angajati;
+        PersonalSpital::salariu_mediu = PersonalSpital::suma_totala_salarii / PersonalSpital::nr_angajati;
 }
 
 //operators

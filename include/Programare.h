@@ -33,8 +33,6 @@ class Programare {
     void setData(const std::string &data);
     void setOraInceput(int ora_inceput);
     void setOraSfarsit(int ora_sfarsit);
-    void setPacient(const std::shared_ptr<Pacient> &pacient);
-    void setMedic(const std::shared_ptr<Medic> &med);
 
     //methods
     //upcast

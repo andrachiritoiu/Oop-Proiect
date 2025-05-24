@@ -10,7 +10,7 @@ public:
     //constructors
     ConsultatieUrmarire()=default;
     ConsultatieUrmarire(const std::shared_ptr<Pacient> &pacient);
-    ConsultatieUrmarire(const std::string &nume_serviciu, const std::shared_ptr<Pacient> &pacient, int pret, bool urgenta,const std::string &evaluare_progres);
+    ConsultatieUrmarire(const std::string &nume_serviciu, const std::shared_ptr<Pacient> &pacient, int pret, bool urgenta,const std::string &evaluare_progres_n);
 
     //getter
     [[nodiscard]] std::string getTip()const override;

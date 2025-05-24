@@ -14,8 +14,8 @@ std::string ConsultatieUrmarire::getTip() const{
 }
 
 //setter
-void ConsultatieUrmarire::setEvaluareProgres(const std::string &evaluare_progres) {
-    this->evaluare_progres=evaluare_progres;
+void ConsultatieUrmarire::setEvaluareProgres(const std::string &evaluare_progres_n) {
+    this->evaluare_progres=evaluare_progres_n;
 }
 
 //methods

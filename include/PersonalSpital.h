@@ -33,7 +33,7 @@ public:
   [[nodiscard]] std::map<std::string, std::vector<std::pair<int,int>>> getProgram() const;
 
   //setters
-  void setSalariu(int salariu);
+  void setSalariu(int salariu_n);
 
   //operators
   PersonalSpital& operator=(const PersonalSpital &p);

@@ -40,6 +40,3 @@ void Programare::setOraInceput(int ora_inceput) {
 void Programare::setOraSfarsit(int ora_sfarsit) {
   this->ora_sfarsit=ora_sfarsit;
 }
-void Programare::setPacient(const std::shared_ptr<Pacient> &pacient) {
-  this->pacient=pacient;
-}

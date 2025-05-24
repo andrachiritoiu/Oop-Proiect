@@ -23,7 +23,7 @@ public:
     //setters
     void setNume(const std::string &nume_p);
     void setPrenume(const std::string &prenume_p);
-    void setCNP(const std::string &CNP);
+    void setCNP(const std::string &CNP_n);
 
     //operators
     Persoana& operator= (const Persoana &p);

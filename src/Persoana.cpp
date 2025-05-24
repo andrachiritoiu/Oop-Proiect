@@ -97,8 +97,8 @@ void Persoana :: setNume(const std::string &nume_p) {
 void Persoana :: setPrenume(const std::string &prenume_p) {
     this->prenume = prenume_p;
 }
-void Persoana :: setCNP(const std::string &CNP) {
-    this->CNP = CNP;
+void Persoana :: setCNP(const std::string &CNP_n) {
+    this->CNP = CNP_n;
 }
 
 //operators

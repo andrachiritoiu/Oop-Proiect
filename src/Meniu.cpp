@@ -247,7 +247,7 @@ void Meniu::ruleazaMeniuPacient() {
                         }
 
                         if (medici_specializare.empty()) {
-                            std::cout<<"Nu exista medici la aceasta specializare.\n";\
+                            std::cout<<"Nu exista medici la aceasta specializare.\n";
                             break;
                         }
 
@@ -260,7 +260,7 @@ void Meniu::ruleazaMeniuPacient() {
                         std::cout<<"Alege un medic(index): ";
                         std::cin>>index;
 
-                        if(index<1 || index>medici_specializare.size()){
+                        if(index<1 || index>static_cast<int>(medici_specializare.size())){
                             throw ExceptieIndex();
                         }
 
@@ -296,7 +296,7 @@ void Meniu::ruleazaMeniuPacient() {
                         std::cin>>ora_sfarsit;
 
                         bool interval_valid=false;
-                        for (auto interval:medic_selectat->getProgram()[zi_aleasa]) {
+                        for (const auto &interval:medic_selectat->getProgram()[zi_aleasa]) {
                             if (ora_start>=interval.first && ora_sfarsit<=interval.second)
                                 interval_valid=true;
                         }

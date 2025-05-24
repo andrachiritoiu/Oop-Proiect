@@ -64,8 +64,8 @@ const std::vector<RetetaVariant>& Pacient :: getRetete() const {
 }
 
 //setters
-void Pacient :: setDiagnostic(const std::string &diagnostic) {
-    this->diagnostic=diagnostic;
+void Pacient :: setDiagnostic(const std::string &diagnostic_n) {
+    this->diagnostic=diagnostic_n;
 }
 void Pacient :: setSeveritate(int severitate) {
     this->severitate_boala=severitate;
