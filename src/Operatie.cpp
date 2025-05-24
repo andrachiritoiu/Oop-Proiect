@@ -1,12 +1,14 @@
 #include "Operatie.h"
 
+#include <utility>
+
 //constructor
 Operatie::Operatie(const std::shared_ptr<Pacient> &pacient):Servicii(pacient){}
 
 Operatie::Operatie(const std::string &nume_serviciu, const std::shared_ptr<Pacient> &pacient,int sala_operatie,
     std::string tip_anestezie, int timp_recuperare):Servicii(nume_serviciu, pacient) {
     this->sala_operatie=sala_operatie;
-    this->tip_anestezie=tip_anestezie;
+    this->tip_anestezie=std::move(tip_anestezie);
     this->timp_recuperare=timp_recuperare;
 }
 

@@ -1,6 +1,7 @@
 #include "Medic.h"
 #include "PersonalSpital.h"
 #include<iostream>
+#include <utility>
 
 //constructors
 Medic::Medic() : PersonalSpital() {
@@ -11,7 +12,7 @@ Medic::Medic(const std::string &nume, const std::string &prenume, const std::str
        const std::map<std::string, std::vector<std::pair<int,int>>> &program, const std::string &specializare, std::map<int, std::shared_ptr<Pacient>> pacienti) : PersonalSpital(nume,
        prenume, CNP, salariu, experienta, program) {
     this->specializare=specializare;
-    this->pacienti=pacienti;
+    this->pacienti=std::move(pacienti);
 }
 //copy constructor
 Medic::Medic(const Medic &m): PersonalSpital(m) {
@@ -25,7 +26,7 @@ std::string Medic :: getSpecializare() const {
 }
 
 //ofera acces doar la citirea listei
-const std::map<int, std::shared_ptr<Pacient>> Medic :: getPacienti()const {
+std::map<int, std::shared_ptr<Pacient> > Medic::getPacienti() const {
     return this->pacienti;
 }
 
@@ -57,7 +58,7 @@ std::ostream& operator<<(std::ostream &out, const  Medic &m) {
 }
 
 //methods
-void Medic::adaugaPacient(std::shared_ptr<Pacient> p) {
+void Medic::adaugaPacient(const std::shared_ptr<Pacient>& p) {
     this->pacienti[p->getId()]=p;
 }
 void Medic::stergePacient(int id_pacient) {

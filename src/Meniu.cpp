@@ -586,7 +586,7 @@ void Meniu::ruleazaMeniuMedic() {
                                     for (const auto &prog: this->gestiuneProgramari.getProgramari()) {
                                         if (prog.getPacient()->getId()==id && prog.getMedic()->getId()==idMedicCurent) {
                                             gasit_consultatie=true;
-                                            auto consultatie=prog.getConsultatie();
+                                            const auto& consultatie=prog.getConsultatie();
 
                                             //downcast
                                             if (auto initiala=std::dynamic_pointer_cast<ConsultatieInitiala>(consultatie)) {
@@ -954,7 +954,7 @@ void Meniu::ruleazaMeniuAsistent() {
                             for (auto &a:asistenti) {
                                 if (a->getId()==idAsistentCurent) {
                                     gasit=true;
-                                    a->administrareTratament(gestiuneProgramari.getProgramari(),idPacient);
+                                    Asistent::administrareTratament(gestiuneProgramari.getProgramari(),idPacient);
                                     break;
                                 }
                             }

@@ -1,10 +1,12 @@
 #include "Consultatie.h"
+
+#include <utility>
 //conswtructors
 Consultatie::Consultatie(const std::shared_ptr<Pacient> &pacient) {
     this->pacient=pacient;
 }
 
-Consultatie::Consultatie(const std::string& nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta): Servicii(nume_serviciu,pacient) {
+Consultatie::Consultatie(const std::string& nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta): Servicii(nume_serviciu,std::move(pacient)) {
     this->pret=pret;
     this->urgenta=urgenta;
 }

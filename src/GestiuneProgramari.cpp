@@ -27,7 +27,7 @@ bool GestiuneProgramari :: adaugaProgramare(const Programare &programare){
     return true;
 }
 
-void GestiuneProgramari :: afiseazaProgram(const std::shared_ptr<Medic>& medic, const std::string &zi) {
+void GestiuneProgramari :: afiseazaProgram(const std::shared_ptr<Medic>& medic, const std::string &zi) const {
     std::cout<<"Programul medicului "<<medic->getNume()<<" "<<medic->getPrenume()<<" pentru "<<zi<<" este:\n";
 
     bool gasit=false;
@@ -42,7 +42,7 @@ void GestiuneProgramari :: afiseazaProgram(const std::shared_ptr<Medic>& medic, 
     }
 
 }
-void GestiuneProgramari::afiseazaProgramariFacute(const std::shared_ptr<Medic>& medic) {
+void GestiuneProgramari::afiseazaProgramariFacute(const std::shared_ptr<Medic>& medic) const {
     std::cout<<"Programul medicului "<<medic->getNume()<<" "<<medic->getPrenume()<<":\n";
     bool gasit=false;
 

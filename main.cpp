@@ -2,7 +2,7 @@
 
 
 int main() {
-    Meniu::getInstanta()->ruleaza();
+    // Meniu::getInstanta()->ruleaza();
 
     return 0;
 }

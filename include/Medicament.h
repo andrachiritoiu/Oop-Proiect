@@ -15,9 +15,9 @@ public:
     Medicament(const std::string& nume, int pret,const std::string &substanta_activa);
 
     //getters
-    std::string getNume()const;
-    int getPret()const;
-    std::string getSubstantaActiva()const;
+    [[nodiscard]] std::string getNume()const;
+    [[nodiscard]] int getPret()const;
+    [[nodiscard]] std::string getSubstantaActiva()const;
 
     //setters
 

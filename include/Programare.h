@@ -21,13 +21,13 @@ class Programare {
     Programare(const std::string &data,  int ora_inceput, int ora_sfarsit, const std::shared_ptr<Pacient> &pacient, const std::shared_ptr<Medic> &medic,const std::shared_ptr<Consultatie> &consultatie);
 
     //getters
-    std::string getData() const;
-    int getOraInceput() const;
-    int getOraSfarsit() const;
+    [[nodiscard]] std::string getData() const;
+    [[nodiscard]] int getOraInceput() const;
+    [[nodiscard]] int getOraSfarsit() const;
     //const(1)-obj returnat nu poate fi modificat
-    const std::shared_ptr<Pacient>& getPacient() const;
-    const std::shared_ptr<Medic>& getMedic() const;
-    const std::shared_ptr<Consultatie>& getConsultatie() const;
+    [[nodiscard]] const std::shared_ptr<Pacient>& getPacient() const;
+    [[nodiscard]] const std::shared_ptr<Medic>& getMedic() const;
+    [[nodiscard]] const std::shared_ptr<Consultatie>& getConsultatie() const;
 
     //setters
     void setData(const std::string &data);

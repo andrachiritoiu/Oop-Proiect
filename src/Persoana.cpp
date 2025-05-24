@@ -1,7 +1,5 @@
 #include "Persoana.h"
-
 #include <ExceptieCNPInvalid.h>
-#include<stdexcept>
 #include<iostream>
 #include<string>
 
