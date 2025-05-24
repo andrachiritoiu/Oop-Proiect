@@ -44,5 +44,5 @@ void Programare::setPacient(const std::shared_ptr<Pacient> &pacient) {
   this->pacient=pacient;
 }
 void Programare::setMedic(const std::shared_ptr<Medic> &med) {
-  this->medic=medic;
+  this->medic=med;
 }

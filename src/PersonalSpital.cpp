@@ -11,7 +11,6 @@ PersonalSpital::PersonalSpital():Persoana() {
     this->id_angajat=next_id++;
     this->salariu=0;
     this->experienta=0;
-    this->program;
 }
 PersonalSpital::PersonalSpital(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu,
     int experienta, const std::map<std::string, std::vector<std::pair<int,int>>> &program) : Persoana(nume, prenume, CNP){

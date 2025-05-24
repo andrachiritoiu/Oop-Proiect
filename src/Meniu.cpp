@@ -252,7 +252,7 @@ void Meniu::ruleazaMeniuPacient() {
                         }
 
                         std::cout<<"Medici disponibili: \n";
-                        for (auto i=0;i<medici_specializare.size();i++) {
+                        for (size_t i=0;i<medici_specializare.size();i++) {
                             std::cout<<i+1<<"."<<medici_specializare[i]->getNume()<<" "<<medici_specializare[i]->getPrenume()<<"\n";
                         }
 
@@ -284,7 +284,9 @@ void Meniu::ruleazaMeniuPacient() {
                         }
 
                         std::cout<<"Intervale disponibile "<<zi_aleasa<<": ";
-                        for (auto interval:medic_selectat->getProgram()[zi_aleasa])
+                        const auto program=medic_selectat->getProgram();
+                        //.at - val de la cheia respectiva
+                        for (auto interval : program.at(zi_aleasa))
                             std::cout<<interval.first<<":00 - "<<interval.second<<":00 \n";
 
                         int ora_start, ora_sfarsit;
@@ -294,7 +296,7 @@ void Meniu::ruleazaMeniuPacient() {
                         std::cin>>ora_sfarsit;
 
                         bool interval_valid=false;
-                        for (const auto &interval:medic_selectat->getProgram()[zi_aleasa]) {
+                        for (auto interval:medic_selectat->getProgram()[zi_aleasa]) {
                             if (ora_start>=interval.first && ora_sfarsit<=interval.second)
                                 interval_valid=true;
                         }
@@ -746,6 +748,7 @@ void Meniu::ruleazaMeniuMedic() {
                     catch (const ExceptiePacientNegasit &e) {
                         std::cout<<e.what()<<"\n";
                     }
+                    break;
                 }
 
                 case 6: {
@@ -782,6 +785,7 @@ void Meniu::ruleazaMeniuMedic() {
                     catch (const ExceptiePacientNegasit &e) {
                         std::cout<<e.what()<<"\n";
                     }
+                    break;
                 }
 
                 case 7: {
