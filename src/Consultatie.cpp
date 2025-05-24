@@ -38,10 +38,10 @@ void Consultatie::executa(){
     std::cin>>pret_n;
     this->pret=pret_n;
 
-    bool urgenta;
+    bool urgenta_n;
     std::cout<<"Este urgenta? (1-da, 0-nu): ";
-    std::cin>>urgenta;
-    this->urgenta=urgenta;
+    std::cin>>urgenta_n;
+    this->urgenta=urgenta_n;
 
     this->pacient->adaugaIstoric("Evaluare: Diagnostic:" + diagnostic +", Severitate:" +
         std::to_string(severitate) + ", Internare:" + data_internare + ", Externare:" + data_externare+" ");

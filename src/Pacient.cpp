@@ -67,17 +67,17 @@ const std::vector<RetetaVariant>& Pacient :: getRetete() const {
 void Pacient :: setDiagnostic(const std::string &diagnostic_n) {
     this->diagnostic=diagnostic_n;
 }
-void Pacient :: setSeveritate(int severitate) {
-    this->severitate_boala=severitate;
+void Pacient :: setSeveritate(int severitate_n) {
+    this->severitate_boala=severitate_n;
 }
-void Pacient :: setData_internare(const std::string &data_internare) {
-    this->data_internare=data_internare;
+void Pacient :: setData_internare(const std::string &data_internare_n) {
+    this->data_internare=data_internare_n;
 }
-void Pacient :: setData_externare(const std::string &data_externare) {
-    this->data_externare=data_externare;
+void Pacient :: setData_externare(const std::string &data_externare_n) {
+    this->data_externare=data_externare_n;
 }
-void Pacient :: setIstoric(const std::vector<std::string>& istoric_medical) {
-    this->istoric_medical=istoric_medical;
+void Pacient :: setIstoric(const std::vector<std::string>& istoric_medical_n) {
+    this->istoric_medical=istoric_medical_n;
 }
 
 //operators

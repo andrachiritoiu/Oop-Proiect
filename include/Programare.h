@@ -30,9 +30,9 @@ class Programare {
     [[nodiscard]] const std::shared_ptr<Consultatie>& getConsultatie() const;
 
     //setters
-    void setData(const std::string &data);
-    void setOraInceput(int ora_inceput);
-    void setOraSfarsit(int ora_sfarsit);
+    void setData(const std::string &data_n);
+    void setOraInceput(int ora_inceput_n);
+    void setOraSfarsit(int ora_sfarsit_n);
 
     //methods
     //upcast

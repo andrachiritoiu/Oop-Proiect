@@ -296,7 +296,7 @@ void Meniu::ruleazaMeniuPacient() {
                         std::cin>>ora_sfarsit;
 
                         bool interval_valid=false;
-                        for (const auto &interval:medic_selectat->getProgram()[zi_aleasa]) {
+                        for (auto interval:program.at(zi_aleasa)) {
                             if (ora_start>=interval.first && ora_sfarsit<=interval.second)
                                 interval_valid=true;
                         }

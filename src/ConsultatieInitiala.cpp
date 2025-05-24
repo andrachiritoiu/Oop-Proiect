@@ -20,30 +20,30 @@ void ConsultatieInitiala::setSimptome(const std::string &simptome_initiale_n) {
 
 //methods
 void ConsultatieInitiala::executa(){
-    std::string diagnostic;
+    std::string diagnostic_n;
     std::cout<<"Introduceti diagnosticul: ";
-    std::cin>>diagnostic;
-    this->pacient->setDiagnostic(diagnostic);
+    std::cin>>diagnostic_n;
+    this->pacient->setDiagnostic(diagnostic_n);
 
-    int severitate;
+    int severitate_n;
     std::cout<<"Severitate: ";
-    std::cin>>severitate;
-    this->pacient->setSeveritate(severitate);
+    std::cin>>severitate_n;
+    this->pacient->setSeveritate(severitate_n);
 
-    std::string data_internare;
+    std::string data_internare_n;
     std::cout<<"Data internare: ";
-    std::cin>>data_internare;
-    this->pacient->setData_internare(data_internare);
+    std::cin>>data_internare_n;
+    this->pacient->setData_internare(data_internare_n);
 
-    std::string data_externare;
+    std::string data_externare_n;
     std::cout<<"Data externare: ";
-    std::cin>>data_externare;
-    this->pacient->setData_externare(data_externare);
+    std::cin>>data_externare_n;
+    this->pacient->setData_externare(data_externare_n);
 
-    int pret;
+    int pret_n;
     std::cout<<"Introduceti pretul consultatiei: ";
-    std::cin>>pret;
-    this->pret=pret;
+    std::cin>>pret_n;
+    this->pret=pret_n;
 
     bool urgenta;
     std::cout<<"Este urgenta? (1-da, 0-nu): ";
@@ -55,8 +55,8 @@ void ConsultatieInitiala::executa(){
     std::cin>>simptome_initiale_n;
     this->simptome_initiale=simptome_initiale_n;
 
-    this->pacient->adaugaIstoric("Evaluare: Diagnostic:" + diagnostic +", Severitate:" +
-        std::to_string(severitate) + ", Internare:" + data_internare + ", Externare:" + data_externare + ", Simptome initiale:" + simptome_initiale);
+    this->pacient->adaugaIstoric("Evaluare: Diagnostic:" + diagnostic_n +", Severitate:" +
+        std::to_string(severitate_n) + ", Internare:" + data_internare_n + ", Externare:" + data_externare_n + ", Simptome initiale:" + simptome_initiale);
     std::cout << "Evaluare initiala adaugata cu succes.\n";
 }
 

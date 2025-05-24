@@ -31,12 +31,12 @@ const std::shared_ptr<Consultatie>& Programare::getConsultatie() const {
 }
 
 //setters
-void Programare::setData(const std::string &data) {
-  this->data=data;
+void Programare::setData(const std::string &data_n) {
+  this->data=data_n;
 }
-void Programare::setOraInceput(int ora_inceput) {
-  this->ora_inceput=ora_inceput;
+void Programare::setOraInceput(int ora_inceput_n) {
+  this->ora_inceput=ora_inceput_n;
 }
-void Programare::setOraSfarsit(int ora_sfarsit) {
-  this->ora_sfarsit=ora_sfarsit;
+void Programare::setOraSfarsit(int ora_sfarsit_n) {
+  this->ora_sfarsit=ora_sfarsit_n;
 }

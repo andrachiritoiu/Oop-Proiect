@@ -40,10 +40,10 @@ public:
 
     //setters
     void setDiagnostic(const std::string &diagnostic_n);
-    void setSeveritate(int severitate);
-    void setData_internare(const std::string &data_internare);
-    void setData_externare(const std::string &data_externare);
-    void setIstoric(const std::vector<std::string>& istoric_medical);
+    void setSeveritate(int severitate_n);
+    void setData_internare(const std::string &data_internare_n);
+    void setData_externare(const std::string &data_externare_n);
+    void setIstoric(const std::vector<std::string>& istoric_medical_n);
 
     //operators
     Pacient& operator=(const Pacient &p);
