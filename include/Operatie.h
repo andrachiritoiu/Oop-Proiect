@@ -10,7 +10,7 @@ class Operatie:public Servicii{
 
   public:
   //constructor
-  Operatie(const std::shared_ptr<Pacient> &pacient);
+  explicit Operatie(const std::shared_ptr<Pacient> &pacient);
   Operatie(const std::string &nume_serviciu, const std::shared_ptr<Pacient> &pacient,int sala_operatie,
     std::string tip_anestezie, int timp_recuperare);
 
