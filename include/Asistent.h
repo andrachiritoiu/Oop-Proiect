@@ -23,8 +23,6 @@ public:
     [[nodiscard]] std::string getSectie() const;
     [[nodiscard]] std::vector<std::string> getProceduri() const;
 
-    //setters
-
     //operators
     Asistent& operator=(const Asistent &a);
     friend std::istream& operator>>(std::istream &in, Asistent &a);

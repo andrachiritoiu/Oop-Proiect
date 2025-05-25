@@ -31,9 +31,6 @@ int PersonalSpital :: getId() const {
 int PersonalSpital :: getSalariu() const {
     return this->salariu;
 }
-int PersonalSpital :: getExperienta() const {
-    return this->experienta;
-}
 std::map<std::string, std::vector<std::pair<int,int>>> PersonalSpital :: getProgram() const {
     return this->program;
 }

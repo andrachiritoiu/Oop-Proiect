@@ -35,7 +35,6 @@ public:
     [[nodiscard]] int getSeveritateBoala() const;
     [[nodiscard]] std::string getData_internare() const;
     [[nodiscard]] std::string getData_externare() const;
-    [[nodiscard]] bool getAsigurat() const;
     [[nodiscard]] const std::vector<std::string>& getIstoricMedical() const;
     [[nodiscard]] const std::vector<RetetaVariant>& getRetete() const;
 

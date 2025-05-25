@@ -23,8 +23,6 @@ public:
     [[nodiscard]] std::string getSpecializare() const;
     [[nodiscard]] std::map<int, std::shared_ptr<Pacient>> getPacienti()const;
 
-    //setters
-
     //operators
     Medic& operator=(const Medic &m);
     friend std::istream& operator>>(std::istream &in,  Medic &m);

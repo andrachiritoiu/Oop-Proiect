@@ -57,9 +57,6 @@ std::string Pacient :: getData_internare() const {
 std::string Pacient :: getData_externare() const {
     return this->data_externare;
 }
-bool Pacient :: getAsigurat() const {
-    return this->asigurat;
-}
 const std::vector<std::string>& Pacient :: getIstoricMedical() const {
     return this->istoric_medical;
 }

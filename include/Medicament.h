@@ -19,10 +19,6 @@ public:
     [[nodiscard]] int getPret()const;
     [[nodiscard]] std::string getSubstantaActiva()const;
 
-    //setters
-
-    //methods
-
     //operators
     friend std::istream& operator>>(std::istream &in, Medicament &m);
     friend std::ostream& operator<<(std::ostream &out, const Medicament &m);
