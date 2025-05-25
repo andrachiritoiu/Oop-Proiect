@@ -91,12 +91,6 @@ std::string Persoana :: getCNP() const {
 }
 
 //setters
-void Persoana :: setNume(const std::string &nume_p) {
-    this->nume = nume_p;
-}
-void Persoana :: setPrenume(const std::string &prenume_p) {
-    this->prenume = prenume_p;
-}
 void Persoana :: setCNP(const std::string &CNP_n) {
     this->CNP = CNP_n;
 }
