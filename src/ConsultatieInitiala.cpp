@@ -8,16 +8,6 @@ ConsultatieInitiala::ConsultatieInitiala(const std::string &nume_serviciu, const
     this->simptome_initiale=simptome_initiale;
 }
 
-//getter
-std::string ConsultatieInitiala::getTip() const{
-    return "cardiologica";
-}
-
-//setter
-void ConsultatieInitiala::setSimptome(const std::string &simptome_initiale_n) {
-    this->simptome_initiale=simptome_initiale_n;
-}
-
 //methods
 void ConsultatieInitiala::executa(){
     std::string diagnostic_n;

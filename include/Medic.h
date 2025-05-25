@@ -21,7 +21,6 @@ public:
 
     //getters
     [[nodiscard]] std::string getSpecializare() const;
-    [[nodiscard]] std::map<int, std::shared_ptr<Pacient>> getPacienti()const;
 
     //operators
     Medic& operator=(const Medic &m);
@@ -30,7 +29,6 @@ public:
 
     //methods
     void adaugaPacient(const std::shared_ptr<Pacient>& p);
-    void stergePacient(int id_pacient);
     void calculeazaBonus() override;
 
 

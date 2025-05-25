@@ -13,11 +13,6 @@ std::string ConsultatieUrmarire::getTip() const{
     return "endocrinologica";
 }
 
-//setter
-void ConsultatieUrmarire::setEvaluareProgres(const std::string &evaluare_progres_n) {
-    this->evaluare_progres=evaluare_progres_n;
-}
-
 //methods
 void ConsultatieUrmarire::executa() {
     std::string diagnostic_n;
@@ -53,6 +48,7 @@ void ConsultatieUrmarire::executa() {
     std::string evaluare_progres_n;
     std::cout<<"Evaluare progres: ";
     std::cin>>evaluare_progres_n;
+    this->evaluare_progres=evaluare_progres_n;
 
     this->pacient->adaugaIstoric("Evaluare: Diagnostic:" + diagnostic_n +", Severitate:" +
         std::to_string(severitate_n) + ", Internare:" + data_internare_n + ", Externare:" + data_externare_n + ", Progres: " + evaluare_progres_n);

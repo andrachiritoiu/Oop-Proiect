@@ -15,9 +15,6 @@ public:
     //getter
     [[nodiscard]] std::string getTip()const override;
 
-    //setter
-    void setEvaluareProgres(const std::string &evaluare_progres);
-
     //methods
     void executa()override;
 

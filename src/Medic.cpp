@@ -25,11 +25,6 @@ std::string Medic :: getSpecializare() const {
     return this->specializare;
 }
 
-//ofera acces doar la citirea listei
-std::map<int, std::shared_ptr<Pacient> > Medic::getPacienti() const {
-    return this->pacienti;
-}
-
 //setters
 
 //operators
@@ -47,7 +42,6 @@ std::istream& operator>>(std::istream &in,  Medic &m) {
     in>>m.specializare;
 
     return in;
-
 }
 std::ostream& operator<<(std::ostream &out, const  Medic &m) {
     out<<static_cast<const PersonalSpital&>(m);
@@ -60,9 +54,6 @@ std::ostream& operator<<(std::ostream &out, const  Medic &m) {
 //methods
 void Medic::adaugaPacient(const std::shared_ptr<Pacient>& p) {
     this->pacienti[p->getId()]=p;
-}
-void Medic::stergePacient(int id_pacient) {
-    this->pacienti.erase(id_pacient);
 }
 void Medic :: calculeazaBonus() {
     int bonus=this->salariu*0.1*this->experienta/10;

@@ -19,10 +19,6 @@ public:
     //copy constructor
     Asistent(const Asistent &a);
 
-    //getters
-    [[nodiscard]] std::string getSectie() const;
-    [[nodiscard]] std::vector<std::string> getProceduri() const;
-
     //operators
     Asistent& operator=(const Asistent &a);
     friend std::istream& operator>>(std::istream &in, Asistent &a);
@@ -31,7 +27,6 @@ public:
     //methods
     void calculeazaBonus() override;
     void addProcedura(const std::string &procedura);
-    void efectueazaProcedura(const std::shared_ptr<Pacient>&p, const std::string &procedura);
     static void administrareTratament(const std::vector<Programare> &programari, int id_pacient);
 
     //destructor

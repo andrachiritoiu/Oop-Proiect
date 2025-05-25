@@ -19,16 +19,6 @@ Asistent::Asistent(const Asistent &a): PersonalSpital(a) {
     this->proceduri_efectuate=a.proceduri_efectuate;
 }
 
-//getters
-std::string Asistent::getSectie() const {
-    return this->sectie;
-}
-std::vector<std::string> Asistent::getProceduri() const {
-    return this->proceduri_efectuate;
-}
-
-//setters
-
 //operators
 Asistent& Asistent :: operator=(const Asistent &a) {
     if (this!=&a) {
@@ -71,11 +61,7 @@ std::ostream& operator<<(std::ostream &out,const Asistent &a) {
 void Asistent :: addProcedura(const std::string &procedura) {
     this->proceduri_efectuate.push_back(procedura);
 }
-void Asistent :: efectueazaProcedura(const std::shared_ptr<Pacient> &p, const std::string &procedura) {
-    addProcedura(procedura);
-    p->adaugaIstoric(procedura);
-    std::cout<<"Procedură efectuată de asistentul " + getNume() + " " + getPrenume() + ": " + procedura;
-}
+
 void Asistent :: calculeazaBonus() {
     int bonus=this->salariu*0.05*this->experienta/10;
     std::cout<<"Bonus pentru asistentul "<<this->nume<< " " <<this->prenume<<": "<<bonus<<" RON\n";
