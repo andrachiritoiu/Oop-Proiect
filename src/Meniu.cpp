@@ -30,8 +30,19 @@ Meniu* Meniu :: getInstanta(){
     return instanta;
 }
 
+bool Meniu::inputValid(const std::string &input) {
+    if (input.empty())return false;
+    for (char c:input) {
+        if (!isdigit(c))return false;
+    }
+    return true;
+}
+
+
 void Meniu::ruleaza(){
-    int op;
+    //input invalid
+    int op=-1;
+    std::string input;
 
     do{
         std::cout<<"\n---- Sistem Management Spital ----\n";
@@ -39,7 +50,14 @@ void Meniu::ruleaza(){
         std::cout<<"2. Acces Personal Medical\n";
         std::cout<<"3. Iesire\n";
         std::cout<<"Alege optiune: ";
-        std::cin>>op;
+        std::cin>>input;
+
+        if (inputValid(input)) {
+            op=std::stoi(input);
+        }
+        else {
+            op=-1;
+        }
 
         switch (op) {
             case 1:
@@ -65,6 +83,7 @@ void Meniu::ruleazaMeniuPacient() {
     int optiune;
     int idPacientCurent=-1;
     bool autentificat=false;
+    std::string input;
 
     do {
         if (!autentificat) {
@@ -73,7 +92,14 @@ void Meniu::ruleazaMeniuPacient() {
             std::cout<<"2. Autentificare pacient existent\n";
             std::cout<<"3. Inapoi\n";
             std::cout<<"Alege: ";
-            std::cin>>optiune;
+            std::cin>>input;
+
+            if (inputValid(input)) {
+                optiune=std::stoi(input);
+            }
+            else {
+                optiune=-1;
+            }
 
             switch (optiune) {
                 case 1: {
@@ -168,7 +194,14 @@ void Meniu::ruleazaMeniuPacient() {
             std::cout << "4. Vizualizare retete\n";
             std::cout << "5. Deconectare\n";
             std::cout << "Alege: ";
-            std::cin >> optiune;
+            std::cin >> input;
+
+            if (inputValid(input)) {
+                optiune=std::stoi(input);
+            }
+            else {
+                optiune=-1;
+            }
 
             switch (optiune) {
                 case 1:{
@@ -400,6 +433,7 @@ void Meniu::ruleazaMeniuPacient() {
 
 void Meniu::ruleazaMeniuPersonalMedical() {
     int optiune_tip;
+    std::string input;
 
     do {
         std::cout<<"\n---- Meniu Personal Medical ----\n";
@@ -407,7 +441,15 @@ void Meniu::ruleazaMeniuPersonalMedical() {
         std::cout<<"2. Acces Asistent\n";
         std::cout<<"3. Inapoi\n";
         std::cout<<"Alege: ";
-        std::cin>>optiune_tip;
+        std::cin>>input;
+
+        if (inputValid(input)) {
+            optiune_tip=std::stoi(input);
+        }
+        else {
+            optiune_tip=-1;
+        }
+
 
         switch (optiune_tip) {
             case 1:
@@ -434,6 +476,7 @@ void Meniu::ruleazaMeniuMedic() {
     int op=0;
     int idMedicCurent=-1;
     bool autentificat=false;
+    std::string input;
 
     do {
         if (!autentificat) {
@@ -442,7 +485,14 @@ void Meniu::ruleazaMeniuMedic() {
             std::cout<<"2. Autentificare Medic existent\n";
             std::cout<<"3. Inapoi\n";
             std::cout<<"Alege: ";
-            std::cin>>op;
+            std::cin>>input;
+
+            if (inputValid(input)) {
+                op=std::stoi(input);
+            }
+            else {
+                op=-1;
+            }
 
             switch (op) {
                 case 1: {
@@ -539,7 +589,14 @@ void Meniu::ruleazaMeniuMedic() {
             std::cout<<"7. Calculeaza bonus salarial\n";
             std::cout<<"8. Deconectare\n";
             std::cout<<"Alege: ";
-            std::cin>>opt;
+            std::cin>>input;
+
+            if (inputValid(input)) {
+                opt=std::stoi(input);
+            }
+            else {
+                opt=-1;
+            }
 
             switch (opt) {
                 case 1: {
@@ -820,6 +877,7 @@ void Meniu::ruleazaMeniuAsistent() {
     int op;
     int idAsistentCurent=-1;
     bool autentificat=false;
+    std::string input;
 
     do {
         if (!autentificat) {
@@ -828,7 +886,14 @@ void Meniu::ruleazaMeniuAsistent() {
             std::cout<<"2. Autentificare Asistent existent\n";
             std::cout<<"3. Inapoi\n";
             std::cout<<"Alege: ";
-            std::cin>>op;
+            std::cin>>input;
+
+            if (inputValid(input)) {
+                op=std::stoi(input);
+            }
+            else {
+                op=-1;
+            }
 
             switch (op) {
                 case 1: {
@@ -920,7 +985,14 @@ void Meniu::ruleazaMeniuAsistent() {
             std::cout<<"4. Calculeaza bonus salarial.\n";
             std::cout<<"5. Deconectare\n";
             std::cout<<"Alege: ";
-            std::cin >> op;
+            std::cin >> input;
+
+            if (inputValid(input)) {
+                op=std::stoi(input);
+            }
+            else {
+                op=-1;
+            }
 
             switch (op) {
                 case 1: {
