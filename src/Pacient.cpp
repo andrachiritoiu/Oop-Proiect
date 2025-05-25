@@ -32,7 +32,7 @@ Pacient :: Pacient (const std::string &nume, const std::string &prenume, const s
 //copy constructor
 Pacient::Pacient(const Pacient &p):Persoana(p){
     this->id_pacient=p.id_pacient;
-    this->total_pacienti=total_pacienti;
+    this->total_pacienti=p.total_pacienti;
     this->diagnostic=p.diagnostic;
     this->severitate_boala=p.severitate_boala;
     this->data_internare=p.data_internare;

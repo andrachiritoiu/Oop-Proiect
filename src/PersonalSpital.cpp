@@ -37,6 +37,7 @@ std::map<std::string, std::vector<std::pair<int,int>>> PersonalSpital :: getProg
 PersonalSpital& PersonalSpital :: operator=(const PersonalSpital &p) {
     if (this!=&p) {
         Persoana::operator=(p);
+        this->id_angajat=p.id_angajat;
         this->salariu=p.salariu;
         this->experienta=p.experienta;
         this->program=p.program;
@@ -65,14 +66,13 @@ std::istream& operator>>(std::istream &in, PersonalSpital &p) {
 
         std::vector<std::pair<int,int>> ore;
         std::string interval;
-        int ora_inceput,ora_sfarsit;
         for (int j=0;j<nr_intervale;j++) {
             std::cout << "Introduceti intervalul de ore "<<"(ora inceput - ora sfarsit): ";
             in>>interval;
 
             int poz=interval.find('-');
-            ora_inceput=std::stoi(interval.substr(0,poz));
-            ora_sfarsit=std::stoi(interval.substr(poz+1));
+            int ora_inceput=std::stoi(interval.substr(0,poz));
+            int ora_sfarsit=std::stoi(interval.substr(poz+1));
 
             if (ora_inceput<0 || ora_inceput>24 || ora_sfarsit<0 || ora_sfarsit>24 || ora_inceput>=ora_sfarsit){
                 std::cout<<"Interval invalid. Reintroduceti intervalul.\n";

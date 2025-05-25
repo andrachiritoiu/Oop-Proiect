@@ -384,7 +384,7 @@ void Meniu::ruleazaMeniuPacient() {
                     try {
                         bool gasit=false;
                         bool gasit_reteta=false;
-                        for (auto &p:this->pacienti) {
+                        for (const auto &p:this->pacienti) {
                             if (p->getId()==idPacientCurent) {
                                 gasit=true;
                                 std::cout<<"Reteta: "<<"\n";
