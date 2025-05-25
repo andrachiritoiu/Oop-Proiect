@@ -77,9 +77,6 @@ void Pacient :: setData_internare(const std::string &data_internare_n) {
 void Pacient :: setData_externare(const std::string &data_externare_n) {
     this->data_externare=data_externare_n;
 }
-void Pacient :: setIstoric(const std::vector<std::string>& istoric_medical_n) {
-    this->istoric_medical=istoric_medical_n;
-}
 
 //operators
 Pacient& Pacient :: operator=(const Pacient &p) {
