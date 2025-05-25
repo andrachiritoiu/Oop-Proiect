@@ -40,8 +40,7 @@ bool Meniu::inputValid(const std::string &input) {
 
 
 void Meniu::ruleaza(){
-    //input invalid
-    int op=-1;
+    int op;
     std::string input;
 
     do{
@@ -1002,7 +1001,7 @@ void Meniu::ruleazaMeniuAsistent() {
                     else {
                         Pacient::afiseazaTotalPacienti();
 
-                        std::sort(pacienti.begin(),pacienti.end(),[](const std::shared_ptr<Pacient> &a ,const std::shared_ptr<Pacient> &b) {
+                        std::ranges::sort(pacienti,[](const std::shared_ptr<Pacient> &a ,const std::shared_ptr<Pacient> &b) {
                             return a->getNume()<b->getNume();
                         });
 

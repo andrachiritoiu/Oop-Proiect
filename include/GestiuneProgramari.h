@@ -1,7 +1,6 @@
 #ifndef GESTIUNEPROGRAMARI_H
 #define GESTIUNEPROGRAMARI_H
 #include<memory>
-#include<string>
 #include<vector>
 #include "Medic.h"
 #include "Programare.h"

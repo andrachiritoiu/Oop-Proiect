@@ -24,7 +24,7 @@ private:
 public:
     //methods
     static Meniu* getInstanta();
-    bool inputValid(const std::string &input);
+    static bool inputValid(const std::string &input);
     void ruleaza();
     void ruleazaMeniuPacient();
     void ruleazaMeniuPersonalMedical();

@@ -25,8 +25,6 @@ std::string Medic :: getSpecializare() const {
     return this->specializare;
 }
 
-//setters
-
 //operators
 Medic& Medic::operator=(const Medic &m) {
     if (this!=&m) {
