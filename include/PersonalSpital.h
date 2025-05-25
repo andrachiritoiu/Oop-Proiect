@@ -21,7 +21,7 @@ public:
   PersonalSpital(const std::string &nume, const std::string &prenume, const std::string &CNP, int salariu,
       int experienta, const std::map<std::string, std::vector<std::pair<int,int>>> &program);
   //copy constructor
-  PersonalSpital(const PersonalSpital &p);
+  explicit PersonalSpital(const PersonalSpital &p);
 
   //getters
   [[nodiscard]] int getId() const;

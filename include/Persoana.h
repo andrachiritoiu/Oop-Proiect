@@ -13,7 +13,7 @@ public:
     Persoana()=default;
     Persoana(const std::string &nume, const std::string &prenume, const std::string &CNP);
     //copy constructor
-    Persoana(const Persoana &p);
+    explicit Persoana(const Persoana &p);
 
     //getters
     [[nodiscard]] std::string getNume() const;

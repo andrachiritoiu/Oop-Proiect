@@ -27,7 +27,7 @@ public:
     Pacient(const std::string &nume, const std::string &prenume, const std::string &CNP, const std::string &diagnostic,
         int severitate_boala, const std::string &data_internare, const std::string &data_externare, bool asigurat,const std::vector<std::string> &istoric_medical);
     //copy constructor
-    Pacient(const Pacient &p);
+    explicit Pacient(const Pacient &p);
 
     //getters
     [[nodiscard]] int getId() const;
