@@ -919,11 +919,14 @@ void Meniu::ruleazaMeniuAsistent() {
                                 gasit=true;
                                 std::cout<<"Asistentul cu acest CNP exista deja.\n";
                                 idAsistentCurent=a->getId();
-                                autentificat=true;
+                                break;
                             }
                         }
 
-                        if (gasit)break;
+                        if (gasit) {
+                            autentificat=true;
+                            break;
+                        }
 
                         //nu exista
                         auto asistent=std::make_shared<Asistent>();
