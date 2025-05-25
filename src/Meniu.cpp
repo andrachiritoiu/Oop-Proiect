@@ -318,7 +318,7 @@ void Meniu::ruleazaMeniuPacient() {
                         std::cout<<"Intervale disponibile "<<zi_aleasa<<": ";
                         const auto program=medic_selectat->getProgram();
                         //.at - val de la cheia respectiva
-                        for (auto interval : program.at(zi_aleasa))
+                        for (const auto &interval : program.at(zi_aleasa))
                             std::cout<<interval.first<<":00 - "<<interval.second<<":00 \n";
 
                         int ora_start, ora_sfarsit;
@@ -328,7 +328,7 @@ void Meniu::ruleazaMeniuPacient() {
                         std::cin>>ora_sfarsit;
 
                         bool interval_valid=false;
-                        for (auto interval:program.at(zi_aleasa)) {
+                        for (const auto &interval:program.at(zi_aleasa)) {
                             if (ora_start>=interval.first && ora_sfarsit<=interval.second)
                                 interval_valid=true;
                         }
@@ -357,7 +357,7 @@ void Meniu::ruleazaMeniuPacient() {
                     //solicitare externare
                     try {
                         bool gasit=false;
-                        for (auto &p:this->pacienti) {
+                        for (const auto &p:this->pacienti) {
                             if (p->getId()==idPacientCurent) {
                                 gasit=true;
                                 std::string data;
@@ -690,7 +690,7 @@ void Meniu::ruleazaMeniuMedic() {
                             std::cin>>idPacient;
 
                             bool gasit=false;
-                            for (auto &p:pacienti) {
+                            for (const auto &p:pacienti) {
                                 if (p->getId()==idPacient) {
                                     gasit=true;
 
@@ -789,7 +789,7 @@ void Meniu::ruleazaMeniuMedic() {
                             std::cin>>idPacient;
 
                             bool gasit=false;
-                            for (auto &p:pacienti) {
+                            for (const auto &p:pacienti) {
                                 if (p->getId()==idPacient && p->getSeveritateBoala()!=0) {
                                     gasit=true;
                                     std::shared_ptr<Operatie>operatie=std::make_shared<Operatie>(p);
@@ -819,7 +819,7 @@ void Meniu::ruleazaMeniuMedic() {
                             std::cin>>idPacient;
 
                             bool gasit=false;
-                            for (auto &p:pacienti) {
+                            for (const auto &p:pacienti) {
                                 if (p->getId()==idPacient) {
                                     gasit=true;
                                     std::string externare;
@@ -1027,7 +1027,7 @@ void Meniu::ruleazaMeniuAsistent() {
                             std::cin>>idPacient;
 
                             bool gasit=false;
-                            for (auto &a:asistenti) {
+                            for (const auto &a:asistenti) {
                                 if (a->getId()==idAsistentCurent) {
                                     gasit=true;
                                     Asistent::administrareTratament(gestiuneProgramari.getProgramari(),idPacient);
@@ -1057,7 +1057,7 @@ void Meniu::ruleazaMeniuAsistent() {
                             std::cin>>idPacient;
 
                             bool gasit=false;
-                            for (auto &p:pacienti) {
+                            for (const auto &p:pacienti) {
                                 if (p->getId()==idPacient) {
                                     gasit=true;
 
