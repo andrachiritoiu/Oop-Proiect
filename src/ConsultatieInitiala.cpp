@@ -5,7 +5,7 @@ ConsultatieInitiala::ConsultatieInitiala(const std::shared_ptr<Pacient> &pacient
     this->pacient=pacient;
 }
 ConsultatieInitiala::ConsultatieInitiala(const std::string &nume_serviciu, const std::shared_ptr<Pacient> &pacient, int pret, bool urgenta, const std::string &simptome_initiale_n):Consultatie(nume_serviciu,pacient,pret,urgenta) {
-    this->simptome_initiale=simptome_initiale;
+    this->simptome_initiale=simptome_initiale_n;
 }
 
 //methods
