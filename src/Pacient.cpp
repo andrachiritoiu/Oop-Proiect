@@ -45,9 +45,6 @@ Pacient::Pacient(const Pacient &p):Persoana(p){
 int Pacient :: getId() const {
     return this->id_pacient;
 }
-std::string Pacient :: getDiagnostic() const {
-    return this->diagnostic;
-}
 int Pacient :: getSeveritateBoala() const {
     return this->severitate_boala;
 }
@@ -130,5 +127,7 @@ void Pacient :: afiseazaTotalPacienti() {
 
 //destructor
 Pacient::~Pacient() {
-    this->total_pacienti--;
+    if (total_pacienti>0) {
+        total_pacienti--;
+    }
 }

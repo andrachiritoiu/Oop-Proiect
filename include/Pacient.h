@@ -31,7 +31,6 @@ public:
 
     //getters
     [[nodiscard]] int getId() const;
-    [[nodiscard]] std::string getDiagnostic() const;
     [[nodiscard]] int getSeveritateBoala() const;
     [[nodiscard]] const std::vector<std::string>& getIstoricMedical() const;
     [[nodiscard]] const std::vector<RetetaVariant>& getRetete() const;
