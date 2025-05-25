@@ -3,10 +3,12 @@
 #include<vector>
 
 int Pacient::next_id=1;
+int Pacient::total_pacienti=0;
 
 //constructors
 Pacient :: Pacient(): Persoana(){
     this->id_pacient=next_id++;
+    this->total_pacienti++;
     this->diagnostic = "";
     this->severitate_boala = 0;
     this->data_internare = "";
@@ -18,17 +20,19 @@ Pacient :: Pacient(): Persoana(){
 Pacient :: Pacient (const std::string &nume, const std::string &prenume, const std::string &CNP, const std::string &diagnostic,
         int severitate_boala, const std::string &data_internare, const std::string &data_externare, bool asigurat, const std::vector<std::string> &istoric_medical):
         Persoana(nume, prenume, CNP){
-  this->id_pacient=next_id++;
-  this->diagnostic=diagnostic;
-  this->severitate_boala=severitate_boala;
-  this->data_internare=data_internare;
-  this->data_externare=data_externare;
-  this->asigurat=asigurat;
-  this->istoric_medical=istoric_medical;
+    this->id_pacient=next_id++;
+    this->total_pacienti++;
+    this->diagnostic=diagnostic;
+    this->severitate_boala=severitate_boala;
+    this->data_internare=data_internare;
+    this->data_externare=data_externare;
+    this->asigurat=asigurat;
+    this->istoric_medical=istoric_medical;
 }
 //copy constructor
 Pacient::Pacient(const Pacient &p):Persoana(p){
     this->id_pacient=p.id_pacient;
+    this->total_pacienti=total_pacienti;
     this->diagnostic=p.diagnostic;
     this->severitate_boala=p.severitate_boala;
     this->data_internare=p.data_internare;
@@ -85,6 +89,7 @@ Pacient& Pacient :: operator=(const Pacient &p) {
     if (this!=&p) {
         Persoana::operator=(p);
         this->id_pacient = p.id_pacient;
+        this->total_pacienti=p.total_pacienti;
         this->diagnostic = p.diagnostic;
         this->severitate_boala = p.severitate_boala;
         this->data_internare = p.data_internare;
@@ -97,7 +102,6 @@ Pacient& Pacient :: operator=(const Pacient &p) {
 std::istream& operator>>(std::istream &in, Pacient &p) {
     //static_cast - converteste
     in>>static_cast<Persoana&>(p); //upcasting
-
     std::cout<<"Asigurat(0-nu/1-da): ";
     in>>p.asigurat;
     std::cout<<"Istoric medical: \n";
@@ -118,12 +122,6 @@ std::istream& operator>>(std::istream &in, Pacient &p) {
 std::ostream& operator<<(std::ostream &out, const Pacient &p) {
     out<<static_cast<const Persoana&>(p);
     out<<"Id pacient: "<<p.id_pacient<<"\n"
-
-       // <<"Diagnostic: "<<p.diagnostic<<"\n"
-       // <<"Severitate boala: "<<p.severitate_boala<<"\n"
-       // <<"Data internare: "<<p.data_internare<<"\n"
-       // <<"Data externare: "<<p.data_externare<<"\n"
-
        <<"Asigurat: "<<(p.asigurat?"Da" : "Nu")<<"\n" //accepta 1 si 0
        <<"Istoric medical: "<<"\n";
     for (const auto& intrare: p.istoric_medical)
@@ -138,4 +136,11 @@ void Pacient :: adaugaIstoric(const std::string &noua_interventie) {
 void Pacient :: adaugaReteta(const RetetaVariant& reteta) {
     this->retete.push_back(reteta);
 }
+void Pacient :: afiseazaTotalPacienti() {
+    std::cout<<"Total pacienti inregistrati: "<<total_pacienti<<"\n";
+}
 
+//destructor
+Pacient::~Pacient() {
+    this->total_pacienti--;
+}

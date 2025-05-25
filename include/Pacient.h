@@ -12,6 +12,7 @@ class Pacient: public Persoana{
 private:
     int id_pacient{};
     static int next_id;
+    static int total_pacienti;
     std::string diagnostic;
     int severitate_boala{};
     std::string data_internare;
@@ -53,9 +54,10 @@ public:
     //methods
     void adaugaIstoric(const std::string &noua_interventie);
     void adaugaReteta(const RetetaVariant& reteta);
+    static void afiseazaTotalPacienti();
 
     //destructor
-    ~Pacient() override = default;
+    ~Pacient() override;
 };
 
 

@@ -14,9 +14,6 @@ protected:
   int experienta;
   //{ziua:[(ora_inceput,ora_sfarsit),.....], ..... }
   std::map<std::string, std::vector<std::pair<int,int>>> program;
-  static int salariu_mediu;
-  static int suma_totala_salarii;
-  static int nr_angajati;
 
 public:
   //constructors
@@ -42,10 +39,9 @@ public:
 
   //methods
   virtual void calculeazaBonus() = 0 ;
-  static int calculeazaSalariuMediu();
 
   //destructor
-  ~PersonalSpital() override;
+  ~PersonalSpital() override=default;
 };
 
 

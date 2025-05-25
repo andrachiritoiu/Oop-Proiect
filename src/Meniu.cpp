@@ -928,6 +928,8 @@ void Meniu::ruleazaMeniuAsistent() {
                     if (pacienti.empty())
                         std::cout<<"Nu exista pacienti inregistrati.\n";
                     else {
+                        Pacient::afiseazaTotalPacienti();
+
                         std::sort(pacienti.begin(),pacienti.end(),[](const std::shared_ptr<Pacient> &a ,const std::shared_ptr<Pacient> &b) {
                             return a->getNume()<b->getNume();
                         });
