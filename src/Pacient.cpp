@@ -51,12 +51,6 @@ std::string Pacient :: getDiagnostic() const {
 int Pacient :: getSeveritateBoala() const {
     return this->severitate_boala;
 }
-std::string Pacient :: getData_internare() const {
-    return this->data_internare;
-}
-std::string Pacient :: getData_externare() const {
-    return this->data_externare;
-}
 const std::vector<std::string>& Pacient :: getIstoricMedical() const {
     return this->istoric_medical;
 }
