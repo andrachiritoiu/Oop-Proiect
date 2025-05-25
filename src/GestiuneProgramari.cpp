@@ -1,7 +1,7 @@
 #include "GestiuneProgramari.h"
 
-#include <ConsultatieInitiala.h>
-#include <ConsultatieUrmarire.h>
+#include "ConsultatieInitiala.h"
+#include "ConsultatieUrmarire.h"
 
 //getter
 const std::vector<Programare>& GestiuneProgramari :: getProgramari()const {

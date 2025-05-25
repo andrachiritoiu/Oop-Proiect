@@ -4,7 +4,7 @@
 ConsultatieUrmarire::ConsultatieUrmarire(const std::shared_ptr<Pacient> &pacient) {
     this->pacient=pacient;
 }
-ConsultatieUrmarire::ConsultatieUrmarire(const std::string &nume_serviciu, const std::shared_ptr<Pacient> &pacient, int pret, bool urgenta, const std::string &evaluare_progres):Consultatie(nume_serviciu,pacient,pret,urgenta) {
+ConsultatieUrmarire::ConsultatieUrmarire(const std::string &nume_serviciu, const std::shared_ptr<Pacient> &pacient, int pret, bool urgenta, const std::string &evaluare_progres_n):Consultatie(nume_serviciu,pacient,pret,urgenta) {
     this->evaluare_progres=evaluare_progres;
 }
 

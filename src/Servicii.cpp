@@ -1,7 +1,5 @@
 #include "Servicii.h"
 
-#include <utility>
-
 //constructors
 Servicii::Servicii(std::shared_ptr<Pacient>pacient) {
   this->pacient=std::move(pacient);

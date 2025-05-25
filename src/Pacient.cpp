@@ -39,6 +39,7 @@ Pacient::Pacient(const Pacient &p):Persoana(p){
     this->data_externare=p.data_externare;
     this->asigurat=p.asigurat;
     this->istoric_medical=p.istoric_medical;
+    this->retete=retete;
 }
 
 //getters

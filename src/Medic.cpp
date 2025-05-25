@@ -1,7 +1,6 @@
 #include "Medic.h"
 #include "PersonalSpital.h"
 #include<iostream>
-#include <utility>
 
 //constructors
 Medic::Medic() : PersonalSpital() {

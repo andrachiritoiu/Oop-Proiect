@@ -8,7 +8,7 @@ class ExceptieSpital: public std::exception {
     std::string mesaj;
   public:
     //constructor
-  ExceptieSpital(const std::string &mesaj = "Eroare");
+  explicit ExceptieSpital(const std::string &mesaj = "Eroare");
   const char* what() const noexcept override;
 };
 

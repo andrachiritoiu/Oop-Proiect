@@ -1,6 +1,5 @@
 #include "Operatie.h"
 
-#include <utility>
 
 //constructor
 Operatie::Operatie(const std::shared_ptr<Pacient> &pacient):Servicii(pacient){}

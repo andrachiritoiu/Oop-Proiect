@@ -14,7 +14,7 @@ class Reteta{
     public:
       //constructors
       Reteta()=default;
-      Reteta(const std::string &nume_pacient, std::vector<std::pair<std::shared_ptr<Medicament>,T>> medicamente);
+      Reteta(const std::string &nume_pacient,const std::vector<std::pair<std::shared_ptr<Medicament>,T>> &medicamente);
 
       //methods
       void adaugaMedicament(std::shared_ptr<Medicament> medicament, T info);
@@ -35,7 +35,7 @@ class Reteta{
 
 //constructor
 template<typename T>
-Reteta<T>::Reteta(const std::string &nume_pacient, std::vector<std::pair<std::shared_ptr<Medicament>,T>> medicamente){
+Reteta<T>::Reteta(const std::string &nume_pacient,const std::vector<std::pair<std::shared_ptr<Medicament>,T>> &medicamente){
   this->nume_pacient=nume_pacient;
   this->medicamente=medicamente;
 }
