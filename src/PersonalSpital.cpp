@@ -39,12 +39,6 @@ std::map<std::string, std::vector<std::pair<int,int>>> PersonalSpital :: getProg
 }
 
 
-
-//setters
-void PersonalSpital :: setSalariu(int salariu_n) {
-    this->salariu=salariu_n;
-}
-
 //operators
 PersonalSpital& PersonalSpital :: operator=(const PersonalSpital &p) {
     if (this!=&p) {

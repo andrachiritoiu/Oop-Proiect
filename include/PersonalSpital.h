@@ -29,9 +29,6 @@ public:
   [[nodiscard]] int getExperienta() const;
   [[nodiscard]] std::map<std::string, std::vector<std::pair<int,int>>> getProgram() const;
 
-  //setters
-  void setSalariu(int salariu_n);
-
   //operators
   PersonalSpital& operator=(const PersonalSpital &p);
   friend std::istream& operator>>(std::istream &in, PersonalSpital &p);
