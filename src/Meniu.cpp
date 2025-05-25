@@ -125,11 +125,14 @@ void Meniu::ruleazaMeniuPacient() {
                             gasit=true;
                             std::cout<<"Pacientul cu acest CNP exista deja.\n";
                             idPacientCurent=p->getId();
-                            autentificat=true;
+                            break;
                         }
                     }
 
-                    if (gasit)break;
+                    if (gasit) {
+                        autentificat=true;
+                        break;
+                    }
 
                     //nu exista
                     auto pacient=std::make_shared<Pacient>();
@@ -318,7 +321,7 @@ void Meniu::ruleazaMeniuPacient() {
                         std::cout<<"Intervale disponibile "<<zi_aleasa<<": ";
                         const auto program=medic_selectat->getProgram();
                         //.at - val de la cheia respectiva
-                        for (const auto &interval : program.at(zi_aleasa))
+                        for (auto interval : program.at(zi_aleasa))
                             std::cout<<interval.first<<":00 - "<<interval.second<<":00 \n";
 
                         int ora_start, ora_sfarsit;
@@ -328,7 +331,7 @@ void Meniu::ruleazaMeniuPacient() {
                         std::cin>>ora_sfarsit;
 
                         bool interval_valid=false;
-                        for (const auto &interval:program.at(zi_aleasa)) {
+                        for (auto interval:program.at(zi_aleasa)) {
                             if (ora_start>=interval.first && ora_sfarsit<=interval.second)
                                 interval_valid=true;
                         }
@@ -517,11 +520,14 @@ void Meniu::ruleazaMeniuMedic() {
                                 gasit=true;
                                 std::cout<<"Medicul cu acest CNP exista deja.\n";
                                 idMedicCurent=m->getId();
-                                autentificat=true;
+                                break;
                             }
                         }
 
-                        if (gasit)break;
+                        if (gasit) {
+                            autentificat=true;
+                            break;
+                        }
 
                         //nu exista
                         auto medic=std::make_shared<Medic>();
