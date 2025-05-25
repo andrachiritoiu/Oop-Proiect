@@ -28,9 +28,6 @@ PersonalSpital::PersonalSpital(const PersonalSpital &p): Persoana(p){
 int PersonalSpital :: getId() const {
     return this->id_angajat;
 }
-int PersonalSpital :: getSalariu() const {
-    return this->salariu;
-}
 std::map<std::string, std::vector<std::pair<int,int>>> PersonalSpital :: getProgram() const {
     return this->program;
 }

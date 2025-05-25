@@ -25,7 +25,6 @@ public:
 
   //getters
   [[nodiscard]] int getId() const;
-  [[nodiscard]] int getSalariu() const;
   [[nodiscard]] std::map<std::string, std::vector<std::pair<int,int>>> getProgram() const;
 
   //operators
