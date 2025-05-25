@@ -16,9 +16,6 @@ class Consultatie: public Servicii {
   Consultatie(const std::shared_ptr<Pacient> &pacient);
   Consultatie(const std::string& nume_serviciu,std::shared_ptr<Pacient>pacient, int pret, bool urgenta);
 
-  //getter
-  [[nodiscard]] virtual std::string getTip()const =0;
-
   //methods
   void executa()override;
 

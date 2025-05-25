@@ -8,11 +8,6 @@ ConsultatieUrmarire::ConsultatieUrmarire(const std::string &nume_serviciu, const
     this->evaluare_progres=evaluare_progres;
 }
 
-//getter
-std::string ConsultatieUrmarire::getTip() const{
-    return "endocrinologica";
-}
-
 //methods
 void ConsultatieUrmarire::executa() {
     std::string diagnostic_n;
