@@ -1,7 +1,8 @@
 # Sistem de Management pentru Spital
 Acest proiect implementează un sistem orientat pe obiect pentru gestionarea activităților dintr-un spital, inclusiv pacienți, personal medical și servicii medicale. 
 
-#Structura Generală
+# Structura Generală
+
 1. Ierarhia Persoanelor
 Clasă de bază: Persoana
 Clase derivate:
@@ -21,7 +22,7 @@ Clase derivate:
 -Operatie
 -Analiza 
 
-#Functionalitati
+# Functionalitati
 Funcționalități Medic:
 -Vizualizează toți pacienții activi internați în spital
 -Accesează lista programărilor medicale curente
@@ -40,7 +41,7 @@ Funcționalități Asistent:
 -Se poate deconecta din contul de utilizator
 
 
-    ##Cerinte:
+# Cerinte:
 
 ### Folosiți template-ul corespunzător grupei voastre!
 
