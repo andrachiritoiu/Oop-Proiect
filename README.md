@@ -3,22 +3,28 @@ Acest proiect implementează un sistem orientat pe obiect pentru gestionarea act
 
 # Structura Generală
 
-1. Ierarhia Persoanelor  
+1. Ierarhia Persoanelor
+    
 Clasă de bază: Persoana  
+
 Clase derivate:  
 -Pacient  
--PersonalSpital (abstractă)  
+-PersonalSpital (abstractă) 
+
      Subclase:  
-   Medic: evalueaza pacienți, efectuează operații, prescrie rețete  
-   Asistent: administrează tratamente, face analize  
+   =Medic: evalueaza pacienți, efectuează operații, prescrie rețete  
+   =Asistent: administrează tratamente, face analize  
    
-2.Ierarhia Serviciilor  
-Clasa de bază: Servicii  
+2.Ierarhia Serviciilor
+
+Clasa de bază: Servicii 
+
 Clase derivate:  
 -Consultatie   
-   Subclase:  
-   ConsultatieInitiala  
-   ConsultatieUrmarire  
+    Subclase:  
+   =ConsultatieInitiala  
+   =ConsultatieUrmarire  
+   
 -Operatie  
 -Analiza   
 
