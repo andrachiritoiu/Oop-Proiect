@@ -1,4 +1,52 @@
-# Nu primesc notă pentru că nu am pus titlu și descriere
+# Sistem de Management pentru Spital
+Acest proiect implementează un sistem orientat pe obiect pentru gestionarea activităților dintr-un spital, inclusiv pacienți, personal medical și servicii medicale. 
+
+# Structura Generală
+
+1. Ierarhia Persoanelor
+    
+Clasă de bază: Persoana  
+
+Clase derivate:  
+-Pacient  
+-PersonalSpital (abstractă) 
+    Subclase:  
+         -Medic: evalueaza pacienți, efectuează operații, prescrie rețete  
+         -Asistent: administrează tratamente, face analize  
+   
+2.Ierarhia Serviciilor
+
+Clasa de bază: Servicii 
+
+Clase derivate:  
+-Consultatie   
+    Subclase:  
+           -ConsultatieInitiala  
+           -ConsultatieUrmarire  
+   
+-Operatie  
+-Analiza   
+
+# Functionalitati  
+Funcționalități Medic:  
+-Vizualizează toți pacienții activi internați în spital  
+-Accesează lista programărilor medicale curente  
+-Evaluează starea medicală a pacienților  
+-Prescrie tratamente personalizate  
+-Programează intervenții chirurgicale  
+-Efectuează externarea pacienților  
+-Calculează bonusul salarial în funcție de performanță  
+-Se poate deconecta din contul de utilizator  
+
+Funcționalități Asistent:  
+-Vizualizează pacienții activi internați, sortați alfabetic  
+-Administrează tratamente conform planului medical  
+-Realizează analize medicale  
+-Calculează bonusul salarial în funcție de activitatea desfășurată  
+-Se poate deconecta din contul de utilizator  
+
+
+# Cerinte:
 
 ### Folosiți template-ul corespunzător grupei voastre!
 
