@@ -923,7 +923,7 @@ void Meniu::ruleazaMeniuAsistent() {
                             }
                         }
 
-                        if (gasit) {
+                        if (!gasit) {
                             auto asistent=std::make_shared<Asistent>();
                             std::cin>>*asistent;
                             asistent->setCNP(cnp);
