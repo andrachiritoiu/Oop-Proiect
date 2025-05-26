@@ -10,10 +10,9 @@ Clasă de bază: Persoana
 Clase derivate:  
 -Pacient  
 -PersonalSpital (abstractă) 
-
-     Subclase:  
-   =Medic: evalueaza pacienți, efectuează operații, prescrie rețete  
-   =Asistent: administrează tratamente, face analize  
+    Subclase:  
+         -Medic: evalueaza pacienți, efectuează operații, prescrie rețete  
+         -Asistent: administrează tratamente, face analize  
    
 2.Ierarhia Serviciilor
 
@@ -22,8 +21,8 @@ Clasa de bază: Servicii
 Clase derivate:  
 -Consultatie   
     Subclase:  
-   =ConsultatieInitiala  
-   =ConsultatieUrmarire  
+           -ConsultatieInitiala  
+           -ConsultatieUrmarire  
    
 -Operatie  
 -Analiza   
