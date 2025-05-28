@@ -29,11 +29,6 @@ class Programare {
     [[nodiscard]] const std::shared_ptr<Medic>& getMedic() const;
     [[nodiscard]] const std::shared_ptr<Consultatie>& getConsultatie() const;
 
-    //methods
-    //upcast
-    void adaugaServiciu();
-    void afiseazaServiciu();
-
     //destructor
     ~Programare()=default;
 

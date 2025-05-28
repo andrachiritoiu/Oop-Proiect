@@ -732,7 +732,6 @@ void Meniu::ruleazaMeniuMedic() {
                                         else {
                                             std::cout<<"Nu exista in stoc acest medicament.";
                                         }
-
                                         std::cout<<"Doza recoamndata: \n";
                                         std::cout<<"1. Numar de pastile/zi\n";
                                         std::cout<<"2. Alta doza/zi\n";

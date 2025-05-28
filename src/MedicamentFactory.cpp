@@ -21,3 +21,11 @@ std::shared_ptr<Medicament> MedicamentFactory :: antiinflamator_pastila() {
 std::shared_ptr<Medicament> MedicamentFactory :: antiinflamator_crema() {
     return std::make_shared<Medicament>("Voltaren",45,"diclofenac");
 }
+
+class  Baza {
+private:
+    int x;
+public:
+    Baza(int x);
+    void afiseaza(Baza b)const;
+};
